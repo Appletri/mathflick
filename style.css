@@ -4,3 +4,85 @@ body{
     background-color: #bdd4e7;
     background-image: linear-gradient(315deg, #6c88bb 0%, #93aabd 74%);
 }
+
+#gameboard{
+    background-color: #56A2A9;
+    display:flex;
+    width: 800px;
+    height:800px;
+    border: 5px solid black;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 50%;
+}
+
+#box7{
+    width:25%;
+    height:25%;
+    margin: 70px -50px -70px 50px;
+}
+
+#box8{
+    width:25%;
+    height:25%;
+    margin: -20px 0 20px 0;
+
+}
+
+#box9{
+    width:25%;
+    height:25%;
+    margin: 70px 50px -70px -50px;
+}
+
+#box4{
+    width:25%;
+    height:25%;
+    margin: 0px 35px 0px -35px; 
+}
+
+#box6{
+    width:25%;
+    height:25%;
+    margin: 0px -35px 0px 35px; 
+}
+
+#box1{
+    width:25%;
+    height:25%;
+    margin: -70px -50px 70px 50px;
+}
+
+#box2{
+    width:25%;
+    height:25%;
+    margin: 20px 0 -20px 0;
+}
+
+#box3{
+    width:25%;
+    height:25%;
+    margin: -70px 50px 70px -50px;
+}
+
+#equation{
+    width:25%;
+    height:25%;
+    border: 4px solid black;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+}
+
+.target{
+    background-color: #A2A956;
+    text-align: center;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #A956A2;
+}
