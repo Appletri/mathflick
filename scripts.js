@@ -8,8 +8,22 @@ const box2 = document.querySelector("#box2");
 const box1 = document.querySelector("#box1");
 const equationBox = document.querySelector("#equation");
 
-
 let equation = 1;
+
+//tylphe's stuff vvvvvvvvvvvvvvvv
+
+//start countdown  when mouse hovers over equation button
+let timer = 30;
+document.getElementById(`timer`).innerHTML = `0:` + timer;
+
+document.getElementById(`equation`).addEventListener("mouseover", event => {
+        document.getElementById('equation').innerHTML = `test`;
+    });
+
+equationBox.addEventListener(`mouseout`, event => {
+    equationBox.innerHTML = `equation`;
+});
+//tylphe's stuff ^^^^^^^^^^^^^^^^^^
 
 //box 7 event listener
 box7.addEventListener("mouseover", event => {
