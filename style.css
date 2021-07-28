@@ -4,72 +4,134 @@ body{
     background-color: #bdd4e7;
     background-image: linear-gradient(315deg, #6c88bb 0%, #93aabd 74%);
 }
-
+h1{
+    text-align: center;
+}
 #gameboard{
-    background-color: #56A2A9;
-    display:flex;
+    display: grid;
+    margin-left: auto;
+    margin-right: auto;
+    border: 3px solid black;
+    width: 850px;
+    justify-content: center;
+    align-items: center;
+    background-color:rgb(158, 158, 158);
+    grid-template: 
+    "title title"
+    "timer score"
+    "flick flick";
+    grid-auto-columns: 50%;
+}
+
+#title{
+    grid-area: title;
+    margin-left: auto;
+    margin-right: auto;
+    width:90%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 45px;
+    
+}
+
+#scoreboard{
+    grid-area: score;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    height:50px;
+    border: 3px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    
+}
+
+#timer{
+    grid-area: timer;
+    margin-left: auto;
+    margin-right: auto;
+    width:50%;
+    height:50px;
+    border: 3px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+}
+
+#flickboard{
+    grid-area: flick;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #6ccfd8;
+    display: flex;
     width: 800px;
     height:800px;
-    border: 5px solid black;
+    border: 3px solid black;
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
     border-radius: 50%;
+    font-size: 50px;
 }
 
 #box7{
-    width:25%;
-    height:25%;
+    width: 25%;
+    height: 25%;
     margin: 70px -50px -70px 50px;
 }
 
 #box8{
-    width:25%;
-    height:25%;
+    width: 25%;
+    height: 25%;
     margin: -20px 0 20px 0;
 
 }
 
 #box9{
-    width:25%;
-    height:25%;
+    width: 25%;
+    height: 25%;
     margin: 70px 50px -70px -50px;
 }
 
 #box4{
-    width:25%;
-    height:25%;
+    width: 25%;
+    height: 25%;
     margin: 0px 35px 0px -35px; 
 }
 
 #box6{
-    width:25%;
-    height:25%;
+    width: 25%;
+    height: 25%;
     margin: 0px -35px 0px 35px; 
 }
 
 #box1{
-    width:25%;
-    height:25%;
+    width: 25%;
+    height: 25%;
     margin: -70px -50px 70px 50px;
 }
 
 #box2{
-    width:25%;
-    height:25%;
+    width: 25%;
+    height: 25%;
     margin: 20px 0 -20px 0;
 }
 
 #box3{
-    width:25%;
-    height:25%;
+    width: 25%;
+    height: 25%;
     margin: -70px 50px 70px -50px;
 }
 
 #equation{
-    width:25%;
-    height:25%;
-    border: 4px solid black;
+    width: 25%;
+    height: 25%;
+    border: 3px solid black;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -78,7 +140,7 @@ body{
 }
 
 .target{
-    background-color: #A2A956;
+    background-color: #f4ff81;
     text-align: center;
     border-radius: 50%;
     display: flex;
