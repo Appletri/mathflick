@@ -8,6 +8,7 @@ const box2 = document.querySelector("#box2");
 const box1 = document.querySelector("#box1");
 const equationBox = document.querySelector("#equation");
 const targets = document.querySelector(".target")
+const timer = document.querySelector(`#timer`);
 
 let equation = 1;
 let solved = true;
@@ -24,8 +25,24 @@ let targetArray = [1,2,3,4,5,6,7,8];
 
 //start countdown  when mouse hovers over equation button
 
-let timer = 30;
-document.getElementById(`timer`).innerHTML = `0:` + timer;
+// equationBox.addEventListener("mouseover");
+
+
+
+
+let gameTime = 3;
+timer.innerHTML = `Time: ` + gameTime;
+// timer vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+let interval = setInterval(() => {
+    if(gameTime > 0){
+      gameTime--;
+      timer.innerHTML = `Time: ` + gameTime;
+    }
+    else{
+      clearInterval(interval);
+    }
+  }, 1000);
+// timer ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 //tylphe's stuff ^^^^^^^^^^^^^^^^^^
 
