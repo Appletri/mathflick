@@ -12,8 +12,12 @@ const timer = document.querySelector(`#timer`);
 
 let equation = 1;
 let solved = true;
+let round = 0;
+let roundCheck = 0;
+let combo = 1;
 let a;
 let b;
+let score = 0;
 
 
 //targets start value
@@ -64,11 +68,15 @@ box1.addEventListener("mouseover", event => {
     if (equation == targetArray[0]) {
       
       box1.style.background = "green";
-      return solved = true; 
+      addPoint();
+      return solved = true;
+      
   }
     else {
       
       box1.style.background = "red";
+      minusPoint();
+      comboReset()
       return solved = false; 
   }
   
@@ -88,11 +96,14 @@ box2.addEventListener("mouseover", event => {
     if (equation == targetArray[1]) {
       
       box2.style.background = "green";
+      addPoint();
       return solved = true; 
   }
     else {
       
       box2.style.background = "red";
+      minusPoint();
+      comboReset()
       return solved = false; 
   }
   
@@ -114,11 +125,14 @@ box3.addEventListener("mouseover", event => {
     if (equation == targetArray[2]) {
       
       box3.style.background = "green";
+      addPoint();
       return solved = true; 
   }
     else {
       
       box3.style.background = "red";
+      minusPoint();
+      comboReset()
       return solved = false; 
   }
   
@@ -138,11 +152,14 @@ box4.addEventListener("mouseover", event => {
     if (equation == targetArray[3]) {
       
       box4.style.background = "green";
+      addPoint();
       return solved = true; 
   }
     else {
       
       box4.style.background = "red";
+      minusPoint();
+      comboReset()
       return solved = false; 
   }
   
@@ -162,11 +179,14 @@ box5.addEventListener("mouseover", event => {
     if (equation == targetArray[4]) {
       
       box5.style.background = "green";
+      addPoint();
       return solved = true; 
   }
     else {
       
       box5.style.background = "red";
+      minusPoint();
+      comboReset()
       return solved = false; 
   }
   
@@ -186,11 +206,14 @@ box6.addEventListener("mouseover", event => {
     if (equation == targetArray[5]) {
       
       box6.style.background = "green";
+      addPoint();
       return solved = true; 
   }
     else {
       
       box6.style.background = "red";
+      minusPoint();
+      comboReset()
       return solved = false; 
   }
   
@@ -211,11 +234,14 @@ box7.addEventListener("mouseover", event => {
     if (equation == targetArray[6]) {
       
       box7.style.background = "green";
+      addPoint();
       return solved = true; 
   }
     else {
       
       box7.style.background = "red";
+      minusPoint();
+      comboReset()
       return solved = false; 
   }
   
@@ -237,12 +263,16 @@ box8.addEventListener("mouseover", event => {
     if (equation == targetArray[7]) {
       
       box8.style.background = "green";
+      addPoint();
       return solved = true; 
   }
     else {
       
       box8.style.background = "red";
+      minusPoint();
+      comboReset()
       return solved = false; 
+
   }
   
 });
@@ -269,7 +299,7 @@ equationBox.addEventListener("mouseover", event => {
 
 let randomNumber= 1;
 let randomBoxNumber = "";
-    
+
 if (solved == true) {
         equationBox.style.background = "green";
         updateArray();
@@ -286,10 +316,15 @@ if (solved == true) {
         eval(randomBoxNumber).textContent = equation;
         targetArray[randomNumber] = equation;
 
-        console.log (randomNumber);
-        console.log (randomBoxNumber);
-        console.log (targetArray);
-      
+        roundCheck++;
+        comboChain();
+        console.log (combo);
+        // console.log (randomNumber);
+        // console.log (randomBoxNumber);
+        // console.log (targetArray);
+        // console.log (round);
+        // console.log (roundCheck);
+        
     }
     else 
     {
@@ -302,8 +337,7 @@ equationBox.addEventListener("mouseout", event => {
     
     equationBox.style.background = "";
     solved = false;
-
-   
+    
   });
 
 document.getElementById(`equation`).addEventListener("mouseover", event => {
@@ -322,11 +356,11 @@ function getRandomBoxNumber() {
 }
 
 function getRandomTotal() {
-    return Math.floor(Math.random() * 50);
+    return Math.floor(Math.random() * 10);
 }
 
 function getRandomInt() {
-    return Math.floor(Math.random() * 100);
+    return Math.floor(Math.random() * 20);
 }
 
 function getEquation() {
@@ -337,6 +371,35 @@ function getEquation() {
     
 }
 
+function comboChain() {
+    if (solved == true) {
+        combo++;
+    }
+    else {
+        return;
+    }
+}
+
+function comboReset() {
+    combo = 1;
+}
+
+function addPoint() {
+    if (round == roundCheck){
+        score = score + combo*1;
+        round++;
+        document.getElementById('score').innerHTML = score
+    }
+    
+    else{
+        return;
+    }
+}
+
+function minusPoint() {
+    score--;
+    document.getElementById('score').innerHTML = score;
+}
 
 function updateArray() {
     
