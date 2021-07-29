@@ -26,43 +26,57 @@ let targetArray = [1,2,3,4,5,6,7,8];
 
 
 //tylphe's stuff vvvvvvvvvvvvvvvv
-
 //start countdown  when mouse hovers over equation button
 
 // equationBox.addEventListener("mouseover");
 
-
-
-
 let gameTime = 3;
 timer.innerHTML = `Time: ` + gameTime;
+let startGame = 0;
+
+//start game vvvvvvvvvvvvvvvvvvvvv
+
+
+//start game ^^^^^^^^^^^^^^^^^^^^^^^
+
 // timer vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 let interval = setInterval(() => {
-    if(gameTime > 0){
-      gameTime--;
-      timer.innerHTML = `Time: ` + gameTime;
-    }
-    else{
-      clearInterval(interval);
-    }
-  }, 1000);
+  if(gameTime > 0){
+    --gameTime;
+    timer.innerHTML = `Time: ` + gameTime;
+  }
+  else{
+    function game(){
+      if(gameTime == 0){
+        clearInterval(interval);
+        box1.innerHTML = ``;
+        box2.innerHTML = ``;
+        box3.innerHTML = ``;
+        box4.innerHTML = ``;
+        box5.innerHTML = ``;
+        box6.innerHTML = ``;
+        box7.innerHTML = ``;
+        box8.innerHTML = ``;
+        equationBox.innerHTML = `Hover to start!`;
+        equationBox.addEventListener("mouseover", function() {
+        solved = true;
+        startGame = 1;
+      });
+      }
+      }
+      game();
+  }
+}, 1000);
 // timer ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 //tylphe's stuff ^^^^^^^^^^^^^^^^^^
-
-
-
-
-
-
-
 
 //EventListeners for Targets!
 //------------------------------------------------------------------------------
 
 
 //box 1 event listener. It will show green if correct and red if incorrect
-box1.addEventListener("mouseover", event => {
+box1.addEventListener("mouseover", function() {
   
   
     if (equation == targetArray[0]) {
@@ -83,14 +97,14 @@ box1.addEventListener("mouseover", event => {
 });
 
 //box 1 event listener part 2 will return to original color
-box1.addEventListener("mouseout", event => {
+box1.addEventListener("mouseout", function() {
   
   box1.style.background = "";
   
 });
 
 //box 2 event listener. It will show green if correct and red if incorrect
-box2.addEventListener("mouseover", event => {
+box2.addEventListener("mouseover", function() {
   
   
     if (equation == targetArray[1]) {
@@ -110,7 +124,7 @@ box2.addEventListener("mouseover", event => {
 });
 
 //box 2 event listener part 2 will return to original color
-box2.addEventListener("mouseout", event => {
+box2.addEventListener("mouseout", function() {
   
   box2.style.background = "";
   
@@ -119,7 +133,7 @@ box2.addEventListener("mouseout", event => {
 
 
 //box 3 event listener. It will show green if correct and red if incorrect
-box3.addEventListener("mouseover", event => {
+box3.addEventListener("mouseover", function() {
   
   
     if (equation == targetArray[2]) {
@@ -139,14 +153,14 @@ box3.addEventListener("mouseover", event => {
 });
 
 //box 3 event listener part 2 will return to original color
-box3.addEventListener("mouseout", event => {
+box3.addEventListener("mouseout", function() {
  
   box3.style.background = "";
 
 });
 
 //box 4 event listener. It will show green if correct and red if incorrect
-box4.addEventListener("mouseover", event => {
+box4.addEventListener("mouseover", function() {
   
   
     if (equation == targetArray[3]) {
@@ -166,14 +180,14 @@ box4.addEventListener("mouseover", event => {
 });
 
 //box 4 event listener part 2 will return to original color
-box4.addEventListener("mouseout", event => {
+box4.addEventListener("mouseout", function() {
   
   box4.style.background = "";
   
 });
 
 //box 5 event listener. It will show green if correct and red if incorrect
-box5.addEventListener("mouseover", event => {
+box5.addEventListener("mouseover", function() {
   
   
     if (equation == targetArray[4]) {
@@ -193,14 +207,14 @@ box5.addEventListener("mouseover", event => {
 });
 
 //box 5 event listener part 2 will return to original color
-box5.addEventListener("mouseout", event => {
+box5.addEventListener("mouseout", function() {
   
   box5.style.background = "";
   
 });
 
 //box 6 event listener. It will show green if correct and red if incorrect
-box6.addEventListener("mouseover", event => {
+box6.addEventListener("mouseover", function() {
   
   
     if (equation == targetArray[5]) {
@@ -220,7 +234,7 @@ box6.addEventListener("mouseover", event => {
 });
 
 //box 6 event listener part 2 will return to original color
-box6.addEventListener("mouseout", event => {
+box6.addEventListener("mouseout", function() {
   
   box6.style.background = "";
   
@@ -228,7 +242,7 @@ box6.addEventListener("mouseout", event => {
 
 
 //box 7 event listener. It will show green if correct and red if incorrect
-box7.addEventListener("mouseover", event => {
+box7.addEventListener("mouseover", function() {
   
   
     if (equation == targetArray[6]) {
@@ -248,7 +262,7 @@ box7.addEventListener("mouseover", event => {
 });
 
 //box 7 event listener part 2 will return to original color
-box7.addEventListener("mouseout", event => {
+box7.addEventListener("mouseout", function() {
   
   box7.style.background = "";
   
@@ -257,7 +271,7 @@ box7.addEventListener("mouseout", event => {
 
 
 //box 8 event listener. It will show green if correct and red if incorrect
-box8.addEventListener("mouseover", event => {
+box8.addEventListener("mouseover", function() {
   
   
     if (equation == targetArray[7]) {
@@ -278,7 +292,7 @@ box8.addEventListener("mouseover", event => {
 });
 
 //box 8 event listener part 2 will return to original color
-box8.addEventListener("mouseout", event => {
+box8.addEventListener("mouseout", function() {
   
   box8.style.background = "";
   
@@ -295,7 +309,7 @@ box8.addEventListener("mouseout", event => {
 
 //equation event listener. It will generate a new equation and array of numbers.
 //It will then add the correct answer in the array.
-equationBox.addEventListener("mouseover", event => {
+equationBox.addEventListener("mouseover", function() {
 
 let randomNumber= 1;
 let randomBoxNumber = "";
@@ -333,14 +347,14 @@ if (solved == true) {
     
   });
   
-equationBox.addEventListener("mouseout", event => {
+equationBox.addEventListener("mouseout", function() {
     
     equationBox.style.background = "";
     solved = false;
     
   });
 
-document.getElementById(`equation`).addEventListener("mouseover", event => {
+document.getElementById(`equation`).addEventListener("mouseover", function() {
         document.getElementById('equation').innerHTML = a + " + " + b;
     });
 
@@ -418,12 +432,5 @@ function updateArray() {
         box5.textContent = targetArray[4]; 
         box6.textContent = targetArray[5]; 
         box7.textContent = targetArray[6]; 
-        box8.textContent = targetArray[7];  
-          
+        box8.textContent = targetArray[7];       
 }
-
-
-
-
-
-
