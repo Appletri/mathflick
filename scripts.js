@@ -13,9 +13,11 @@ let equation = 1;
 let solved = true;
 let round = 0;
 let roundCheck = 0;
+let combo = 1;
 let a;
 let b;
 let score = 0;
+
 
 //targets start value
 let targetArray = [1,2,3,4,5,6,7,8];
@@ -57,6 +59,7 @@ box1.addEventListener("mouseover", event => {
       
       box1.style.background = "red";
       minusPoint();
+      comboReset()
       return solved = false; 
   }
   
@@ -83,6 +86,7 @@ box2.addEventListener("mouseover", event => {
       
       box2.style.background = "red";
       minusPoint();
+      comboReset()
       return solved = false; 
   }
   
@@ -111,6 +115,7 @@ box3.addEventListener("mouseover", event => {
       
       box3.style.background = "red";
       minusPoint();
+      comboReset()
       return solved = false; 
   }
   
@@ -137,6 +142,7 @@ box4.addEventListener("mouseover", event => {
       
       box4.style.background = "red";
       minusPoint();
+      comboReset()
       return solved = false; 
   }
   
@@ -163,6 +169,7 @@ box5.addEventListener("mouseover", event => {
       
       box5.style.background = "red";
       minusPoint();
+      comboReset()
       return solved = false; 
   }
   
@@ -189,6 +196,7 @@ box6.addEventListener("mouseover", event => {
       
       box6.style.background = "red";
       minusPoint();
+      comboReset()
       return solved = false; 
   }
   
@@ -216,6 +224,7 @@ box7.addEventListener("mouseover", event => {
       
       box7.style.background = "red";
       minusPoint();
+      comboReset()
       return solved = false; 
   }
   
@@ -244,6 +253,7 @@ box8.addEventListener("mouseover", event => {
       
       box8.style.background = "red";
       minusPoint();
+      comboReset()
       return solved = false; 
 
   }
@@ -290,12 +300,14 @@ if (solved == true) {
         targetArray[randomNumber] = equation;
 
         roundCheck++;
-
-        console.log (randomNumber);
-        console.log (randomBoxNumber);
-        console.log (targetArray);
-        console.log (round);
-        console.log (roundCheck);
+        comboChain();
+        console.log (combo);
+        // console.log (randomNumber);
+        // console.log (randomBoxNumber);
+        // console.log (targetArray);
+        // console.log (round);
+        // console.log (roundCheck);
+        
     }
     else 
     {
@@ -308,8 +320,7 @@ equationBox.addEventListener("mouseout", event => {
     
     equationBox.style.background = "";
     solved = false;
-
-   
+    
   });
 
 document.getElementById(`equation`).addEventListener("mouseover", event => {
@@ -328,11 +339,11 @@ function getRandomBoxNumber() {
 }
 
 function getRandomTotal() {
-    return Math.floor(Math.random() * 50);
+    return Math.floor(Math.random() * 10);
 }
 
 function getRandomInt() {
-    return Math.floor(Math.random() * 100);
+    return Math.floor(Math.random() * 20);
 }
 
 function getEquation() {
@@ -343,9 +354,22 @@ function getEquation() {
     
 }
 
+function comboChain() {
+    if (solved == true) {
+        combo++;
+    }
+    else {
+        return;
+    }
+}
+
+function comboReset() {
+    combo = 1;
+}
+
 function addPoint() {
     if (round == roundCheck){
-        score++;
+        score = score + combo*1;
         round++;
         document.getElementById('score').innerHTML = score
     }
