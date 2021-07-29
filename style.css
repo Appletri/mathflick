@@ -174,3 +174,15 @@ h1{
     align-items: center;
     border: 3px solid #A956A2;
 }
+
+
+#comboMeter {
+    position:absolute;
+    width:5%;
+    text-align:center;
+    right:47.5%;
+    top:470px;
+    opacity:0.3;
+    font-size: 10px;
+    z-index: 1;
+}
