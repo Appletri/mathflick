@@ -58,7 +58,7 @@ function resetScore(){
 //pre game vvvv
 function preGame(){
     solved = true;
-    resetButton.addEventListener(`mouseover`, preGame);
+    resetButton.addEventListener(`onclick`, preGame);
     scoreboard.innerHTML = `Score: ` + score;
     box1.removeEventListener(`mouseover`, box1Colors);
     box2.removeEventListener(`mouseover`, box2Colors);
@@ -90,7 +90,7 @@ function preGame(){
 function playGame(){
   equationBox.removeEventListener(`mouseover`, playGame);
   equationBox.addEventListener("mouseout", alertRed);
-  gameTime = 20;
+  gameTime = 60;
   
   assignColors();
   assignMouseout();
@@ -310,7 +310,7 @@ if (solved == true) {
     equationBox.style.background = "rgba(0,225,0,0.2)";
     randomNumber = getRandomBoxNumber();
     randomBoxNumber="box"+(randomNumber+1);
-
+    // difficulty();
     // console.log (randomNumber);
     // console.log (randomBoxNumber);
     // console.log (targetArray);
@@ -324,13 +324,13 @@ if (solved == true) {
     // console.log (randomNumber);
     // console.log (randomBoxNumber);
     // console.log (targetArray);
-    console.log (round);
-    console.log (roundCheck);
-    console.log (score);
+    // console.log (round);
+    // console.log (roundCheck);
+    // console.log (score);
   }
   else {
     equationBox.style.background = "rgba(225,0,0,0.5)";
-   
+    // difficulty();
   }
 });
   
@@ -340,6 +340,7 @@ if (solved == true) {
 function alertRed () {
     equationBox.style.background = "";
     solved = false;
+    
 }
 
 
@@ -428,3 +429,8 @@ function updateArray() {
   box7.textContent = targetArray[6]; 
   box8.textContent = targetArray[7];       
 }
+
+function difficulty() {
+    
+}
+    
