@@ -311,27 +311,34 @@ function getEquation() {
 }
 
 function comboChain() {
-  if (solved == true) {
-      combo++;
-  }
-  else {
-      return;
-  }
+
+    if (solved == true) {
+        combo++;
+        document.getElementById('comboMeter').innerHTML = "x" + combo;
+        document.getElementById('comboMeter').style.fontSize = `${10 * (1 + (combo/10))}px`;
+    }
+    else {
+        return;
+    }
 }
 
 function comboReset() {
     combo = 1;
+    document.getElementById('comboMeter').innerHTML = "x" + combo;
+    document.getElementById('comboMeter').style.fontSize = '10px';
 }
 
 function addPoint() {
-  if (round == roundCheck){
-      score = score + combo*1;
-      round++;
-      document.getElementById('score').innerHTML = score
-  }
-  else{
-      return;
-  }
+
+    if (round == roundCheck){
+        score = score + combo*1;
+        round++;
+        document.getElementById('score').innerHTML = score;
+    }
+    
+    else{
+        return;
+    }
 }
 
 function minusPoint() {
