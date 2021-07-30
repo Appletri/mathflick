@@ -9,6 +9,7 @@ const box1 = document.querySelector("#box1");
 const equationBox = document.querySelector("#equation");
 const targets = document.querySelector(".target")
 const timer = document.querySelector(`#timer`);
+const resetButton = document.querySelector(`#resetButton`);
 
 let equation = 1;
 let solved = true;
@@ -18,294 +19,232 @@ let combo = 1;
 let a;
 let b;
 let score = 0;
+let gameTime = 0; //initial game time
+timer.innerHTML = `Time: ` + gameTime; //display current time
+let targetArray = [1,2,3,4,5,6,7,8]; //targets start value
 
+preGame();//will present `hover to start` screen
 
-//targets start value
-let targetArray = [1,2,3,4,5,6,7,8];
+//reset game vvvv
+function resetGame(){
+  preGame();
+}
 
-
-
-//tylphe's stuff vvvvvvvvvvvvvvvv
-//start countdown  when mouse hovers over equation button
-
-// equationBox.addEventListener("mouseover");
-
-let gameTime = 3;
-timer.innerHTML = `Time: ` + gameTime;
-let startGame = 0;
-
-//start game vvvvvvvvvvvvvvvvvvvvv
-
-
-//start game ^^^^^^^^^^^^^^^^^^^^^^^
-
-// timer vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-let interval = setInterval(() => {
-  if(gameTime > 0){
-    --gameTime;
-    timer.innerHTML = `Time: ` + gameTime;
-  }
-  else{
-    function game(){
-      if(gameTime == 0){
-        clearInterval(interval);
-        box1.innerHTML = ``;
-        box2.innerHTML = ``;
-        box3.innerHTML = ``;
-        box4.innerHTML = ``;
-        box5.innerHTML = ``;
-        box6.innerHTML = ``;
-        box7.innerHTML = ``;
-        box8.innerHTML = ``;
-        equationBox.innerHTML = `Hover to start!`;
-        equationBox.addEventListener("mouseover", function() {
-        solved = true;
-        startGame = 1;
-      });
-      }
-      }
-      game();
-  }
-}, 1000);
-// timer ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-//tylphe's stuff ^^^^^^^^^^^^^^^^^^
-
-//EventListeners for Targets!
-//------------------------------------------------------------------------------
-
-
-//box 1 event listener. It will show green if correct and red if incorrect
-box1.addEventListener("mouseover", function() {
+//reset score vvv
+function resetScore(){
   
-  
-    if (equation == targetArray[0]) {
-      
-      box1.style.background = "green";
-      addPoint();
-      return solved = true;
-      
-  }
-    else {
-      
-      box1.style.background = "red";
-      minusPoint();
-      comboReset()
-      return solved = false; 
-  }
-  
-});
+}
 
-//box 1 event listener part 2 will return to original color
-box1.addEventListener("mouseout", function() {
-  
+//pre game vvvv
+function preGame(){
+    resetButton.addEventListener(`mouseover`, resetGame);
+    box1.removeEventListener(`mouseover`, box1Colors);
+    box2.removeEventListener(`mouseover`, box2Colors);
+    box3.removeEventListener(`mouseover`, box3Colors);
+    box4.removeEventListener(`mouseover`, box4Colors);
+    box5.removeEventListener(`mouseover`, box5Colors);
+    box6.removeEventListener(`mouseover`, box6Colors);
+    box7.removeEventListener(`mouseover`, box7Colors);
+    box8.removeEventListener(`mouseover`, box8Colors);
+    box1.innerHTML = ``;
+    box2.innerHTML = ``;
+    box3.innerHTML = ``;
+    box4.innerHTML = ``;
+    box5.innerHTML = ``;
+    box6.innerHTML = ``;
+    box7.innerHTML = ``;
+    box8.innerHTML = ``;
+    equationBox.innerHTML = `Hover <br>to start!`;
+    solved = true;
+    equationBox.addEventListener("mouseover", playGame);
+  }
+
+//after `hover to start`, play the game, start countdown
+function playGame(){
+  equationBox.removeEventListener(`mouseover`, playGame);
+  gameTime = 3;
+  assignColors();
+  assignMouseout();
+  countdown();
+}
+
+// countdown timer vvvv
+function countdown(){
+  timer.innerHTML = `Time: ` + gameTime;
+  let interval = setInterval(tickTock, 1000);
+  function tickTock(){
+    if(gameTime > 0){
+      timer.innerHTML = `Time: ` + gameTime;
+      gameTime--;
+      timer.innerHTML = `Time: ` + gameTime;
+    }
+    else{
+      timer.innerHTML = `Time: ` + gameTime;
+      clearInterval(interval);
+    }
+  }
+}
+
+// event listeners for mouseover listener vvvv
+function assignColors(){
+box1.addEventListener("mouseover", box1Colors);
+box2.addEventListener("mouseover", box2Colors);
+box3.addEventListener("mouseover", box3Colors);
+box4.addEventListener("mouseover", box4Colors);
+box5.addEventListener("mouseover", box5Colors);
+box6.addEventListener("mouseover", box6Colors);
+box7.addEventListener("mouseover", box7Colors);
+box8.addEventListener("mouseover", box8Colors);
+}
+
+function box1Colors(){
+  if (equation == targetArray[0]) {  
+    box1.style.background = "green";
+    addPoint();
+    return solved = true;
+  }
+  else {
+    box1.style.background = "red";
+    minusPoint();
+    comboReset()
+    return solved = false; 
+  }
+}
+
+function box2Colors(){
+  if (equation == targetArray[1]) {  
+    box2.style.background = "green";
+    addPoint();
+    return solved = true;
+  }
+  else {
+    box2.style.background = "red";
+    minusPoint();
+    comboReset()
+    return solved = false; 
+  }
+}
+
+function box3Colors(){
+  if (equation == targetArray[2]) {  
+    box3.style.background = "green";
+    addPoint();
+    return solved = true;
+  }
+  else {
+    box3.style.background = "red";
+    minusPoint();
+    comboReset()
+    return solved = false; 
+  }
+}
+
+function box4Colors(){
+  if (equation == targetArray[3]) {  
+    box4.style.background = "green";
+    addPoint();
+    return solved = true;
+  }
+  else {
+    box4.style.background = "red";
+    minusPoint();
+    comboReset()
+    return solved = false; 
+  }
+}
+
+function box5Colors(){
+  if (equation == targetArray[4]) {  
+    box5.style.background = "green";
+    addPoint();
+    return solved = true;
+  }
+  else {
+    box5.style.background = "red";
+    minusPoint();
+    comboReset()
+    return solved = false; 
+  }
+}
+
+function box6Colors(){
+  if (equation == targetArray[5]) {  
+    box6.style.background = "green";
+    addPoint();
+    return solved = true;
+  }
+  else {
+    box6.style.background = "red";
+    minusPoint();
+    comboReset()
+    return solved = false; 
+  }
+}
+
+function box7Colors(){
+  if (equation == targetArray[6]) {  
+    box7.style.background = "green";
+    addPoint();
+    return solved = true;
+  }
+  else {
+    box7.style.background = "red";
+    minusPoint();
+    comboReset()
+    return solved = false; 
+  }
+}
+
+function box8Colors(){
+  if (equation == targetArray[7]) {  
+    box8.style.background = "green";
+    addPoint();
+    return solved = true;
+  }
+  else {
+    box8.style.background = "red";
+    minusPoint();
+    comboReset()
+    return solved = false; 
+  }
+}
+
+// event listeners for mouseout vvvvv
+function assignMouseout(){
+  box1.addEventListener("mouseout", box1Mouseout);
+  box2.addEventListener("mouseout", box2Mouseout);
+  box3.addEventListener("mouseout", box3Mouseout);
+  box4.addEventListener("mouseout", box4Mouseout);
+  box5.addEventListener("mouseout", box5Mouseout);
+  box6.addEventListener("mouseout", box6Mouseout);
+  box7.addEventListener("mouseout", box7Mouseout);
+  box8.addEventListener("mouseout", box8Mouseout);
+}
+
+function box1Mouseout(){
   box1.style.background = "";
-  
-});
-
-//box 2 event listener. It will show green if correct and red if incorrect
-box2.addEventListener("mouseover", function() {
-  
-  
-    if (equation == targetArray[1]) {
-      
-      box2.style.background = "green";
-      addPoint();
-      return solved = true; 
-  }
-    else {
-      
-      box2.style.background = "red";
-      minusPoint();
-      comboReset()
-      return solved = false; 
-  }
-  
-});
-
-//box 2 event listener part 2 will return to original color
-box2.addEventListener("mouseout", function() {
-  
+}
+function box2Mouseout(){
   box2.style.background = "";
-  
-});
-
-
-
-//box 3 event listener. It will show green if correct and red if incorrect
-box3.addEventListener("mouseover", function() {
-  
-  
-    if (equation == targetArray[2]) {
-      
-      box3.style.background = "green";
-      addPoint();
-      return solved = true; 
-  }
-    else {
-      
-      box3.style.background = "red";
-      minusPoint();
-      comboReset()
-      return solved = false; 
-  }
-  
-});
-
-//box 3 event listener part 2 will return to original color
-box3.addEventListener("mouseout", function() {
- 
+}
+function box3Mouseout(){
   box3.style.background = "";
-
-});
-
-//box 4 event listener. It will show green if correct and red if incorrect
-box4.addEventListener("mouseover", function() {
-  
-  
-    if (equation == targetArray[3]) {
-      
-      box4.style.background = "green";
-      addPoint();
-      return solved = true; 
-  }
-    else {
-      
-      box4.style.background = "red";
-      minusPoint();
-      comboReset()
-      return solved = false; 
-  }
-  
-});
-
-//box 4 event listener part 2 will return to original color
-box4.addEventListener("mouseout", function() {
-  
+}
+function box4Mouseout(){
   box4.style.background = "";
-  
-});
-
-//box 5 event listener. It will show green if correct and red if incorrect
-box5.addEventListener("mouseover", function() {
-  
-  
-    if (equation == targetArray[4]) {
-      
-      box5.style.background = "green";
-      addPoint();
-      return solved = true; 
-  }
-    else {
-      
-      box5.style.background = "red";
-      minusPoint();
-      comboReset()
-      return solved = false; 
-  }
-  
-});
-
-//box 5 event listener part 2 will return to original color
-box5.addEventListener("mouseout", function() {
-  
+}
+function box5Mouseout(){
   box5.style.background = "";
-  
-});
-
-//box 6 event listener. It will show green if correct and red if incorrect
-box6.addEventListener("mouseover", function() {
-  
-  
-    if (equation == targetArray[5]) {
-      
-      box6.style.background = "green";
-      addPoint();
-      return solved = true; 
-  }
-    else {
-      
-      box6.style.background = "red";
-      minusPoint();
-      comboReset()
-      return solved = false; 
-  }
-  
-});
-
-//box 6 event listener part 2 will return to original color
-box6.addEventListener("mouseout", function() {
-  
+}
+function box6Mouseout(){
   box6.style.background = "";
-  
-});
-
-
-//box 7 event listener. It will show green if correct and red if incorrect
-box7.addEventListener("mouseover", function() {
-  
-  
-    if (equation == targetArray[6]) {
-      
-      box7.style.background = "green";
-      addPoint();
-      return solved = true; 
-  }
-    else {
-      
-      box7.style.background = "red";
-      minusPoint();
-      comboReset()
-      return solved = false; 
-  }
-  
-});
-
-//box 7 event listener part 2 will return to original color
-box7.addEventListener("mouseout", function() {
-  
+}
+function box7Mouseout(){
   box7.style.background = "";
-  
-});
-
-
-
-//box 8 event listener. It will show green if correct and red if incorrect
-box8.addEventListener("mouseover", function() {
-  
-  
-    if (equation == targetArray[7]) {
-      
-      box8.style.background = "green";
-      addPoint();
-      return solved = true; 
-  }
-    else {
-      
-      box8.style.background = "red";
-      minusPoint();
-      comboReset()
-      return solved = false; 
-
-  }
-  
-});
-
-//box 8 event listener part 2 will return to original color
-box8.addEventListener("mouseout", function() {
-  
+}
+function box8Mouseout(){
   box8.style.background = "";
-  
-});
-
-//------------------------------------------------------------------------------
-
-
-
-
-
-
-
+}
 
 //equation event listener. It will generate a new equation and array of numbers.
 //It will then add the correct answer in the array.
@@ -315,58 +254,45 @@ let randomNumber= 1;
 let randomBoxNumber = "";
 
 if (solved == true) {
-        equationBox.style.background = "green";
-        updateArray();
-        equation = getEquation();
+    updateArray();
+    equation = getEquation();
 
+    randomNumber = getRandomBoxNumber();
+    randomBoxNumber="box"+(randomNumber+1);
 
-        randomNumber = getRandomBoxNumber();
-        randomBoxNumber="box"+(randomNumber+1);
+    console.log (randomNumber);
+    console.log (randomBoxNumber);
+    console.log (targetArray);
 
-        console.log (randomNumber);
-        console.log (randomBoxNumber);
-        console.log (targetArray);
+    eval(randomBoxNumber).textContent = equation;
+    targetArray[randomNumber] = equation;
 
-        eval(randomBoxNumber).textContent = equation;
-        targetArray[randomNumber] = equation;
-
-        roundCheck++;
-        comboChain();
-        console.log (combo);
-        // console.log (randomNumber);
-        // console.log (randomBoxNumber);
-        // console.log (targetArray);
-        // console.log (round);
-        // console.log (roundCheck);
-        
-    }
-    else 
-    {
-        equationBox.style.background = "red";
-    }
-    
-  });
+    roundCheck++;
+    comboChain();
+    console.log (combo);
+    // console.log (randomNumber);
+    // console.log (randomBoxNumber);
+    // console.log (targetArray);
+    // console.log (round);
+    // console.log (roundCheck);
+  }
+  else {
+    equationBox.style.background = "red";
+  }
+});
   
 equationBox.addEventListener("mouseout", function() {
-    
     equationBox.style.background = "";
     solved = false;
-    
   });
 
 document.getElementById(`equation`).addEventListener("mouseover", function() {
-        document.getElementById('equation').innerHTML = a + " + " + b;
-    });
-
-
-
-
+    document.getElementById('equation').innerHTML = a + " + " + b;
+  });
 
 //functions
 function getRandomBoxNumber() {
     return Math.floor((Math.random() * 8));
-    
-    
 }
 
 function getRandomTotal() {
@@ -374,7 +300,7 @@ function getRandomTotal() {
 }
 
 function getRandomInt() {
-    return Math.floor(Math.random() * 20);
+   return Math.floor(Math.random() * 20);
 }
 
 function getEquation() {
@@ -382,16 +308,15 @@ function getEquation() {
     b = getRandomTotal();
 
     return a+b;
-    
 }
 
 function comboChain() {
-    if (solved == true) {
-        combo++;
-    }
-    else {
-        return;
-    }
+  if (solved == true) {
+      combo++;
+  }
+  else {
+      return;
+  }
 }
 
 function comboReset() {
@@ -399,38 +324,36 @@ function comboReset() {
 }
 
 function addPoint() {
-    if (round == roundCheck){
-        score = score + combo*1;
-        round++;
-        document.getElementById('score').innerHTML = score
-    }
-    
-    else{
-        return;
-    }
+  if (round == roundCheck){
+      score = score + combo*1;
+      round++;
+      document.getElementById('score').innerHTML = score
+  }
+  else{
+      return;
+  }
 }
 
 function minusPoint() {
-    score--;
-    document.getElementById('score').innerHTML = score;
+  score--;
+  document.getElementById('score').innerHTML = score;
 }
 
 function updateArray() {
-    
-        targetArray[0] = getRandomInt();
-        targetArray[1] = getRandomInt();
-        targetArray[2] = getRandomInt();
-        targetArray[3] = getRandomInt();
-        targetArray[4] = getRandomInt();
-        targetArray[5] = getRandomInt();
-        targetArray[6] = getRandomInt();
-        targetArray[7] = getRandomInt();
-        box1.textContent = targetArray[0];
-        box2.textContent = targetArray[1]; 
-        box3.textContent = targetArray[2]; 
-        box4.textContent = targetArray[3]; 
-        box5.textContent = targetArray[4]; 
-        box6.textContent = targetArray[5]; 
-        box7.textContent = targetArray[6]; 
-        box8.textContent = targetArray[7];       
+  targetArray[0] = getRandomInt();
+  targetArray[1] = getRandomInt();
+  targetArray[2] = getRandomInt();
+  targetArray[3] = getRandomInt();
+  targetArray[4] = getRandomInt();
+  targetArray[5] = getRandomInt();
+  targetArray[6] = getRandomInt();
+  targetArray[7] = getRandomInt();
+  box1.textContent = targetArray[0];
+  box2.textContent = targetArray[1]; 
+  box3.textContent = targetArray[2]; 
+  box4.textContent = targetArray[3]; 
+  box5.textContent = targetArray[4]; 
+  box6.textContent = targetArray[5]; 
+  box7.textContent = targetArray[6]; 
+  box8.textContent = targetArray[7];       
 }
