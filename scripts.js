@@ -9,7 +9,9 @@ const box1 = document.querySelector("#box1");
 const equationBox = document.querySelector("#equation");
 const targets = document.querySelector(".target")
 const timer = document.querySelector(`#timer`);
+const scoreboard = document.querySelector(`#score`);
 const resetButton = document.querySelector(`#resetButton`);
+const clearScore = document.querySelector(`#clearScore`);
 
 let equation = 1;
 let solved = true;
@@ -32,12 +34,15 @@ function resetGame(){
 
 //reset score vvv
 function resetScore(){
-  
+  score = 0;
+  scoreboard.innerHTML = `Score: ` + score;
 }
 
 //pre game vvvv
 function preGame(){
     resetButton.addEventListener(`mouseover`, resetGame);
+    clearScore.addEventListener(`mouseover`, resetScore);
+    scoreboard.innerHTML = `Score: ` + score;
     box1.removeEventListener(`mouseover`, box1Colors);
     box2.removeEventListener(`mouseover`, box2Colors);
     box3.removeEventListener(`mouseover`, box3Colors);
@@ -333,7 +338,7 @@ function addPoint() {
     if (round == roundCheck){
         score = score + combo*1;
         round++;
-        document.getElementById('score').innerHTML = score;
+        scoreboard.innerHTML = `Score: ` + score;
     }
     
     else{
@@ -343,7 +348,7 @@ function addPoint() {
 
 function minusPoint() {
   score--;
-  document.getElementById('score').innerHTML = score;
+  scoreboard.innerHTML = `Score: ` + score;
 }
 
 function updateArray() {
