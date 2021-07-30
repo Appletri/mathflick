@@ -167,6 +167,7 @@ h1{
     border-radius: 50%;
     display: flex;
     justify-content: center;
+    text-align: center;
     align-items: center;
     color:white;
     text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black;

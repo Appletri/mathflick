@@ -13,7 +13,10 @@ const scoreboard = document.querySelector(`#score`);
 const resetButton = document.querySelector(`#resetButton`);
 
 
-let highScore = localStorage.getItem("highScore");
+const highScore = localStorage.getItem('HS');
+
+
+
 let equation = 1;
 let solved = true;
 let round = 1;
@@ -22,6 +25,7 @@ let combo = 0;
 let a;
 let b;
 let score = 0;
+
 let gameTime = 0; //initial game time
 timer.innerHTML = `Time: ` + gameTime; //display current time
 let targetArray = [1,2,3,4,5,6,7,8]; //targets start value
@@ -30,12 +34,26 @@ preGame();//will present `hover to start` screen
 
 //reset score vvv
 function resetScore(){
+    //update highscore
+  highScore;
+  if (highScore === null) {
+      localStorage.setItem("HS",'0')
+  }
+  if (score > highScore) {
+    localStorage.setItem("HS",score);
+    document.getElementById("highScore").innerText = "High Score: " + highScore;
+  }  
+
+  //reset variables
   score = 0;
   scoreboard.innerHTML = `Score: ` + score;
   round = 1;
   roundCheck = 0;
   combo = 0;
+  
+  
 }
+
 
 //pre game vvvv
 function preGame(){
@@ -50,6 +68,8 @@ function preGame(){
     box6.removeEventListener(`mouseover`, box6Colors);
     box7.removeEventListener(`mouseover`, box7Colors);
     box8.removeEventListener(`mouseover`, box8Colors);
+    equationBox.style.background = "";
+    equationBox.removeEventListener("mouseout", alertRed);
     box1.innerHTML = ``;
     box2.innerHTML = ``;
     box3.innerHTML = ``;
@@ -60,15 +80,22 @@ function preGame(){
     box8.innerHTML = ``;
     equationBox.innerHTML = `Hover <br>to start!`;
     equationBox.addEventListener("mouseover", playGame);
+    
+    document.getElementById("highScore").innerText = "High Score: " + highScore;
+    
+
   }
 
 //after `hover to start`, play the game, start countdown
 function playGame(){
   equationBox.removeEventListener(`mouseover`, playGame);
-  gameTime = 5;
+  equationBox.addEventListener("mouseout", alertRed);
+  gameTime = 20;
+  
   assignColors();
   assignMouseout();
   countdown();
+  
 }
 
 
@@ -78,22 +105,27 @@ function countdown(){
   let interval = setInterval(tickTock, 1000);
   function tickTock(){
     if(gameTime > 0){
-      timer.innerHTML = `Time: ` + gameTime;
-      gameTime--;
-      timer.innerHTML = `Time: ` + gameTime;
-      if (gameTime <= 0){
-        alert(`Game over. \n\nYour score: ` + score);
-        resetScore();
-        preGame();
-        
-      }
+      
+        gameTime--;
+        timer.innerHTML = `Time: ` + gameTime;
     }
     else{
-      timer.innerHTML = `Time: ` + gameTime;
-      clearInterval(interval);
+        timer.innerHTML = `Time: ` + gameTime;  
+        console.log (`Game over. \n\nYour score: ` + score);
+        
+        resetScore();
+        preGame();
+        clearInterval(interval);
     }
   }
 }
+
+
+
+
+
+
+
 
 // event listeners for mouseover listener vvvv
 function assignColors(){
@@ -256,6 +288,15 @@ function box8Mouseout(){
   box8.style.background = "";
 }
 
+
+
+
+
+
+
+
+
+
 //equation event listener. It will generate a new equation and array of numbers.
 //It will then add the correct answer in the array.
 equationBox.addEventListener("mouseover", function() {
@@ -285,20 +326,35 @@ if (solved == true) {
     // console.log (targetArray);
     console.log (round);
     console.log (roundCheck);
-    // console.log (score);
+    console.log (score);
   }
   else {
     equationBox.style.background = "rgba(225,0,0,0.5)";
+   
   }
 });
   
-equationBox.addEventListener("mouseout", function() {
+
+
+
+function alertRed () {
     equationBox.style.background = "";
-  });
+    solved = false;
+}
+
 
 document.getElementById(`equation`).addEventListener("mouseover", function() {
     document.getElementById('equation').innerHTML = a + " + " + b;
   });
+
+
+
+
+
+
+
+
+
 
 //functions
 function getRandomBoxNumber() {
