@@ -11,11 +11,12 @@ const targets = document.querySelector(".target")
 const timer = document.querySelector(`#timer`);
 const resetButton = document.querySelector(`#resetButton`);
 
+
 let equation = 1;
 let solved = true;
-let round = 0;
+let round = 1;
 let roundCheck = 0;
-let combo = 1;
+let combo = 0;
 let a;
 let b;
 let score = 0;
@@ -67,6 +68,7 @@ function playGame(){
   assignMouseout();
   countdown();
 }
+
 
 // countdown timer vvvv
 function countdown(){
@@ -260,21 +262,22 @@ if (solved == true) {
     randomNumber = getRandomBoxNumber();
     randomBoxNumber="box"+(randomNumber+1);
 
-    console.log (randomNumber);
-    console.log (randomBoxNumber);
-    console.log (targetArray);
+    // console.log (randomNumber);
+    // console.log (randomBoxNumber);
+    // console.log (targetArray);
 
     eval(randomBoxNumber).textContent = equation;
     targetArray[randomNumber] = equation;
 
     roundCheck++;
     comboChain();
-    console.log (combo);
+    // console.log (combo);
     // console.log (randomNumber);
     // console.log (randomBoxNumber);
     // console.log (targetArray);
     // console.log (round);
     // console.log (roundCheck);
+    // console.log (score);
   }
   else {
     equationBox.style.background = "red";
@@ -331,7 +334,7 @@ function comboReset() {
 function addPoint() {
 
     if (round == roundCheck){
-        score = score + combo*1;
+        score = score + (combo*1);
         round++;
         document.getElementById('score').innerHTML = score;
     }
