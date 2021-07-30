@@ -28,11 +28,6 @@ let targetArray = [1,2,3,4,5,6,7,8]; //targets start value
 
 preGame();//will present `hover to start` screen
 
-//reset game vvvv
-function resetGame(){
-  preGame();
-}
-
 //reset score vvv
 function resetScore(){
   score = 0;
@@ -67,7 +62,7 @@ function preGame(){
 //after `hover to start`, play the game, start countdown
 function playGame(){
   equationBox.removeEventListener(`mouseover`, playGame);
-  gameTime = 3;
+  gameTime = 5;
   assignColors();
   assignMouseout();
   countdown();
@@ -86,6 +81,7 @@ function countdown(){
       if (gameTime <= 0){
         alert(`Game over. \n\nYour score: ` + score);
         resetScore();
+        comboReset();
         preGame();
       }
     }
@@ -117,7 +113,7 @@ function box1Colors(){
   else {
     box1.style.background = "red";
     minusPoint();
-    comboReset()
+    comboReset();
     return solved = false; 
   }
 }
@@ -131,7 +127,7 @@ function box2Colors(){
   else {
     box2.style.background = "red";
     minusPoint();
-    comboReset()
+    comboReset();
     return solved = false; 
   }
 }
@@ -145,7 +141,7 @@ function box3Colors(){
   else {
     box3.style.background = "red";
     minusPoint();
-    comboReset()
+    comboReset();
     return solved = false; 
   }
 }
@@ -159,7 +155,7 @@ function box4Colors(){
   else {
     box4.style.background = "red";
     minusPoint();
-    comboReset()
+    comboReset();
     return solved = false; 
   }
 }
@@ -173,7 +169,7 @@ function box5Colors(){
   else {
     box5.style.background = "red";
     minusPoint();
-    comboReset()
+    comboReset();
     return solved = false; 
   }
 }
@@ -187,7 +183,7 @@ function box6Colors(){
   else {
     box6.style.background = "red";
     minusPoint();
-    comboReset()
+    comboReset();
     return solved = false; 
   }
 }
@@ -201,7 +197,7 @@ function box7Colors(){
   else {
     box7.style.background = "red";
     minusPoint();
-    comboReset()
+    comboReset();
     return solved = false; 
   }
 }
@@ -215,7 +211,7 @@ function box8Colors(){
   else {
     box8.style.background = "red";
     minusPoint();
-    comboReset()
+    comboReset();
     return solved = false; 
   }
 }
@@ -295,7 +291,6 @@ if (solved == true) {
   
 equationBox.addEventListener("mouseout", function() {
     equationBox.style.background = "";
-    solved = false;
   });
 
 document.getElementById(`equation`).addEventListener("mouseover", function() {
@@ -323,7 +318,6 @@ function getEquation() {
 }
 
 function comboChain() {
-
     if (solved == true) {
         combo++;
         document.getElementById('comboMeter').innerHTML = "x" + combo;
@@ -341,9 +335,8 @@ function comboReset() {
 }
 
 function addPoint() {
-
     if (round == roundCheck){
-        score = score + (combo*1);
+        score = score + combo;
         round++;
         scoreboard.innerHTML = `Score: ` + score;
     }
