@@ -41,6 +41,7 @@ function resetScore(){
 
 //pre game vvvv
 function preGame(){
+    solved = true;
     resetButton.addEventListener(`mouseover`, resetGame);
     clearScore.addEventListener(`mouseover`, resetScore);
     scoreboard.innerHTML = `Score: ` + score;
@@ -61,7 +62,6 @@ function preGame(){
     box7.innerHTML = ``;
     box8.innerHTML = ``;
     equationBox.innerHTML = `Hover <br>to start!`;
-    solved = true;
     equationBox.addEventListener("mouseover", playGame);
   }
 
@@ -75,7 +75,7 @@ function playGame(){
 }
 
 
-// countdown timer vvvv
+// countdown timer and alert game over vvvv
 function countdown(){
   timer.innerHTML = `Time: ` + gameTime;
   let interval = setInterval(tickTock, 1000);
@@ -84,6 +84,11 @@ function countdown(){
       timer.innerHTML = `Time: ` + gameTime;
       gameTime--;
       timer.innerHTML = `Time: ` + gameTime;
+      if (gameTime <= 0){
+        alert(`Game over. \n\nYour score: ` + score);
+        resetScore();
+        preGame();
+      }
     }
     else{
       timer.innerHTML = `Time: ` + gameTime;
