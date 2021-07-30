@@ -11,9 +11,9 @@ const targets = document.querySelector(".target")
 const timer = document.querySelector(`#timer`);
 const scoreboard = document.querySelector(`#score`);
 const resetButton = document.querySelector(`#resetButton`);
-const clearScore = document.querySelector(`#clearScore`);
 
 
+let highScore = localStorage.getItem("highScore");
 let equation = 1;
 let solved = true;
 let round = 1;
@@ -43,7 +43,6 @@ function resetScore(){
 function preGame(){
     solved = true;
     resetButton.addEventListener(`mouseover`, resetGame);
-    clearScore.addEventListener(`mouseover`, resetScore);
     scoreboard.innerHTML = `Score: ` + score;
     box1.removeEventListener(`mouseover`, box1Colors);
     box2.removeEventListener(`mouseover`, box2Colors);
@@ -268,7 +267,7 @@ let randomBoxNumber = "";
 if (solved == true) {
     updateArray();
     equation = getEquation();
-
+    equationBox.style.background = "rgba(0,225,0,0.2)";
     randomNumber = getRandomBoxNumber();
     randomBoxNumber="box"+(randomNumber+1);
 
@@ -290,7 +289,7 @@ if (solved == true) {
     // console.log (score);
   }
   else {
-    equationBox.style.background = "red";
+    equationBox.style.background = "rgba(225,0,0,0.5)";
   }
 });
   

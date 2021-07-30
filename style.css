@@ -25,7 +25,7 @@ h1{
     "title title"
     "timer score"
     "flick flick"
-    "resetgame resetscore";
+    "resetgame highscore";
     grid-auto-columns: 50%;
 }
 
@@ -80,13 +80,13 @@ h1{
     font-size: 25px;
 }
 
-#clearScore{
-    grid-area: resetscore;
+#highScore{
+    grid-area: highscore;
     margin-left: auto;
     margin-right: auto;
     width:50%;
     height:50px;
-    border: 3px solid rgb(216, 216, 216);k;
+    border: 3px solid rgb(216, 216, 216);
     display: flex;
     justify-content: center;
     align-items: center;
