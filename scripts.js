@@ -32,12 +32,15 @@ preGame();//will present `hover to start` screen
 function resetScore(){
   score = 0;
   scoreboard.innerHTML = `Score: ` + score;
+  round = 1;
+  roundCheck = 0;
+  combo = 0;
 }
 
 //pre game vvvv
 function preGame(){
     solved = true;
-    resetButton.addEventListener(`mouseover`, resetGame);
+    resetButton.addEventListener(`mouseover`, preGame);
     scoreboard.innerHTML = `Score: ` + score;
     box1.removeEventListener(`mouseover`, box1Colors);
     box2.removeEventListener(`mouseover`, box2Colors);
@@ -81,8 +84,8 @@ function countdown(){
       if (gameTime <= 0){
         alert(`Game over. \n\nYour score: ` + score);
         resetScore();
-        comboReset();
         preGame();
+        
       }
     }
     else{
@@ -280,8 +283,8 @@ if (solved == true) {
     // console.log (randomNumber);
     // console.log (randomBoxNumber);
     // console.log (targetArray);
-    // console.log (round);
-    // console.log (roundCheck);
+    console.log (round);
+    console.log (roundCheck);
     // console.log (score);
   }
   else {
