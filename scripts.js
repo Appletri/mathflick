@@ -13,7 +13,10 @@ const scoreboard = document.querySelector(`#score`);
 const resetButton = document.querySelector(`#resetButton`);
 
 
-let highScore = localStorage.getItem("highScore");
+const highScore = localStorage.getItem('HS');
+
+
+let gameState = "";
 let equation = 1;
 let solved = true;
 let round = 1;
@@ -22,26 +25,41 @@ let combo = 0;
 let a;
 let b;
 let score = 0;
+let interval;
+
 let gameTime = 0; //initial game time
 timer.innerHTML = `Time: ` + gameTime; //display current time
 let targetArray = [1,2,3,4,5,6,7,8]; //targets start value
 
 preGame();//will present `hover to start` screen
 
-//reset score vvv
-function resetScore(){
+
+//reset gameboard
+function reset(){
+    //update highscore
+  highScore;
+  if (highScore === null) {
+      localStorage.setItem("HS",'0')
+  }
+  if (score > highScore) {
+    localStorage.setItem("HS",score);
+    document.getElementById("highScore").innerText = "High Score: " + highScore;
+  }  
+
+  //reset variables
   score = 0;
-  scoreboard.innerHTML = `Score: ` + score;
   round = 1;
   roundCheck = 0;
   combo = 0;
+  
 }
+
 
 //pre game vvvv
 function preGame(){
     solved = true;
-    resetButton.addEventListener(`mouseover`, preGame);
-    scoreboard.innerHTML = `Score: ` + score;
+    gameState = "pregame";
+    resetButton.addEventListener(`click`, preGame);
     box1.removeEventListener(`mouseover`, box1Colors);
     box2.removeEventListener(`mouseover`, box2Colors);
     box3.removeEventListener(`mouseover`, box3Colors);
@@ -50,6 +68,8 @@ function preGame(){
     box6.removeEventListener(`mouseover`, box6Colors);
     box7.removeEventListener(`mouseover`, box7Colors);
     box8.removeEventListener(`mouseover`, box8Colors);
+    equationBox.style.background = "";
+    equationBox.removeEventListener("mouseout", alertRed); //there was a bug with the mouseout when the game resets, this fixes it
     box1.innerHTML = ``;
     box2.innerHTML = ``;
     box3.innerHTML = ``;
@@ -60,40 +80,54 @@ function preGame(){
     box8.innerHTML = ``;
     equationBox.innerHTML = `Hover <br>to start!`;
     equationBox.addEventListener("mouseover", playGame);
+    
+    document.getElementById("highScore").innerText = "High Score: " + highScore;
+    
+
   }
 
 //after `hover to start`, play the game, start countdown
 function playGame(){
   equationBox.removeEventListener(`mouseover`, playGame);
-  gameTime = 5;
+  equationBox.addEventListener("mouseout", alertRed);
+  gameTime = 60;
+  gameState = "playgame";
   assignColors();
   assignMouseout();
   countdown();
+  scoreboard.innerHTML = `Score: ` + score;
 }
 
 
 // countdown timer and alert game over vvvv
 function countdown(){
+  clearInterval(interval);
   timer.innerHTML = `Time: ` + gameTime;
-  let interval = setInterval(tickTock, 1000);
+  interval = setInterval(tickTock, 1000);
   function tickTock(){
-    if(gameTime > 0){
-      timer.innerHTML = `Time: ` + gameTime;
-      gameTime--;
-      timer.innerHTML = `Time: ` + gameTime;
-      if (gameTime <= 0){
-        alert(`Game over. \n\nYour score: ` + score);
-        resetScore();
-        preGame();
-        
-      }
+    if(gameTime > 0 && gameState == "playgame"){
+      
+        gameTime--;
+        timer.innerHTML = `Time: ` + gameTime;
     }
+    
     else{
-      timer.innerHTML = `Time: ` + gameTime;
-      clearInterval(interval);
+        timer.innerHTML = `Time: ` + 0;  
+        console.log (`Game over. \n\nYour score: ` + score);
+        
+        reset();
+        preGame();
+        clearInterval(interval);
     }
   }
 }
+
+
+
+
+
+
+
 
 // event listeners for mouseover listener vvvv
 function assignColors(){
@@ -256,6 +290,15 @@ function box8Mouseout(){
   box8.style.background = "";
 }
 
+
+
+
+
+
+
+
+
+
 //equation event listener. It will generate a new equation and array of numbers.
 //It will then add the correct answer in the array.
 equationBox.addEventListener("mouseover", function() {
@@ -269,7 +312,7 @@ if (solved == true) {
     equationBox.style.background = "rgba(0,225,0,0.2)";
     randomNumber = getRandomBoxNumber();
     randomBoxNumber="box"+(randomNumber+1);
-
+    // difficulty();
     // console.log (randomNumber);
     // console.log (randomBoxNumber);
     // console.log (targetArray);
@@ -283,22 +326,37 @@ if (solved == true) {
     // console.log (randomNumber);
     // console.log (randomBoxNumber);
     // console.log (targetArray);
-    console.log (round);
-    console.log (roundCheck);
+    // console.log (round);
+    // console.log (roundCheck);
     // console.log (score);
   }
   else {
     equationBox.style.background = "rgba(225,0,0,0.5)";
+    // difficulty();
   }
 });
   
-equationBox.addEventListener("mouseout", function() {
+
+
+
+function alertRed () {
     equationBox.style.background = "";
-  });
+    solved = false;    
+}
+
 
 document.getElementById(`equation`).addEventListener("mouseover", function() {
     document.getElementById('equation').innerHTML = a + " + " + b;
   });
+
+
+
+
+
+
+
+
+
 
 //functions
 function getRandomBoxNumber() {
@@ -372,3 +430,8 @@ function updateArray() {
   box7.textContent = targetArray[6]; 
   box8.textContent = targetArray[7];       
 }
+
+function difficulty() {
+    
+}
+    
