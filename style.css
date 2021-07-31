@@ -1,17 +1,26 @@
 body{
-    background-attachment: fixed;
+    ackground-attachment: fixed;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #bdd4e7;
-    background-image: linear-gradient(315deg, #6c88bb 0%, #93aabd 74%);
+    background-color: #231f20;
+    color: white;
 }
 h1{
     text-align: center;
+}
+
+#logoImage{
+    color: white;
+    filter: invert(100%);
+    position: absolute;
+    top: 25px;
+    width: 200px;
+
 }
 #gameboard{
     display: grid;
     margin-left: auto;
     margin-right: auto;
-    border: 3px solid black;
+    /* border: 3px solid black; */
     width: 850px;
     justify-content: center;
     align-items: center;
@@ -178,7 +187,7 @@ h1{
     text-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black;
     /* background-color: rgb(255, 255, 255); */
     animation: rotationBackwards 60s infinite linear;
-    box-shadow : 0 0 20px white;
+    box-shadow : 0 0 30px white;
     font-family: 'Ubuntu', sans-serif;
 }
 
