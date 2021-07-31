@@ -15,12 +15,8 @@ p{
     padding-left:20px;
     padding-right:20px;
 }
-a {
+a:visited {
     color: #A956A2;
-}
-
-a:hover {
-    color: yellow;
 }
     
 
