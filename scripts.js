@@ -7,15 +7,13 @@ const box3 = document.querySelector("#box3");
 const box2 = document.querySelector("#box2");
 const box1 = document.querySelector("#box1");
 const equationBox = document.querySelector("#equation");
-const targets = document.querySelector(".target")
+const targets = document.getElementsByClassName("target");
 const timer = document.querySelector(`#timer`);
 const scoreboard = document.querySelector(`#score`);
 const resetButton = document.querySelector(`#resetButton`);
+const highScoreBox = document.querySelector(`#highScore`);
 
-
-const highScore = localStorage.getItem('HS');
-
-
+let highScore = localStorage.getItem('HS');
 let gameState = "";
 let equation = 1;
 let solved = true;
@@ -25,51 +23,21 @@ let combo = 0;
 let a;
 let b;
 let score = 0;
-let interval;
 
-let gameTime = 0; //initial game time
-timer.innerHTML = `Time: ` + gameTime; //display current time
+let interval; //time interval
+let gameTime = 0;
+
 let targetArray = [1,2,3,4,5,6,7,8]; //targets start value
 
 preGame();//will present `hover to start` screen
-
-
-//reset gameboard
-function reset(){
-    //update highscore
-  highScore;
-  if (highScore === null) {
-      localStorage.setItem("HS",'0')
-  }
-  if (score > highScore) {
-    localStorage.setItem("HS",score);
-    document.getElementById("highScore").innerText = "High Score: " + highScore;
-  }  
-
-  //reset variables
-  score = 0;
-  round = 1;
-  roundCheck = 0;
-  combo = 0;
-  
-}
-
 
 //pre game vvvv
 function preGame(){
     solved = true;
     gameState = "pregame";
+    setHighScore();
+    reset();
     resetButton.addEventListener(`click`, preGame);
-    box1.removeEventListener(`mouseover`, box1Colors);
-    box2.removeEventListener(`mouseover`, box2Colors);
-    box3.removeEventListener(`mouseover`, box3Colors);
-    box4.removeEventListener(`mouseover`, box4Colors);
-    box5.removeEventListener(`mouseover`, box5Colors);
-    box6.removeEventListener(`mouseover`, box6Colors);
-    box7.removeEventListener(`mouseover`, box7Colors);
-    box8.removeEventListener(`mouseover`, box8Colors);
-    equationBox.style.background = "";
-    equationBox.removeEventListener("mouseout", alertRed); //there was a bug with the mouseout when the game resets, this fixes it
     box1.innerHTML = ``;
     box2.innerHTML = ``;
     box3.innerHTML = ``;
@@ -78,19 +46,27 @@ function preGame(){
     box6.innerHTML = ``;
     box7.innerHTML = ``;
     box8.innerHTML = ``;
+    box1.removeEventListener(`mouseover`, box1Colors);
+    box2.removeEventListener(`mouseover`, box2Colors);
+    box3.removeEventListener(`mouseover`, box3Colors);
+    box4.removeEventListener(`mouseover`, box4Colors);
+    box5.removeEventListener(`mouseover`, box5Colors);
+    box6.removeEventListener(`mouseover`, box6Colors);
+    box7.removeEventListener(`mouseover`, box7Colors);
+    box8.removeEventListener(`mouseover`, box8Colors);
+    equationBox.removeEventListener("mouseout", alertRed); //there was a bug with the mouseout when the game resets, this fixes it
+    equationBox.style.background = "";
     equationBox.innerHTML = `Hover <br>to start!`;
-    equationBox.addEventListener("mouseover", playGame);
-    
-    document.getElementById("highScore").innerText = "High Score: " + highScore;
-    
+    equationBox.addEventListener("mouseover", playGame); //starts the game
+    scoreboard.innerHTML = `Score: ` + score;
+    timer.innerHTML = `Time: ` + gameTime;
+}
 
-  }
-
-//after `hover to start`, play the game, start countdown
+//play the game, start countdown vvvv
 function playGame(){
   equationBox.removeEventListener(`mouseover`, playGame);
   equationBox.addEventListener("mouseout", alertRed);
-  gameTime = 60;
+  gameTime = 5; //debugging
   gameState = "playgame";
   assignColors();
   assignMouseout();
@@ -99,35 +75,47 @@ function playGame(){
 }
 
 
-// countdown timer and alert game over vvvv
+//countdown timer and alert game over vvvv
 function countdown(){
   clearInterval(interval);
   timer.innerHTML = `Time: ` + gameTime;
   interval = setInterval(tickTock, 1000);
   function tickTock(){
     if(gameTime > 0 && gameState == "playgame"){
-      
         gameTime--;
         timer.innerHTML = `Time: ` + gameTime;
     }
     
     else{
-        timer.innerHTML = `Time: ` + 0;  
-        console.log (`Game over. \n\nYour score: ` + score);
-        
-        reset();
-        preGame();
+        timer.innerHTML = `Time: ` + 0;
         clearInterval(interval);
+        alert(`Game Over!\n\nYour Score: ` + score);
+        setHighScore();
+        preGame();
     }
   }
 }
 
+//reset variables vvvv
+function reset(){
+  score = 0;
+  round = 1;
+  roundCheck = 0;
+  combo = 0;
+}
 
-
-
-
-
-
+//High score vvvv
+function setHighScore(){
+  if (score > highScore) {
+    localStorage.setItem(`HS`, score);
+    highScore = score;
+    alert(`You have the new high score!\nHigh score: ` + score);
+    highScoreBox.innerHTML = "High Score: " + highScore;
+  } 
+  else{
+    highScoreBox.innerHTML = "High Score: " + highScore;
+  }
+}
 
 // event listeners for mouseover listener vvvv
 function assignColors(){
@@ -145,7 +133,10 @@ function box1Colors(){
   if (equation == targetArray[0]) {  
     box1.style.background = "green";
     addPoint();
+    equationBox.style.background = "rgba(0,225,0,0.2)";
+    indicatorEq = setInterval(indicatorEquation, 500);
     return solved = true;
+    
   }
   else {
     box1.style.background = "red";
@@ -159,7 +150,10 @@ function box2Colors(){
   if (equation == targetArray[1]) {  
     box2.style.background = "green";
     addPoint();
+    equationBox.style.background = "rgba(0,225,0,0.2)";
+    indicatorEq = setInterval(indicatorEquation, 500);
     return solved = true;
+    
   }
   else {
     box2.style.background = "red";
@@ -173,6 +167,8 @@ function box3Colors(){
   if (equation == targetArray[2]) {  
     box3.style.background = "green";
     addPoint();
+    equationBox.style.background = "rgba(0,225,0,0.2)";
+    indicatorEq = setInterval(indicatorEquation, 500);
     return solved = true;
   }
   else {
@@ -187,6 +183,8 @@ function box4Colors(){
   if (equation == targetArray[3]) {  
     box4.style.background = "green";
     addPoint();
+    equationBox.style.background = "rgba(0,225,0,0.2)";
+    indicatorEq = setInterval(indicatorEquation, 500);
     return solved = true;
   }
   else {
@@ -201,6 +199,8 @@ function box5Colors(){
   if (equation == targetArray[4]) {  
     box5.style.background = "green";
     addPoint();
+    equationBox.style.background = "rgba(0,225,0,0.2)";
+    indicatorEq = setInterval(indicatorEquation, 500);
     return solved = true;
   }
   else {
@@ -215,6 +215,8 @@ function box6Colors(){
   if (equation == targetArray[5]) {  
     box6.style.background = "green";
     addPoint();
+    equationBox.style.background = "rgba(0,225,0,0.2)";
+    indicatorEq = setInterval(indicatorEquation, 500);
     return solved = true;
   }
   else {
@@ -229,6 +231,8 @@ function box7Colors(){
   if (equation == targetArray[6]) {  
     box7.style.background = "green";
     addPoint();
+    equationBox.style.background = "rgba(0,225,0,0.2)";
+    indicatorEq = setInterval(indicatorEquation, 500);
     return solved = true;
   }
   else {
@@ -243,6 +247,8 @@ function box8Colors(){
   if (equation == targetArray[7]) {  
     box8.style.background = "green";
     addPoint();
+    equationBox.style.background = "rgba(0,225,0,0.2)";
+    indicatorEq = setInterval(indicatorEquation, 500);
     return solved = true;
   }
   else {
@@ -267,37 +273,44 @@ function assignMouseout(){
 
 function box1Mouseout(){
   box1.style.background = "";
+  equationBox.style.background = "";
+  clearInterval(indicatorEq);
 }
 function box2Mouseout(){
   box2.style.background = "";
+  equationBox.style.background = "";
+  clearInterval(indicatorEq);
 }
 function box3Mouseout(){
   box3.style.background = "";
+  equationBox.style.background = "";
+  clearInterval(indicatorEq);
 }
 function box4Mouseout(){
   box4.style.background = "";
+  equationBox.style.background = "";
+  clearInterval(indicatorEq);
 }
 function box5Mouseout(){
   box5.style.background = "";
+  equationBox.style.background = "";
+  clearInterval(indicatorEq);
 }
 function box6Mouseout(){
   box6.style.background = "";
+  equationBox.style.background = "";
+  clearInterval(indicatorEq);
 }
 function box7Mouseout(){
   box7.style.background = "";
+  equationBox.style.background = "";
+  clearInterval(indicatorEq);
 }
 function box8Mouseout(){
   box8.style.background = "";
+  equationBox.style.background = "";
+  clearInterval(indicatorEq);
 }
-
-
-
-
-
-
-
-
-
 
 //equation event listener. It will generate a new equation and array of numbers.
 //It will then add the correct answer in the array.
@@ -316,7 +329,8 @@ if (solved == true) {
     // console.log (randomNumber);
     // console.log (randomBoxNumber);
     // console.log (targetArray);
-
+    
+    equationBox.style.boxShadow = "0px 0px 0px white";
     eval(randomBoxNumber).textContent = equation;
     targetArray[randomNumber] = equation;
 
@@ -329,18 +343,20 @@ if (solved == true) {
     // console.log (round);
     // console.log (roundCheck);
     // console.log (score);
+
+    
   }
   else {
     equationBox.style.background = "rgba(225,0,0,0.5)";
     // difficulty();
+    indicatorT = setInterval(indicatorTargets,500);
+    
   }
 });
   
-
-
-
 function alertRed () {
-    equationBox.style.background = "";
+    document.getElementById("equation").style.background = "";
+    
     solved = false;    
 }
 
@@ -349,26 +365,17 @@ document.getElementById(`equation`).addEventListener("mouseover", function() {
     document.getElementById('equation').innerHTML = a + " + " + b;
   });
 
-
-
-
-
-
-
-
-
-
 //functions
 function getRandomBoxNumber() {
     return Math.floor((Math.random() * 8));
 }
 
 function getRandomTotal() {
-    return Math.floor(Math.random() * 10);
+    return Math.floor(Math.random() * 11);
 }
 
 function getRandomInt() {
-   return Math.floor(Math.random() * 20);
+   return Math.floor(Math.random() * 21);
 }
 
 function getEquation() {
@@ -407,10 +414,36 @@ function addPoint() {
     }
 }
 
+
+
 function minusPoint() {
   score--;
   scoreboard.innerHTML = `Score: ` + score;
 }
+
+
+
+
+
+
+
+function indicatorEquation () {
+    
+    
+    if (blinkingState == true){
+        equationBox.style.background = "rgba(0,225,0,0.2)";
+        blinkingState = false;
+    }
+    else 
+    {
+        equationBox.style.background = "";
+        blinkingState = true;
+    }
+    
+}
+
+
+
 
 function updateArray() {
   targetArray[0] = getRandomInt();
@@ -434,4 +467,3 @@ function updateArray() {
 function difficulty() {
     
 }
-    
