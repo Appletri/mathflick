@@ -7,7 +7,7 @@ const box3 = document.querySelector("#box3");
 const box2 = document.querySelector("#box2");
 const box1 = document.querySelector("#box1");
 const equationBox = document.querySelector("#equation");
-const targets = document.querySelector(".target")
+const targets = document.getElementsByClassName("target");
 const timer = document.querySelector(`#timer`);
 const scoreboard = document.querySelector(`#score`);
 const resetButton = document.querySelector(`#resetButton`);
@@ -23,8 +23,10 @@ let combo = 0;
 let a;
 let b;
 let score = 0;
+
 let interval; //time interval
 let gameTime = 0;
+
 let targetArray = [1,2,3,4,5,6,7,8]; //targets start value
 
 preGame();//will present `hover to start` screen
@@ -131,7 +133,10 @@ function box1Colors(){
   if (equation == targetArray[0]) {  
     box1.style.background = "green";
     addPoint();
+    equationBox.style.background = "rgba(0,225,0,0.2)";
+    indicatorEq = setInterval(indicatorEquation, 500);
     return solved = true;
+    
   }
   else {
     box1.style.background = "red";
@@ -145,7 +150,10 @@ function box2Colors(){
   if (equation == targetArray[1]) {  
     box2.style.background = "green";
     addPoint();
+    equationBox.style.background = "rgba(0,225,0,0.2)";
+    indicatorEq = setInterval(indicatorEquation, 500);
     return solved = true;
+    
   }
   else {
     box2.style.background = "red";
@@ -159,6 +167,8 @@ function box3Colors(){
   if (equation == targetArray[2]) {  
     box3.style.background = "green";
     addPoint();
+    equationBox.style.background = "rgba(0,225,0,0.2)";
+    indicatorEq = setInterval(indicatorEquation, 500);
     return solved = true;
   }
   else {
@@ -173,6 +183,8 @@ function box4Colors(){
   if (equation == targetArray[3]) {  
     box4.style.background = "green";
     addPoint();
+    equationBox.style.background = "rgba(0,225,0,0.2)";
+    indicatorEq = setInterval(indicatorEquation, 500);
     return solved = true;
   }
   else {
@@ -187,6 +199,8 @@ function box5Colors(){
   if (equation == targetArray[4]) {  
     box5.style.background = "green";
     addPoint();
+    equationBox.style.background = "rgba(0,225,0,0.2)";
+    indicatorEq = setInterval(indicatorEquation, 500);
     return solved = true;
   }
   else {
@@ -201,6 +215,8 @@ function box6Colors(){
   if (equation == targetArray[5]) {  
     box6.style.background = "green";
     addPoint();
+    equationBox.style.background = "rgba(0,225,0,0.2)";
+    indicatorEq = setInterval(indicatorEquation, 500);
     return solved = true;
   }
   else {
@@ -215,6 +231,8 @@ function box7Colors(){
   if (equation == targetArray[6]) {  
     box7.style.background = "green";
     addPoint();
+    equationBox.style.background = "rgba(0,225,0,0.2)";
+    indicatorEq = setInterval(indicatorEquation, 500);
     return solved = true;
   }
   else {
@@ -229,6 +247,8 @@ function box8Colors(){
   if (equation == targetArray[7]) {  
     box8.style.background = "green";
     addPoint();
+    equationBox.style.background = "rgba(0,225,0,0.2)";
+    indicatorEq = setInterval(indicatorEquation, 500);
     return solved = true;
   }
   else {
@@ -253,27 +273,43 @@ function assignMouseout(){
 
 function box1Mouseout(){
   box1.style.background = "";
+  equationBox.style.background = "";
+  clearInterval(indicatorEq);
 }
 function box2Mouseout(){
   box2.style.background = "";
+  equationBox.style.background = "";
+  clearInterval(indicatorEq);
 }
 function box3Mouseout(){
   box3.style.background = "";
+  equationBox.style.background = "";
+  clearInterval(indicatorEq);
 }
 function box4Mouseout(){
   box4.style.background = "";
+  equationBox.style.background = "";
+  clearInterval(indicatorEq);
 }
 function box5Mouseout(){
   box5.style.background = "";
+  equationBox.style.background = "";
+  clearInterval(indicatorEq);
 }
 function box6Mouseout(){
   box6.style.background = "";
+  equationBox.style.background = "";
+  clearInterval(indicatorEq);
 }
 function box7Mouseout(){
   box7.style.background = "";
+  equationBox.style.background = "";
+  clearInterval(indicatorEq);
 }
 function box8Mouseout(){
   box8.style.background = "";
+  equationBox.style.background = "";
+  clearInterval(indicatorEq);
 }
 
 //equation event listener. It will generate a new equation and array of numbers.
@@ -293,7 +329,8 @@ if (solved == true) {
     // console.log (randomNumber);
     // console.log (randomBoxNumber);
     // console.log (targetArray);
-
+    
+    equationBox.style.boxShadow = "0px 0px 0px white";
     eval(randomBoxNumber).textContent = equation;
     targetArray[randomNumber] = equation;
 
@@ -306,15 +343,20 @@ if (solved == true) {
     // console.log (round);
     // console.log (roundCheck);
     // console.log (score);
+
+    
   }
   else {
     equationBox.style.background = "rgba(225,0,0,0.5)";
     // difficulty();
+    indicatorT = setInterval(indicatorTargets,500);
+    
   }
 });
   
 function alertRed () {
-    equationBox.style.background = "";
+    document.getElementById("equation").style.background = "";
+    
     solved = false;    
 }
 
@@ -329,11 +371,11 @@ function getRandomBoxNumber() {
 }
 
 function getRandomTotal() {
-    return Math.floor(Math.random() * 10);
+    return Math.floor(Math.random() * 11);
 }
 
 function getRandomInt() {
-   return Math.floor(Math.random() * 20);
+   return Math.floor(Math.random() * 21);
 }
 
 function getEquation() {
@@ -372,10 +414,36 @@ function addPoint() {
     }
 }
 
+
+
 function minusPoint() {
   score--;
   scoreboard.innerHTML = `Score: ` + score;
 }
+
+
+
+
+
+
+
+function indicatorEquation () {
+    
+    
+    if (blinkingState == true){
+        equationBox.style.background = "rgba(0,225,0,0.2)";
+        blinkingState = false;
+    }
+    else 
+    {
+        equationBox.style.background = "";
+        blinkingState = true;
+    }
+    
+}
+
+
+
 
 function updateArray() {
   targetArray[0] = getRandomInt();
