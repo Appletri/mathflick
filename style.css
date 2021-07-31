@@ -80,6 +80,11 @@ h1{
     font-size: 25px;
 }
 
+#resetButton:hover{
+    cursor: pointer;
+    background-color: #A956A2;
+}
+
 #highScore{
     grid-area: highscore;
     margin-left: auto;
