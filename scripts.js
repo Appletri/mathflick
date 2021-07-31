@@ -29,6 +29,9 @@ let gameTime = 0;
 
 let targetArray = [1,2,3,4,5,6,7,8]; //targets start value
 
+let indicatorEq;
+let blinkingState = true;
+
 preGame();//will present `hover to start` screen
 
 //pre game vvvv
@@ -330,7 +333,7 @@ if (solved == true) {
     // console.log (randomBoxNumber);
     // console.log (targetArray);
     
-    equationBox.style.boxShadow = "0px 0px 0px white";
+    
     eval(randomBoxNumber).textContent = equation;
     targetArray[randomNumber] = equation;
 
