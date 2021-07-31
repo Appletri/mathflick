@@ -467,3 +467,14 @@ function updateArray() {
 function difficulty() {
     
 }
+
+
+// Change equation text to "Click to start!" when the app is rendered on mobile
+function mobileResponsive(mediaQueryList) {
+  if (mediaQueryList.matches) { // If media query matches
+    equationBox.innerHTML =  `Click <br>to start!`;
+  }
+}
+
+let mediaQueryList = window.matchMedia("(max-width: 768px)");
+mediaQueryList.addEventListener("change", mobileResponsive) // Attach listener function on state changes
