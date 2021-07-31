@@ -11,11 +11,9 @@ const targets = document.getElementsByClassName("target");
 const timer = document.querySelector(`#timer`);
 const scoreboard = document.querySelector(`#score`);
 const resetButton = document.querySelector(`#resetButton`);
+const highScoreBox = document.querySelector(`#highScore`);
 
-
-const highScore = localStorage.getItem('HS');
-
-
+let highScore = localStorage.getItem('HS');
 let gameState = "";
 let equation = 1;
 let solved = true;
@@ -25,55 +23,21 @@ let combo = 0;
 let a;
 let b;
 let score = 0;
-let interval;
-//variables for indicators
-let blinkingState = true;
-let indicatorEq;
-let indicatorT;
 
-let gameTime = 0; //initial game time
-timer.innerHTML = `Time: ` + gameTime; //display current time
+let interval; //time interval
+let gameTime = 0;
+
 let targetArray = [1,2,3,4,5,6,7,8]; //targets start value
 
 preGame();//will present `hover to start` screen
-
-
-//reset gameboard
-function reset(){
-    //update highscore
-  highScore;
-  if (highScore === null) {
-      localStorage.setItem("HS",'0')
-  }
-  if (score > highScore) {
-    localStorage.setItem("HS",score);
-    document.getElementById("highScore").innerText = "High Score: " + highScore;
-  }  
-
-  //reset variables
-  score = 0;
-  round = 1;
-  roundCheck = 0;
-  combo = 0;
-  
-}
-
 
 //pre game vvvv
 function preGame(){
     solved = true;
     gameState = "pregame";
+    setHighScore();
+    reset();
     resetButton.addEventListener(`click`, preGame);
-    box1.removeEventListener(`mouseover`, box1Colors);
-    box2.removeEventListener(`mouseover`, box2Colors);
-    box3.removeEventListener(`mouseover`, box3Colors);
-    box4.removeEventListener(`mouseover`, box4Colors);
-    box5.removeEventListener(`mouseover`, box5Colors);
-    box6.removeEventListener(`mouseover`, box6Colors);
-    box7.removeEventListener(`mouseover`, box7Colors);
-    box8.removeEventListener(`mouseover`, box8Colors);
-    equationBox.style.background = "";
-    equationBox.removeEventListener("mouseout", alertRed); //there was a bug with the mouseout when the game resets, this fixes it
     box1.innerHTML = ``;
     box2.innerHTML = ``;
     box3.innerHTML = ``;
@@ -82,19 +46,27 @@ function preGame(){
     box6.innerHTML = ``;
     box7.innerHTML = ``;
     box8.innerHTML = ``;
+    box1.removeEventListener(`mouseover`, box1Colors);
+    box2.removeEventListener(`mouseover`, box2Colors);
+    box3.removeEventListener(`mouseover`, box3Colors);
+    box4.removeEventListener(`mouseover`, box4Colors);
+    box5.removeEventListener(`mouseover`, box5Colors);
+    box6.removeEventListener(`mouseover`, box6Colors);
+    box7.removeEventListener(`mouseover`, box7Colors);
+    box8.removeEventListener(`mouseover`, box8Colors);
+    equationBox.removeEventListener("mouseout", alertRed); //there was a bug with the mouseout when the game resets, this fixes it
+    equationBox.style.background = "";
     equationBox.innerHTML = `Hover <br>to start!`;
-    equationBox.addEventListener("mouseover", playGame);
-    
-    document.getElementById("highScore").innerText = "High Score: " + highScore;
-    
+    equationBox.addEventListener("mouseover", playGame); //starts the game
+    scoreboard.innerHTML = `Score: ` + score;
+    timer.innerHTML = `Time: ` + gameTime;
+}
 
-  }
-
-//after `hover to start`, play the game, start countdown
+//play the game, start countdown vvvv
 function playGame(){
   equationBox.removeEventListener(`mouseover`, playGame);
   equationBox.addEventListener("mouseout", alertRed);
-  gameTime = 60;
+  gameTime = 5; //debugging
   gameState = "playgame";
   assignColors();
   assignMouseout();
@@ -103,35 +75,47 @@ function playGame(){
 }
 
 
-// countdown timer and alert game over vvvv
+//countdown timer and alert game over vvvv
 function countdown(){
   clearInterval(interval);
   timer.innerHTML = `Time: ` + gameTime;
   interval = setInterval(tickTock, 1000);
   function tickTock(){
     if(gameTime > 0 && gameState == "playgame"){
-      
         gameTime--;
         timer.innerHTML = `Time: ` + gameTime;
     }
     
     else{
-        timer.innerHTML = `Time: ` + 0;  
-        console.log (`Game over. \n\nYour score: ` + score);
-        
-        reset();
-        preGame();
+        timer.innerHTML = `Time: ` + 0;
         clearInterval(interval);
+        alert(`Game Over!\n\nYour Score: ` + score);
+        setHighScore();
+        preGame();
     }
   }
 }
 
+//reset variables vvvv
+function reset(){
+  score = 0;
+  round = 1;
+  roundCheck = 0;
+  combo = 0;
+}
 
-
-
-
-
-
+//High score vvvv
+function setHighScore(){
+  if (score > highScore) {
+    localStorage.setItem(`HS`, score);
+    highScore = score;
+    alert(`You have the new high score!\nHigh score: ` + score);
+    highScoreBox.innerHTML = "High Score: " + highScore;
+  } 
+  else{
+    highScoreBox.innerHTML = "High Score: " + highScore;
+  }
+}
 
 // event listeners for mouseover listener vvvv
 function assignColors(){
@@ -328,15 +312,6 @@ function box8Mouseout(){
   clearInterval(indicatorEq);
 }
 
-
-
-
-
-
-
-
-
-
 //equation event listener. It will generate a new equation and array of numbers.
 //It will then add the correct answer in the array.
 equationBox.addEventListener("mouseover", function() {
@@ -379,9 +354,6 @@ if (solved == true) {
   }
 });
   
-
-
-
 function alertRed () {
     document.getElementById("equation").style.background = "";
     
@@ -392,15 +364,6 @@ function alertRed () {
 document.getElementById(`equation`).addEventListener("mouseover", function() {
     document.getElementById('equation').innerHTML = a + " + " + b;
   });
-
-
-
-
-
-
-
-
-
 
 //functions
 function getRandomBoxNumber() {
@@ -504,4 +467,3 @@ function updateArray() {
 function difficulty() {
     
 }
-    
