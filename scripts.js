@@ -16,7 +16,7 @@ const resetButton = document.querySelector(`#resetButton`);
 const highScore = localStorage.getItem('HS');
 
 
-
+let gameState = "";
 let equation = 1;
 let solved = true;
 let round = 1;
@@ -25,6 +25,7 @@ let combo = 0;
 let a;
 let b;
 let score = 0;
+let interval;
 
 let gameTime = 0; //initial game time
 timer.innerHTML = `Time: ` + gameTime; //display current time
@@ -32,8 +33,9 @@ let targetArray = [1,2,3,4,5,6,7,8]; //targets start value
 
 preGame();//will present `hover to start` screen
 
-//reset score vvv
-function resetScore(){
+
+//reset gameboard
+function reset(){
     //update highscore
   highScore;
   if (highScore === null) {
@@ -46,11 +48,9 @@ function resetScore(){
 
   //reset variables
   score = 0;
-  scoreboard.innerHTML = `Score: ` + score;
   round = 1;
   roundCheck = 0;
   combo = 0;
-  
   
 }
 
@@ -58,8 +58,8 @@ function resetScore(){
 //pre game vvvv
 function preGame(){
     solved = true;
-    resetButton.addEventListener(`onclick`, preGame);
-    scoreboard.innerHTML = `Score: ` + score;
+    gameState = "pregame";
+    resetButton.addEventListener(`click`, preGame);
     box1.removeEventListener(`mouseover`, box1Colors);
     box2.removeEventListener(`mouseover`, box2Colors);
     box3.removeEventListener(`mouseover`, box3Colors);
@@ -69,7 +69,7 @@ function preGame(){
     box7.removeEventListener(`mouseover`, box7Colors);
     box8.removeEventListener(`mouseover`, box8Colors);
     equationBox.style.background = "";
-    equationBox.removeEventListener("mouseout", alertRed);
+    equationBox.removeEventListener("mouseout", alertRed); //there was a bug with the mouseout when the game resets, this fixes it
     box1.innerHTML = ``;
     box2.innerHTML = ``;
     box3.innerHTML = ``;
@@ -91,29 +91,31 @@ function playGame(){
   equationBox.removeEventListener(`mouseover`, playGame);
   equationBox.addEventListener("mouseout", alertRed);
   gameTime = 60;
-  
+  gameState = "playgame";
   assignColors();
   assignMouseout();
   countdown();
-  
+  scoreboard.innerHTML = `Score: ` + score;
 }
 
 
 // countdown timer and alert game over vvvv
 function countdown(){
+  clearInterval(interval);
   timer.innerHTML = `Time: ` + gameTime;
-  let interval = setInterval(tickTock, 1000);
+  interval = setInterval(tickTock, 1000);
   function tickTock(){
-    if(gameTime > 0){
+    if(gameTime > 0 && gameState == "playgame"){
       
         gameTime--;
         timer.innerHTML = `Time: ` + gameTime;
     }
+    
     else{
-        timer.innerHTML = `Time: ` + gameTime;  
+        timer.innerHTML = `Time: ` + 0;  
         console.log (`Game over. \n\nYour score: ` + score);
         
-        resetScore();
+        reset();
         preGame();
         clearInterval(interval);
     }
@@ -339,8 +341,7 @@ if (solved == true) {
 
 function alertRed () {
     equationBox.style.background = "";
-    solved = false;
-    
+    solved = false;    
 }
 
 
