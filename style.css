@@ -1,5 +1,6 @@
 body{
     background-attachment: fixed;
+    margin-top: 35px;
     font-family: sans-serif;
     background-color: #231f20;
     color: white;
@@ -18,6 +19,12 @@ p{
 a {
     color: #A956A2;
 }
+#team-links {
+    text-align:right;
+    right: 20px;
+}
+    
+ 
 
 a:hover {
     color: yellow;
@@ -59,6 +66,7 @@ a:hover {
   /* Do an horizontal flip when you move the mouse over the flip box container */
   .flip-card:hover .flip-card-inner, .flip-card:active .flip-card-inner {
     transform: rotateY(180deg);
+    
   }
   
   /* Position the front and back side */
@@ -91,7 +99,16 @@ a:hover {
     position: absolute;
     top: 25px;
     width: 200px;
+    opacity:0;
+    transform: translateX(-3rem);
+    animation: fadeInSide 2s ease forwards;
+}
 
+@keyframes fadeInSide{
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 #gameboard{
     display: grid;
@@ -106,7 +123,7 @@ a:hover {
     /* background-color:rgb(158, 158, 158); */
     background-image: url(Space.png);
     background-size: 200%;
-    background-position: 1275px -26px;
+    background-position: 1275px -7px;
     grid-template: 
     "title title"
     "timer score"
@@ -117,15 +134,19 @@ a:hover {
 }
 
 #title{
+    padding-bottom:20px;
     grid-area: title;
     margin-left: auto;
     margin-right: auto;
-    width:99%;
-    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 45px;
+   
+}
+#MFIMG{
+    width:200px;
+    
+
 }
 
 #score{
@@ -316,7 +337,7 @@ a:hover {
     width:5%;
     text-align:center;
     right:47.5%;
-    top:470px;
+    top:500px;
     opacity:0.3;
     font-size: 10px;
     z-index: 1;
