@@ -15,6 +15,8 @@ const highScoreBox = document.querySelector(`#highScore`);
 const flickboard = document.querySelector("#flickboard");
 const scoreSummary = document.querySelector("#score-summary");
 const newGame = document.querySelector("#newGame");
+const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+
 
 let highScore = localStorage.getItem('HS');
 let gameState = "";
@@ -62,7 +64,11 @@ function preGame(){
     box8.removeEventListener(`mouseover`, box8Colors);
     equationBox.removeEventListener("mouseout", alertRed); //there was a bug with the mouseout when the game resets, this fixes it
     equationBox.style.background = "";
-    equationBox.innerHTML = `Hover <br>to start!`;
+    if (viewportWidth <= 768) {
+          equationBox.innerHTML =  `Click <br>to start!`;
+        } else {
+          equationBox.innerHTML = `Hover <br>to start!`;
+        }
     equationBox.addEventListener("mouseover", playGame); //starts the game
     scoreboard.innerHTML = `Score: ` + score;
     timer.innerHTML = `Time: ` + gameTime;
@@ -72,7 +78,7 @@ function preGame(){
 function playGame(){
   equationBox.removeEventListener(`mouseover`, playGame);
   equationBox.addEventListener("mouseout", alertRed);
-  gameTime = 75; //debugging
+  gameTime = 60; //debugging
   gameState = "playgame";
   assignColors();
   assignMouseout();
@@ -487,14 +493,3 @@ function updateArray() {
 function difficulty() {
     
 }
-
-
-// Change equation text to "Click to start!" when the app is rendered on mobile
-function mobileResponsive(mediaQueryList) {
-  if (mediaQueryList.matches) { // If media query matches
-    equationBox.innerHTML =  `Click <br>to start!`;
-  }
-}
-
-let mediaQueryList = window.matchMedia("(max-width: 768px)");
-mediaQueryList.addEventListener("change", mobileResponsive) // Attach listener function on state changes
