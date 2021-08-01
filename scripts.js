@@ -72,7 +72,7 @@ function preGame(){
 function playGame(){
   equationBox.removeEventListener(`mouseover`, playGame);
   equationBox.addEventListener("mouseout", alertRed);
-  gameTime = 60; //debugging
+  gameTime = 75; //debugging
   gameState = "playgame";
   assignColors();
   assignMouseout();
@@ -96,9 +96,11 @@ function countdown(){
         timer.innerHTML = `Time: ` + 0;
         clearInterval(interval);
         // alert(`Game Over!\n\nYour Score: ` + score);
-        flickboard.className = "flickboard-hidden";
-        scoreSummary.className = "summary-display";
-        scoreSummary.innerHTML = `Game Over!\n\nYour Score: ` + score;
+        if (gameTime === 0) {
+          flickboard.className = "flickboard-hidden";
+          scoreSummary.className = "summary-display";
+          scoreSummary.innerHTML = `Game Over!\n\nYour Score: ` + score;
+        }
         setHighScore();
         preGame();
     }
@@ -118,7 +120,10 @@ function setHighScore(){
   if (score > highScore) {
     localStorage.setItem(`HS`, score);
     highScore = score;
-    alert(`You have the new high score!\nHigh score: ` + score);
+    // alert(`You have the new high score!\nHigh score: ` + score);
+    if (gameTime === 0) {
+      scoreSummary.innerHTML = `You have the new high score!\nHigh score: ` + score;
+    }
     highScoreBox.innerHTML = "High Score: " + highScore;
   } 
   else{
