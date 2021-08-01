@@ -45,7 +45,12 @@ function preGame(){
     gameState = "pregame";
     setHighScore();
     reset();
-    resetButton.addEventListener(`click`, preGame);
+    resetButton.addEventListener(`click`, function() {
+      preGame();
+      flickboard.className = "flickboard-display";
+      scoreSummary.className = "summary-hidden";
+      resetButton.textContent = "Reset Game";
+    });
     box1.innerHTML = ``;
     box2.innerHTML = ``;
     box3.innerHTML = ``;
@@ -65,7 +70,7 @@ function preGame(){
     equationBox.removeEventListener("mouseout", alertRed); //there was a bug with the mouseout when the game resets, this fixes it
     equationBox.style.background = "";
     if (viewportWidth <= 768) {
-          equationBox.innerHTML =  `Click <br>to start!`;
+          equationBox.innerHTML =  `Tap <br>to start!`;
         } else {
           equationBox.innerHTML = `Hover <br>to start!`;
         }
@@ -101,11 +106,11 @@ function countdown(){
     else{
         timer.innerHTML = `Time: ` + 0;
         clearInterval(interval);
-        // alert(`Game Over!\n\nYour Score: ` + score);
         if (gameTime === 0) {
           flickboard.className = "flickboard-hidden";
           scoreSummary.className = "summary-display";
           scoreSummary.innerHTML = `Game Over!\n\nYour Score: ` + score;
+          resetButton.textContent = "New Game";
         }
         setHighScore();
         preGame();
@@ -126,7 +131,6 @@ function setHighScore(){
   if (score > highScore) {
     localStorage.setItem(`HS`, score);
     highScore = score;
-    // alert(`You have the new high score!\nHigh score: ` + score);
     if (gameTime === 0) {
       scoreSummary.innerHTML = `You have the new high score!\nHigh score: ` + score;
     }
@@ -136,12 +140,6 @@ function setHighScore(){
     highScoreBox.innerHTML = "High Score: " + highScore;
   }
 }
-
-// Start a new game after displaying high score
-newGame.addEventListener("click", function() {
-  flickboard.className = "flickboard-display";
-  scoreSummary.className = "summary-hidden";
-})
 
 // event listeners for mouseover listener vvvv
 function assignColors(){
