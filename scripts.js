@@ -78,7 +78,7 @@ function preGame(){
 function playGame(){
   equationBox.removeEventListener(`mouseover`, playGame);
   equationBox.addEventListener("mouseout", alertRed);
-  gameTime = 60; //debugging
+  gameTime = 3; //debugging
   gameState = "playgame";
   assignColors();
   assignMouseout();

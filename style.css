@@ -234,6 +234,9 @@ a:hover {
 
 .summary-display {
     display: block;
+    text-align: center;
+    padding-top: 200px;
+    padding-bottom: 470px;
 }
 
 .summary-hidden {
