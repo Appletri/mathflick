@@ -15,6 +15,8 @@ const highScoreBox = document.querySelector(`#highScore`);
 const flickboard = document.querySelector("#flickboard");
 const scoreSummary = document.querySelector("#score-summary");
 const newGame = document.querySelector("#newGame");
+const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+
 
 let highScore = localStorage.getItem('HS');
 let gameState = "";
@@ -62,7 +64,11 @@ function preGame(){
     box8.removeEventListener(`mouseover`, box8Colors);
     equationBox.removeEventListener("mouseout", alertRed); //there was a bug with the mouseout when the game resets, this fixes it
     equationBox.style.background = "";
-    equationBox.innerHTML = `Hover <br>to start!`;
+    if (viewportWidth <= 768) {
+          equationBox.innerHTML =  `Click <br>to start!`;
+        } else {
+          equationBox.innerHTML = `Hover <br>to start!`;
+        }
     equationBox.addEventListener("mouseover", playGame); //starts the game
     scoreboard.innerHTML = `Score: ` + score;
     timer.innerHTML = `Time: ` + gameTime;
@@ -96,9 +102,11 @@ function countdown(){
         timer.innerHTML = `Time: ` + 0;
         clearInterval(interval);
         // alert(`Game Over!\n\nYour Score: ` + score);
-        flickboard.className = "flickboard-hidden";
-        scoreSummary.className = "summary-display";
-        scoreSummary.innerHTML = `Game Over!\n\nYour Score: ` + score;
+        if (gameTime === 0) {
+          flickboard.className = "flickboard-hidden";
+          scoreSummary.className = "summary-display";
+          scoreSummary.innerHTML = `Game Over!\n\nYour Score: ` + score;
+        }
         setHighScore();
         preGame();
     }
@@ -118,7 +126,10 @@ function setHighScore(){
   if (score > highScore) {
     localStorage.setItem(`HS`, score);
     highScore = score;
-    alert(`You have the new high score!\nHigh score: ` + score);
+    // alert(`You have the new high score!\nHigh score: ` + score);
+    if (gameTime === 0) {
+      scoreSummary.innerHTML = `You have the new high score!\nHigh score: ` + score;
+    }
     highScoreBox.innerHTML = "High Score: " + highScore;
   } 
   else{
@@ -482,14 +493,3 @@ function updateArray() {
 function difficulty() {
     
 }
-
-
-// Change equation text to "Click to start!" when the app is rendered on mobile
-function mobileResponsive(mediaQueryList) {
-  if (mediaQueryList.matches) { // If media query matches
-    equationBox.innerHTML =  `Click <br>to start!`;
-  }
-}
-
-let mediaQueryList = window.matchMedia("(max-width: 768px)");
-mediaQueryList.addEventListener("change", mobileResponsive) // Attach listener function on state changes
