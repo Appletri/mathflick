@@ -108,10 +108,11 @@ a:hover {
     background-size: 200%;
     background-position: 1275px -26px;
     grid-template: 
-    "title title"
-    "timer score"
-    "flick flick"
-    "resetgame highscore";
+    "title title title"
+    "timer . score"
+    ". summary ."
+    "flick flick flick"
+    "resetgame newgame highscore";
     grid-auto-columns: 50%;
 }
 
@@ -153,6 +154,14 @@ a:hover {
     font-size: 50px;
 }
 
+#score-summary {
+    grid-area: summary;
+    margin: 40px auto;
+    width:100%;
+    height:50px;
+    font-size: 25px;
+}
+
 #resetButton{
     grid-area: resetgame;
     margin-left: auto;
@@ -166,7 +175,25 @@ a:hover {
     font-size: 25px;
 }
 
+#newGame {
+    grid-area: newgame;
+    margin-left: auto;
+    margin-right: auto;
+    width:50%;
+    height:50px;
+    border: 3px solid rgb(216, 216, 216);;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+}
+
 #resetButton:hover{
+    cursor: pointer;
+    background-color: #A956A2;
+}
+
+#newGame:hover {
     cursor: pointer;
     background-color: #A956A2;
 }
@@ -184,7 +211,7 @@ a:hover {
     font-size: 25px;
 }
 
-#flickboard{
+.flickboard-display {
     grid-area: flick;
     margin-left: auto;
     margin-right: auto;
@@ -201,6 +228,22 @@ a:hover {
     animation: rotation 60s infinite linear
 }
 
+.flickboard-hidden {
+    display: none;
+}
+
+.summary-display {
+    display: block;
+}
+
+.summary-hidden {
+    display: none;
+}
+
+.score-message {
+    font-size: 24px;
+    text-align: center;
+}
 
 #box8{
     width: 25%;

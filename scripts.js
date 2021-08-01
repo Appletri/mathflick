@@ -12,6 +12,9 @@ const timer = document.querySelector(`#timer`);
 const scoreboard = document.querySelector(`#score`);
 const resetButton = document.querySelector(`#resetButton`);
 const highScoreBox = document.querySelector(`#highScore`);
+const flickboard = document.querySelector("#flickboard");
+const scoreSummary = document.querySelector("#score-summary");
+const newGame = document.querySelector("#newGame");
 
 let highScore = localStorage.getItem('HS');
 let gameState = "";
@@ -92,7 +95,10 @@ function countdown(){
     else{
         timer.innerHTML = `Time: ` + 0;
         clearInterval(interval);
-        alert(`Game Over!\n\nYour Score: ` + score);
+        // alert(`Game Over!\n\nYour Score: ` + score);
+        flickboard.className = "flickboard-hidden";
+        scoreSummary.className = "summary-display";
+        scoreSummary.innerHTML = `Game Over!\n\nYour Score: ` + score;
         setHighScore();
         preGame();
     }
@@ -119,6 +125,12 @@ function setHighScore(){
     highScoreBox.innerHTML = "High Score: " + highScore;
   }
 }
+
+// Start a new game after displaying high score
+newGame.addEventListener("click", function() {
+  flickboard.className = "flickboard-display";
+  scoreSummary.className = "summary-hidden";
+})
 
 // event listeners for mouseover listener vvvv
 function assignColors(){
