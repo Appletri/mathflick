@@ -78,9 +78,9 @@ function preGame(){
     equationBox.removeEventListener("mouseout", alertRed); //there was a bug with the mouseout when the game resets, this fixes it
     equationBox.style.background = "";
     if (viewportWidth <= 768) {
-          equationBox.innerHTML =  `Tap <br>to start!`;
+          equationBox.innerHTML =  `Tap <br>to <br>start!`;
         } else {
-          equationBox.innerHTML = `Hover <br>to start!`;
+          equationBox.innerHTML = `Hover <br>to <br>start!`;
         }
     equationBox.addEventListener("mouseover", playGame); //starts the game
     scoreboard.innerHTML = `Score: ` + score;
@@ -91,7 +91,7 @@ function preGame(){
 function playGame(){
   equationBox.removeEventListener(`mouseover`, playGame);
   equationBox.addEventListener("mouseout", alertRed);
-  gameTime = 30; //debugging
+  gameTime = 3; //debugging
   gameState = "playgame";
   assignColors();
   assignMouseout();
