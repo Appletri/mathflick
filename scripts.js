@@ -14,11 +14,17 @@ const resetButton = document.querySelector(`#resetButton`);
 const highScoreBox = document.querySelector(`#highScore`);
 const flickboard = document.querySelector("#flickboard");
 const scoreSummary = document.querySelector("#score-summary");
-const newGame = document.querySelector("#newGame");
+const highScoreHistory = document.querySelector("#highScore-history"); 
+const comboMeter = document.querySelector("#comboMeter");
 const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
 
 
 let highScore = localStorage.getItem('HS');
+// if (highScoreArray.length > 0) {
+//   highScoreArray
+// }
+
+let highScoreArray = [];
 let gameState = "";
 let equation = 1;
 let solved = true;
@@ -48,7 +54,9 @@ function preGame(){
     resetButton.addEventListener(`click`, function() {
       preGame();
       flickboard.className = "flickboard-display";
+      comboMeter.className = "comboMeter-display";
       scoreSummary.className = "summary-hidden";
+      highScoreHistory.className = "highScoreHistory-hidden";
       resetButton.textContent = "Reset Game";
     });
     box1.innerHTML = ``;
@@ -83,7 +91,7 @@ function preGame(){
 function playGame(){
   equationBox.removeEventListener(`mouseover`, playGame);
   equationBox.addEventListener("mouseout", alertRed);
-  gameTime = 60; //debugging
+  gameTime = 30; //debugging
   gameState = "playgame";
   assignColors();
   assignMouseout();
@@ -108,8 +116,10 @@ function countdown(){
         clearInterval(interval);
         if (gameTime === 0) {
           flickboard.className = "flickboard-hidden";
+          highScoreHistory.className = "highScoreHistory-hidden";
+          comboMeter.className = "comboMeter-hidden";
           scoreSummary.className = "summary-display";
-          scoreSummary.innerHTML = `Game Over!\n\nYour Score: ` + score;
+          scoreSummary.innerHTML = `Game Over! <br> Your Score: ` + score + `<br> Your accuracy: ` + `<br> Average time to answer: `;
           resetButton.textContent = "New Game";
         }
         setHighScore();
@@ -131,15 +141,33 @@ function setHighScore(){
   if (score > highScore) {
     localStorage.setItem(`HS`, score);
     highScore = score;
+    highScoreArray.push({
+      "Score": highScore, 
+      "Time": new Date()
+    });
     if (gameTime === 0) {
-      scoreSummary.innerHTML = `You have the new high score!\nHigh score: ` + score;
+      scoreSummary.innerHTML = `You have the new high score!<br>High score: ` + score;
     }
-    highScoreBox.innerHTML = "High Score: " + highScore;
-  } 
-  else{
-    highScoreBox.innerHTML = "High Score: " + highScore;
   }
+  highScoreBox.innerHTML = "High Score: " + highScore; 
 }
+
+// Show high score history when highScoreBox is clicked at the end of game
+highScoreBox.addEventListener("click", function() {
+  highScoreHistory.className = "highScoreHistory-display";
+  flickboard.className = "flickboard-hidden";
+  scoreSummary.className = "summary-hidden";
+  comboMeter.className = "comboMeter-hidden";
+  if (highScoreArray.length > 0) {
+    let scoreHistory = "";
+    for (let i = 0; i < highScoreArray.length; i++) {
+      scoreHistory +=  `High score [${i + 1}]: ${highScoreArray[i]["Score"]} <br> Time: ${highScoreArray[i]["Time"]} <br>`;
+    }
+    highScoreHistory.innerHTML = scoreHistory;
+  } else {
+    highScoreHistory.textContent = "High score history not available if page has been refreshed";
+  } 
+})
 
 // event listeners for mouseover listener vvvv
 function assignColors(){
