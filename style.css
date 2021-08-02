@@ -254,6 +254,7 @@ a:hover {
     text-align: center;
     padding-top: 100px;
     padding-bottom: 570px;
+    background-color: black;
 }
 
 .summary-hidden {
@@ -264,8 +265,9 @@ a:hover {
 .highScoreHistory-display {
     display: block;
     text-align: center;
-    padding-top: 100px;
-    padding-bottom: 570px;
+    padding-top: 70px;
+    padding-bottom: 600px;
+    background-color: black;
 }
 
 .highScoreHistory-hidden {
@@ -353,7 +355,7 @@ a:hover {
 }
 
 
-#comboMeter {
+.comboMeter-display {
     position:absolute;
     width:5%;
     text-align:center;
@@ -362,6 +364,10 @@ a:hover {
     opacity:0.3;
     font-size: 10px;
     z-index: 1;
+}
+
+.comboMeter-hidden {
+    display: none;
 }
 
 @keyframes rotation {
