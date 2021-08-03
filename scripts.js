@@ -42,6 +42,8 @@ let constantGameTime;
 let targetArray = [1,2,3,4,5,6,7,8]; //targets start value
 
 let indicatorEq;
+let indicatorT;
+let indicatorTargets;
 let blinkingState = true;
 
 preGame();//will present `hover to start` screen
@@ -121,8 +123,7 @@ resetButton.addEventListener(`click`, function() {
 function playGame(){
   equationBox.removeEventListener(`mouseover`, playGame);
   equationBox.addEventListener("mouseout", alertRed);
-  gameTime = 10; //debugging
-  constantGameTime = gameTime;
+  gameTime = 15; //debugging
   gameState = "playgame";
   assignColors();
   assignMouseout();
@@ -180,6 +181,8 @@ function reset(){
   combo = 0;
   numCorrect = 0;
   numWrong = 0;
+  document.getElementById('comboMeter').innerHTML = "";  
+
 }
 
 //High score vvvv
@@ -464,7 +467,6 @@ if (solved == true) {
     equationBox.style.background = "rgba(225,0,0,0.5)";
     // difficulty();
     indicatorT = setInterval(indicatorTargets,500);
-    
   }
 });
   
@@ -502,8 +504,13 @@ function getEquation() {
 function comboChain() {
     if (solved == true) {
         combo++;
-        document.getElementById('comboMeter').innerHTML = "x" + combo;
-        document.getElementById('comboMeter').style.fontSize = `${10 * (1 + (combo/10))}px`;
+        if (combo == 1){
+          document.getElementById('comboMeter').innerHTML = "";
+        }
+        else{
+          document.getElementById('comboMeter').innerHTML = "Combo x" + combo;
+          document.getElementById('comboMeter').style.fontSize = `${10 * (1 + (combo/10))}px`;
+        }
     }
     else {
         return;
@@ -512,7 +519,7 @@ function comboChain() {
 
 function comboReset() {
     combo = 1;
-    document.getElementById('comboMeter').innerHTML = "x" + combo;
+    document.getElementById('comboMeter').innerHTML = "";
     document.getElementById('comboMeter').style.fontSize = '10px';
 }
 
