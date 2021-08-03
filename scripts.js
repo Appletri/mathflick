@@ -43,6 +43,8 @@ let gameTime = 0;
 let targetArray = [1,2,3,4,5,6,7,8]; //targets start value
 
 let indicatorEq;
+let indicatorT;
+let indicatorTargets;
 let blinkingState = true;
 
 preGame();//will present `hover to start` screen
@@ -445,7 +447,6 @@ if (solved == true) {
     equationBox.style.background = "rgba(225,0,0,0.5)";
     // difficulty();
     indicatorT = setInterval(indicatorTargets,500);
-    
   }
 });
   
