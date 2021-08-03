@@ -249,7 +249,7 @@ a:hover {
     justify-content: center;
     align-items: center;
     border: 3px solid #A956A2;
-    animation: rotationBackwards 60s infinite linear;
+    /* animation: rotationBackwards 60s infinite linear; */
     text-shadow: 0 0 4px black, 0 0 4px black, 0 0 4px black;
     width: 200px;
     height: 200px;
@@ -267,7 +267,7 @@ a:hover {
     align-items: center;
     color:white;
     text-shadow: 0 0 4px black, 0 0 4px black, 0 0 4px black;
-    animation: rotationBackwards 60s infinite linear;
+    /* animation: rotationBackwards 60s infinite linear; */
     box-shadow : 0 0 30px white;
     font-family: 'Ubuntu', sans-serif;
     grid-area: equa;
