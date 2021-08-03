@@ -82,6 +82,11 @@ function preGame(){
     box6.removeEventListener(`mouseover`, box6Colors);
     box7.removeEventListener(`mouseover`, box7Colors);
     box8.removeEventListener(`mouseover`, box8Colors);
+    equationBox.style.animation = 'rotationBackwards 60s infinite linear';
+    flickboard.style.animation = 'rotation 60s infinite linear';
+    for (let target of targets) {
+      target.style.animation = 'rotationBackwards 60s infinite linear';
+    }
     equationBox.removeEventListener("mouseout", alertRed); //there was a bug with the mouseout when the game resets, this fixes it
     equationBox.style.background = "";
     if (viewportWidth <= 768) {
@@ -124,6 +129,7 @@ function playGame(){
   equationBox.removeEventListener(`mouseover`, playGame);
   equationBox.addEventListener("mouseout", alertRed);
   gameTime = 15; //debugging
+  constantGameTime = gameTime;
   gameState = "playgame";
   assignColors();
   assignMouseout();
@@ -151,8 +157,6 @@ function countdown(){
           highScoreHistory.className = "highScoreHistory-hidden";
           comboMeter.className = "comboMeter-hidden";
           scoreSummary.className = "summary-display";
-          console.log(numCorrect)
-          console.log(numWrong)
           scoreSummary.innerHTML = `Game Over! <br>Score: ${score} <br>Accuracy: ${Math.round(numCorrect / (numCorrect + numWrong) * 100)}% <br>Speed: ${Math.round(constantGameTime / (numCorrect + numWrong) * 10) / 10} seconds/question`;
           resetButton.textContent = "New Game";
           equationBox.style.animation = 'none';
