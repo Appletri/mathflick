@@ -7,6 +7,8 @@ const box3 = document.querySelector("#box3");
 const box2 = document.querySelector("#box2");
 const box1 = document.querySelector("#box1");
 const equationBox = document.querySelector("#equation");
+// let equationBox;
+// let box1;
 const targets = document.getElementsByClassName("target");
 const timer = document.querySelector(`#timer`);
 const scoreboard = document.querySelector(`#score`);
@@ -47,18 +49,22 @@ preGame();//will present `hover to start` screen
 
 //pre game vvvv
 function preGame(){
+  // box1 = document.createElement("div");
+  // box1.textContent = 1;
+  // box1.setAttribute("id", "box1");
+  // box1.setAttribute("class", "target");
+  // flickboard.appendChild(box1);
+
+  // equationBox = document.createElement("div");
+  // equationBox.textContent = "equation";
+  // equationBox.setAttribute("id", "equation");
+  // flickboard.appendChild(equationBox);
+  // console.log(equationBox);
+
     solved = true;
     gameState = "pregame";
     setHighScore();
     reset();
-    resetButton.addEventListener(`click`, function() {
-      preGame();
-      flickboard.className = "flickboard-display";
-      comboMeter.className = "comboMeter-display";
-      scoreSummary.className = "summary-hidden";
-      highScoreHistory.className = "highScoreHistory-hidden";
-      resetButton.textContent = "Reset Game";
-    });
     box1.innerHTML = ``;
     box2.innerHTML = ``;
     box3.innerHTML = ``;
@@ -87,11 +93,36 @@ function preGame(){
     timer.innerHTML = `Time: ` + gameTime;
 }
 
+resetButton.addEventListener(`click`, function() {
+  equationBox.style.animation = 'none';
+  equationBox.offsetHeight; /* trigger reflow */
+  equationBox.style.animation = null; 
+  equationBox.style.animation = 'rotationBackwards 60s infinite linear';
+  flickboard.style.animation = 'none';
+  flickboard.offsetHeight; /* trigger reflow */
+  flickboard.style.animation = null;
+  flickboard.style.animation = 'rotation 60s infinite linear';
+  for (let target of targets) {
+    target.style.animation = 'none';
+    target.offsetHeight;
+    target.style.animation = null;
+    target.style.animation = 'rotationBackwards 60s infinite linear';
+  }
+
+  // flickboard.innerHTML = "";
+  preGame();
+  flickboard.className = "flickboard-display";
+  comboMeter.className = "comboMeter-display";
+  scoreSummary.className = "summary-hidden";
+  highScoreHistory.className = "highScoreHistory-hidden";
+  resetButton.textContent = "Reset Game";
+});
+
 //play the game, start countdown vvvv
-function playGame(){
+function playGame(event){
   equationBox.removeEventListener(`mouseover`, playGame);
   equationBox.addEventListener("mouseout", alertRed);
-  gameTime = 3; //debugging
+  gameTime = 30; //debugging
   gameState = "playgame";
   assignColors();
   assignMouseout();
@@ -121,6 +152,17 @@ function countdown(){
           scoreSummary.className = "summary-display";
           scoreSummary.innerHTML = `Game Over! <br> Your Score: ` + score + `<br> Your accuracy: ` + `<br> Average time to answer: `;
           resetButton.textContent = "New Game";
+          equationBox.style.animation = 'none';
+          equationBox.offsetHeight; /* trigger reflow */
+          equationBox.style.animation = null; 
+          flickboard.style.animation = 'none';
+          flickboard.offsetHeight; /* trigger reflow */
+          flickboard.style.animation = null;      
+          for (let target of targets) {
+            target.style.animation = 'none';
+            target.offsetHeight;
+            target.style.animation = null;
+          }
         }
         setHighScore();
         preGame();
