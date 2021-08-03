@@ -178,6 +178,7 @@ a:hover {
     width:100%;
     height:50px;
     font-size: 25px;
+    background-color: #231f20;
 }
 
 #highScore-history {
@@ -186,6 +187,7 @@ a:hover {
     width:100%;
     height:50px;
     font-size: 25px;
+    background-color: #231f20;
 }
 
 #resetButton{
