@@ -1,10 +1,13 @@
 body{
     background-attachment: fixed;
     margin-top: 35px;
-    font-family: sans-serif;
+    font-family: 'Ubuntu', sans-serif;
     background-color: #231f20;
     color: white;
+    text-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black;
+    font-size: larger;
 }
+
 h1{
     text-align: center;
     width:850px;
@@ -24,9 +27,7 @@ a {
     right: 20px;
 }
     
- 
-
-a:hover {
+ a:hover {
     color: yellow;
 }
 
@@ -47,7 +48,6 @@ a:hover {
     margin-right:auto;
     width: 600px;
     height: 200px;
-    /* border: 1px solid #f1f1f1; */
     border-radius:20px;
     /* perspective: 1000px; Remove this if you don't want the 3D effect */
   }
@@ -66,7 +66,6 @@ a:hover {
   /* Do an horizontal flip when you move the mouse over the flip box container */
   .flip-card:hover .flip-card-inner, .flip-card:active .flip-card-inner {
     transform: rotateY(180deg);
-    
   }
   
   /* Position the front and back side */
@@ -91,7 +90,7 @@ a:hover {
     color: white;
     transform: rotateY(180deg);
     border-radius:20px;
-  } 
+} 
 
 #logoImage{
     color: white;
@@ -110,18 +109,15 @@ a:hover {
         transform: translateX(0);
     }
 }
+
 #gameboard{
     display: grid;
     margin-left: auto;
     margin-right: auto;
-    width: 850px;
-    justify-content: center;
-    align-items: center;
-    color:rgb(216, 216, 216);
-    text-shadow: 0 0 10px white;
+    width: 800px;
     background-image: url(Space.png);
-    background-size: 200%;
-    background-position: 1275px -7px;
+    background-size: 205%;
+    background-position: 1220px 50px;
     grid-template: 
     "title title"
     "timer score"
@@ -130,42 +126,42 @@ a:hover {
     "flick flick"
     "resetgame highscore";
     grid-auto-columns: 50%;
+    border: 1px solid;
 }
 
 #title{
     padding-bottom:20px;
     grid-area: title;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 12.75px auto 12.75px auto;
     display: flex;
-    justify-content: center;
-    align-items: center;
-   
 }
 #MFIMG{
-    width:200px;
+    width:250px;
 }
 
 #score{
     grid-area: score;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 3% 0 auto;
     width: 75%;
     height: 50px;
-    border: 3px solid rgb(216, 216, 216);;
+    /* border: 3px solid rgb(216, 216, 216); */
+    border: 3px solid rgb(100, 200, 200);
+    box-shadow: 0 0 3px white, 0 0 3px white, 0 0 3px white;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 50px;
+    box-shadow: cyan;
 }
 
 #timer{
     grid-area: timer;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto 0 3%;
     width: 75%;
     height: 50px;
-    border: 3px solid rgb(216, 216, 216);;
+    /* border: 3px solid rgb(216, 216, 216); */
+    border: 3px solid rgb(130, 228, 228);
+    box-shadow: 0 0 3px white, 0 0 3px white, 0 0 3px white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -178,6 +174,7 @@ a:hover {
     width:100%;
     height:50px;
     font-size: 25px;
+    background-color: #231f20;
 }
 
 #highScore-history {
@@ -190,11 +187,12 @@ a:hover {
 
 #resetButton{
     grid-area: resetgame;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto 3% 3%;
     width:50%;
     height:50px;
-    border: 3px solid rgb(216, 216, 216);;
+    /* border: 3px solid rgb(216, 216, 216); */
+    border: 3px solid rgb(100, 200, 200);
+    box-shadow: 0 0 3px white, 0 0 3px white, 0 0 3px white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -208,11 +206,12 @@ a:hover {
 
 #highScore{
     grid-area: highscore;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 3% 3% auto;
     width:50%;
     height:50px;
-    border: 3px solid rgb(216, 216, 216);
+    /* border: 3px solid rgb(216, 216, 216); */
+    border: 3px solid rgb(100, 200, 200);
+    box-shadow: 0 0 3px white, 0 0 3px white, 0 0 3px white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -230,10 +229,9 @@ a:hover {
     margin-right: auto;
     display: grid;
     width: 800px;
-    height:800px;
+    height: 800px;
     justify-content: center;
     align-items: center;
-    /* border-radius: 50%; */
     font-size: 50px;
     animation: rotation 60s infinite linear;
     grid-template: 
@@ -242,7 +240,9 @@ a:hover {
     "box6 box5 box4";
     place-items: center;
     border-radius: 50%;
-    gap: 6%;
+    z-index: 2;
+    gap: 3%;
+    /* border: 1px solid white; */
 }
 
 .flickboard-hidden {
@@ -278,56 +278,56 @@ a:hover {
     width: 200px;
     height: 200px;
     grid-area: box8;
-    margin: 70px -45px -70px 45px;
+    margin: 65px -25px -65px 25px;
 }
 
 #box1{
     width: 200px;
     height: 200px;
     grid-area: box1;
-    margin: -14px 0 14px 0;
+    margin: -20px 0 20px 0;
 }
 
 #box2{
     width: 200px;
     height: 200px;
     grid-area: box2;
-    margin: 70px 45px -70px -45px;
+    margin: 65px 25px -65px -25px;
 }
 
 #box7{
     width: 200px;
     height: 200px;
     grid-area: box7;
-    margin: 0px 45px 0px -45px; 
+    margin: 0px 60px 0px -60px; 
 }
 
 #box3{
     width: 200px;
     height: 200px;
     grid-area: box3;
-    margin: 0px -45px 0px 45px; 
+    margin: 0px -60px 0px 60px; 
 }
 
 #box6{
     width: 200px;
     height: 200px;
     grid-area: box6;
-    margin: -70px -45px 70px 45px;
+    margin: -65px -25px 65px 25px;
 }
 
 #box5{
     width: 200px;
     height: 200px;
     grid-area: box5;
-    margin: 14px 0 -14px 0;
+    margin: 20px 0 -20px 0;
 }
 
 #box4{
     width: 200px;
     height: 200px;
     grid-area: box4;
-    margin: -70px 45px 70px -45px;
+    margin: -65px 25px 65px -25px;
 }
 
 #equation{
@@ -344,6 +344,7 @@ a:hover {
     box-shadow : 0 0 30px white;
     font-family: 'Ubuntu', sans-serif;
     grid-area: equa;
+    border: 3px solid #A956A2;
 }
 
 .target{
@@ -362,13 +363,13 @@ a:hover {
 
 .comboMeter-display {
     position:absolute;
-    width:5%;
+    width:800px;
     text-align:center;
-    right:47.5%;
-    top:500px;
+    margin: 400px auto auto auto;
     opacity:0.3;
     font-size: 10px;
     z-index: 1;
+    /* border: 1px solid white; */
 }
 
 .comboMeter-hidden {

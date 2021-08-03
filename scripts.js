@@ -91,7 +91,7 @@ function preGame(){
 function playGame(){
   equationBox.removeEventListener(`mouseover`, playGame);
   equationBox.addEventListener("mouseout", alertRed);
-  gameTime = 3; //debugging
+  gameTime = 15; //debugging
   gameState = "playgame";
   assignColors();
   assignMouseout();
@@ -134,6 +134,7 @@ function reset(){
   round = 1;
   roundCheck = 0;
   combo = 0;
+  document.getElementById('comboMeter').innerHTML = "";  
 }
 
 //High score vvvv
@@ -440,8 +441,13 @@ function getEquation() {
 function comboChain() {
     if (solved == true) {
         combo++;
-        document.getElementById('comboMeter').innerHTML = "x" + combo;
-        document.getElementById('comboMeter').style.fontSize = `${10 * (1 + (combo/10))}px`;
+        if (combo == 1){
+          document.getElementById('comboMeter').innerHTML = "";
+        }
+        else{
+          document.getElementById('comboMeter').innerHTML = "Combo x" + combo;
+          document.getElementById('comboMeter').style.fontSize = `${10 * (1 + (combo/10))}px`;
+        }
     }
     else {
         return;
@@ -450,7 +456,7 @@ function comboChain() {
 
 function comboReset() {
     combo = 1;
-    document.getElementById('comboMeter').innerHTML = "x" + combo;
+    document.getElementById('comboMeter').innerHTML = "";
     document.getElementById('comboMeter').style.fontSize = '10px';
 }
 
