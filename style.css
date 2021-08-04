@@ -126,7 +126,7 @@ a {
     "flick flick"
     "resetgame highscore";
     grid-auto-columns: 50%;
-    border: 1px solid;
+    /* border: 1px solid; */
 }
 
 #title{
@@ -217,6 +217,7 @@ a {
     justify-content: center;
     align-items: center;
     font-size: 25px;
+    background-color: #231f20; 
 }
 
 #highScore:hover {
@@ -280,6 +281,7 @@ a {
     height: 200px;
     grid-area: box8;
     margin: 65px -25px -65px 25px;
+    
 }
 
 #box1{
@@ -345,7 +347,7 @@ a {
     box-shadow : 0 0 30px white;
     font-family: 'Ubuntu', sans-serif;
     grid-area: equa;
-    border: 3px solid #A956A2;
+    /* border: 3px solid #A956A2; */
 }
 
 .target{
@@ -406,3 +408,8 @@ a {
         -moz-transform: rotate(-359deg);
     }
 }
+
+
+
+
+
