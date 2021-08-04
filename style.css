@@ -19,18 +19,15 @@ p{
     padding-left:20px;
     padding-right:20px;
 }
-a {
+
+a{
     color: #A956A2;
 }
-#team-links {
-    text-align:right;
-    right: 20px;
-}
-    
- a:hover {
+
+a:hover {
     color: yellow;
 }
-
+    
 #logo-background{
     display:block;
     width:100%;
@@ -40,8 +37,263 @@ a {
     background:linear-gradient(45deg, rgba(167, 165, 165, 0.527),10%, #231f20);
     height: 101px;
 }
- /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
- .flip-card {
+ 
+#logoImage{
+    color: white;
+    filter: invert(100%);
+    position: absolute;
+    top: 25px;
+    width: 200px;
+    opacity:0;
+    transform: translateX(-3rem);
+    animation: fadeInSide 2s ease forwards;
+}
+
+#gameboard{
+    display: grid;
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+    background-image: url(Space.png);
+    background-size: 205%;
+    background-position: 1220px 30px;
+    grid-template: 
+    "title title"
+    "timer score"
+    "summary summary"
+    "scorehistory scorehistory"
+    "flick flick"
+    "resetgame highscore";
+    grid-auto-columns: 50%;
+    /* border: 1px solid; */
+}
+
+#title{
+    grid-area: title;
+    margin: 12.75px auto 12.75px auto;
+    display: flex;
+}
+
+#MFIMG{
+    width:250px;
+}
+
+#score{
+    grid-area: score;
+    margin: 0 3% 0 auto;
+    width: 75%;
+    height: 50px;
+    /* border: 3px solid rgb(216, 216, 216); */
+    border: 3px solid rgb(130, 228, 228);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+}
+
+#timer{
+    grid-area: timer;
+    margin: 0 auto 0 3%;
+    width: 75%;
+    height: 50px;
+    /* border: 3px solid rgb(216, 216, 216); */
+    border: 3px solid rgb(130, 228, 228);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+}
+
+#score-summary {
+    grid-area: summary;
+    margin: 40px auto;
+    width:100%;
+    height:50px;
+    font-size: 25px;
+    background-color: #231f20cc;
+}
+
+#highScore-history {
+    grid-area: scorehistory;
+    margin: 40px auto;
+    width:100%;
+    height:50px;
+    font-size: 25px;
+    background-color: #231f20cc;
+}
+
+#resetButton{
+    grid-area: resetgame;
+    margin: 0 auto 3% 3%;
+    width:50%;
+    height:50px;
+    /* border: 3px solid rgb(216, 216, 216); */
+    border: 3px solid rgb(100, 200, 200);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    background-color: #231f20;
+}
+
+#resetButton:hover{
+    cursor: pointer;
+    background-color: #A956A2;
+}
+
+#highScore{
+    grid-area: highscore;
+    margin: 0 3% 3% auto;
+    width:50%;
+    height:50px;
+    /* border: 3px solid rgb(216, 216, 216); */
+    border: 3px solid rgb(100, 200, 200);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+
+    background-color: #231f20; 
+
+}
+
+#highScore:hover {
+    cursor: pointer;
+    background-color: #A956A2;
+}
+
+.flickboard-display {
+    grid-area: flick;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    width: 800px;
+    height: 800px;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+    /* animation: rotation 60s infinite linear; */
+    grid-template: 
+    "box8 box1 box2"
+    "box7 equa box3"
+    "box6 box5 box4";
+    place-items: center;
+    border-radius: 50%;
+    z-index: 2;
+    gap: 3%;
+    /* border: 1px solid white; */
+}
+
+.flickboard-hidden {
+    display: none;
+}
+
+.summary-display {
+    display: block;
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 570px;
+    background-color: #231f20;
+}
+
+.summary-hidden {
+    display: none;
+}
+
+.highScoreHistory-display {
+    display: block;
+    text-align: center;
+    padding-top: 70px;
+    padding-bottom: 600px;
+    background-color: #231f20;
+}
+
+.highScoreHistory-hidden {
+    display: none;
+}
+
+
+#box1{
+    grid-area: box1;
+    margin: -20px 0 20px 0;
+}
+#box2{
+    grid-area: box2;
+    margin: 65px 25px -65px -25px;
+}
+#box3{
+    grid-area: box3;
+    margin: 0px -60px 0px 60px; 
+}
+#box4{
+    grid-area: box4;
+    margin: -65px 25px 65px -25px;
+}
+#box5{
+    grid-area: box5;
+    margin: 20px 0 -20px 0;
+}
+#box6{
+    grid-area: box6;
+    margin: -65px -25px 65px 25px;
+}
+#box7{
+    grid-area: box7;
+    margin: 0px 60px 0px -60px; 
+}
+#box8{
+    grid-area: box8;
+    margin: 65px -25px -65px 25px;
+}
+
+.target{
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #A956A2;
+    /* animation: rotationBackwards 60s infinite linear; */
+    text-shadow: 0 0 4px black, 0 0 4px black, 0 0 4px black;
+    width: 200px;
+    height: 200px;
+    clip-path: polygon(50% 0%,65% 29%,98% 35%,73% 59%,79% 91%,50% 75%,21% 91%,27% 59%,2% 35%,35% 29%);
+    background-color: #a956a262;
+}
+
+#equation{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    color:white;
+    text-shadow: 0 0 4px black, 0 0 4px black, 0 0 4px black;
+    /* animation: rotationBackwards 60s infinite linear; */
+    box-shadow : 0 0 30px white;
+    font-family: 'Ubuntu', sans-serif;
+    grid-area: equa;
+    /* border: 3px solid #A956A2; */
+}
+
+.comboMeter-display {
+    position:absolute;
+    width:800px;
+    text-align:center;
+    margin: 400px auto auto auto;
+    opacity:0.3;
+    font-size: 10px;
+    z-index: 1;
+    /* border: 1px solid white; */
+}
+
+.comboMeter-hidden {
+    display: none;
+}
+
+/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.flip-card {
     background-color: transparent;
     margin-top:20px;
     margin-left:auto;
@@ -60,7 +312,6 @@ a {
     text-align: center;
     transition: transform 0.8s;
     transform-style: preserve-3d;
-    
   }
   
   /* Do an horizontal flip when you move the mouse over the flip box container */
@@ -92,15 +343,9 @@ a {
     border-radius:20px;
 } 
 
-#logoImage{
-    color: white;
-    filter: invert(100%);
-    position: absolute;
-    top: 25px;
-    width: 200px;
-    opacity:0;
-    transform: translateX(-3rem);
-    animation: fadeInSide 2s ease forwards;
+#team-links {
+    text-align:right;
+    right: 20px;
 }
 
 @keyframes fadeInSide{
@@ -110,302 +355,21 @@ a {
     }
 }
 
-#gameboard{
-    display: grid;
-    margin-left: auto;
-    margin-right: auto;
-    width: 800px;
-    background-image: url(Space.png);
-    background-size: 205%;
-    background-position: 1220px 50px;
-    grid-template: 
-    "title title"
-    "timer score"
-    "summary summary"
-    "scorehistory scorehistory"
-    "flick flick"
-    "resetgame highscore";
-    grid-auto-columns: 50%;
-    /* border: 1px solid; */
-}
-
-#title{
-    padding-bottom:20px;
-    grid-area: title;
-    margin: 12.75px auto 12.75px auto;
-    display: flex;
-}
-#MFIMG{
-    width:250px;
-}
-
-#score{
-    grid-area: score;
-    margin: 0 3% 0 auto;
-    width: 75%;
-    height: 50px;
-    /* border: 3px solid rgb(216, 216, 216); */
-    border: 3px solid rgb(100, 200, 200);
-    box-shadow: 0 0 3px white, 0 0 3px white, 0 0 3px white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 50px;
-    box-shadow: cyan;
-}
-
-#timer{
-    grid-area: timer;
-    margin: 0 auto 0 3%;
-    width: 75%;
-    height: 50px;
-    /* border: 3px solid rgb(216, 216, 216); */
-    border: 3px solid rgb(130, 228, 228);
-    box-shadow: 0 0 3px white, 0 0 3px white, 0 0 3px white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 50px;
-}
-
-#score-summary {
-    grid-area: summary;
-    margin: 40px auto;
-    width:100%;
-    height:50px;
-    font-size: 25px;
-    background-color: #231f20;
-}
-
-#highScore-history {
-    grid-area: scorehistory;
-    margin: 40px auto;
-    width:100%;
-    height:50px;
-    font-size: 25px;
-    background-color: #231f20;
-}
-
-#resetButton{
-    grid-area: resetgame;
-    margin: 0 auto 3% 3%;
-    width:50%;
-    height:50px;
-    /* border: 3px solid rgb(216, 216, 216); */
-    border: 3px solid rgb(100, 200, 200);
-    box-shadow: 0 0 3px white, 0 0 3px white, 0 0 3px white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 25px;
-}
-
-#resetButton:hover{
-    cursor: pointer;
-    background-color: #A956A2;
-}
-
-#highScore{
-    grid-area: highscore;
-    margin: 0 3% 3% auto;
-    width:50%;
-    height:50px;
-    /* border: 3px solid rgb(216, 216, 216); */
-    border: 3px solid rgb(100, 200, 200);
-    box-shadow: 0 0 3px white, 0 0 3px white, 0 0 3px white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 25px;
-    background-color: #231f20; 
-}
-
-#highScore:hover {
-    cursor: pointer;
-    background-color: #A956A2;
-}
-
-.flickboard-display {
-    grid-area: flick;
-    margin-left: auto;
-    margin-right: auto;
-    display: grid;
-    width: 800px;
-    height: 800px;
-    justify-content: center;
-    align-items: center;
-    font-size: 50px;
-    animation: rotation 60s infinite linear;
-    grid-template: 
-    "box8 box1 box2"
-    "box7 equa box3"
-    "box6 box5 box4";
-    place-items: center;
-    border-radius: 50%;
-    z-index: 2;
-    gap: 3%;
-    /* border: 1px solid white; */
-}
-
-.flickboard-hidden {
-    display: none;
-}
-
-.summary-display {
-    display: block;
-    text-align: center;
-    padding-top: 100px;
-    padding-bottom: 570px;
-    background-color: black;
-}
-
-.summary-hidden {
-    display: none;
-}
-
-
-.highScoreHistory-display {
-    display: block;
-    text-align: center;
-    padding-top: 70px;
-    padding-bottom: 600px;
-    background-color: black;
-}
-
-.highScoreHistory-hidden {
-    display: none;
-}
-
-#box8{
-    width: 200px;
-    height: 200px;
-    grid-area: box8;
-    margin: 65px -25px -65px 25px;
-    
-}
-
-#box1{
-    width: 200px;
-    height: 200px;
-    grid-area: box1;
-    margin: -20px 0 20px 0;
-}
-
-#box2{
-    width: 200px;
-    height: 200px;
-    grid-area: box2;
-    margin: 65px 25px -65px -25px;
-}
-
-#box7{
-    width: 200px;
-    height: 200px;
-    grid-area: box7;
-    margin: 0px 60px 0px -60px; 
-}
-
-#box3{
-    width: 200px;
-    height: 200px;
-    grid-area: box3;
-    margin: 0px -60px 0px 60px; 
-}
-
-#box6{
-    width: 200px;
-    height: 200px;
-    grid-area: box6;
-    margin: -65px -25px 65px 25px;
-}
-
-#box5{
-    width: 200px;
-    height: 200px;
-    grid-area: box5;
-    margin: 20px 0 -20px 0;
-}
-
-#box4{
-    width: 200px;
-    height: 200px;
-    grid-area: box4;
-    margin: -65px 25px 65px -25px;
-}
-
-#equation{
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    color:white;
-    text-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black;
-    animation: rotationBackwards 60s infinite linear;
-    box-shadow : 0 0 30px white;
-    font-family: 'Ubuntu', sans-serif;
-    grid-area: equa;
-    /* border: 3px solid #A956A2; */
-}
-
-.target{
-    font-family: 'Ubuntu', sans-serif;
-    text-align: center;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 3px solid #A956A2;
-    animation: rotationBackwards 60s infinite linear;
-    box-shadow: 0 0 0 #A956A2;
-    text-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black;
-}
-
-
-.comboMeter-display {
-    position:absolute;
-    width:800px;
-    text-align:center;
-    margin: 400px auto auto auto;
-    opacity:0.3;
-    font-size: 10px;
-    z-index: 1;
-    /* border: 1px solid white; */
-}
-
-.comboMeter-hidden {
-    display: none;
-}
-
 @keyframes rotation {
     from{
         transform: rotate(0deg);
-        -ms-transform: rotate(0deg);
-        -webkit-transform: rotate(0deg);
-        -moz-transform: rotate(0deg);
     }
     to {
         transform: rotate(359deg);
-        -ms-transform: rotate(359deg);
-        -webkit-transform: rotate(359deg);
-        -moz-transform: rotate(359deg);
     }
 }
 
 @keyframes rotationBackwards {
     from{
         transform: rotate(0deg);
-        -ms-transform: rotate(0deg);
-        -webkit-transform: rotate(0deg);
-        -moz-transform: rotate(0deg);
     }
     to {
         transform: rotate(-359deg);
-        -ms-transform: rotate(-359deg);
-        -webkit-transform: rotate(-359deg);
-        -moz-transform: rotate(-359deg);
     }
 }
 
