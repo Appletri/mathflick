@@ -7,8 +7,6 @@ const box3 = document.querySelector("#box3");
 const box2 = document.querySelector("#box2");
 const box1 = document.querySelector("#box1");
 const equationBox = document.querySelector("#equation");
-// let equationBox;
-// let box1;
 const targets = document.getElementsByClassName("target");
 const timer = document.querySelector(`#timer`);
 const scoreboard = document.querySelector(`#score`);
@@ -18,8 +16,7 @@ const flickboard = document.querySelector("#flickboard");
 const scoreSummary = document.querySelector("#score-summary");
 const highScoreHistory = document.querySelector("#highScore-history"); 
 const comboMeter = document.querySelector("#comboMeter");
-const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
-
+const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
 
 let highScore = localStorage.getItem('HS');
 let highScoreArray = [];
@@ -46,22 +43,16 @@ let indicatorT;
 let indicatorTargets;
 let blinkingState = true;
 
-preGame();//will present `hover to start` screen
+//sound variables
+let sfxRight = new Audio(`sfx_coin_double1.wav`);
+let sfxWrong = new Audio(`sfx_sounds_error9.wav`);
+let sfxNewGame = new Audio(`sfx_sounds_button4.wav`);
+let sfxGameEnd = new Audio(`sfx_menu_select4.wav`);
 
-//pre game vvvv
+preGame(); 
+
+//Present `hover to start` screen
 function preGame(){
-  // box1 = document.createElement("div");
-  // box1.textContent = 1;
-  // box1.setAttribute("id", "box1");
-  // box1.setAttribute("class", "target");
-  // flickboard.appendChild(box1);
-
-  // equationBox = document.createElement("div");
-  // equationBox.textContent = "equation";
-  // equationBox.setAttribute("id", "equation");
-  // flickboard.appendChild(equationBox);
-  // console.log(equationBox);
-
     solved = true;
     gameState = "pregame";
     setHighScore();
@@ -100,6 +91,7 @@ function preGame(){
 }
 
 resetButton.addEventListener(`click`, function() {
+  sfxNewGame.play();
   equationBox.style.animation = 'none';
   equationBox.offsetHeight; /* trigger reflow */
   equationBox.style.animation = null; 
@@ -114,8 +106,6 @@ resetButton.addEventListener(`click`, function() {
     target.style.animation = null;
     target.style.animation = 'rotationBackwards 60s infinite linear';
   }
-
-  // flickboard.innerHTML = "";
   preGame();
   flickboard.className = "flickboard-display";
   comboMeter.className = "comboMeter-display";
@@ -137,7 +127,6 @@ function playGame(){
   scoreboard.innerHTML = `Score: ` + score;
 }
 
-
 //countdown timer and alert game over vvvv
 function countdown(){
   clearInterval(interval);
@@ -148,11 +137,11 @@ function countdown(){
         gameTime--;
         timer.innerHTML = `Time: ` + gameTime;
     }
-    
     else{
         timer.innerHTML = `Time: ` + 0;
         clearInterval(interval);
         if (gameTime === 0) {
+          sfxGameEnd.play();
           flickboard.className = "flickboard-hidden";
           highScoreHistory.className = "highScoreHistory-hidden";
           comboMeter.className = "comboMeter-hidden";
@@ -451,7 +440,6 @@ if (solved == true) {
     // console.log (randomBoxNumber);
     // console.log (targetArray);
     
-    
     eval(randomBoxNumber).textContent = equation;
     targetArray[randomNumber] = equation;
 
@@ -464,8 +452,6 @@ if (solved == true) {
     // console.log (round);
     // console.log (roundCheck);
     // console.log (score);
-
-    
   }
   else {
     equationBox.style.background = "rgba(225,0,0,0.5)";
@@ -480,10 +466,9 @@ function alertRed () {
     solved = false;    
 }
 
-
 document.getElementById(`equation`).addEventListener("mouseover", function() {
     document.getElementById('equation').innerHTML = a + " + " + b;
-  });
+});
 
 //functions
 function getRandomBoxNumber() {
@@ -529,32 +514,25 @@ function comboReset() {
 
 function addPoint() {
     if (round == roundCheck){
+        sfxRight.load();
+        sfxRight.play();
         score = score + combo;
         round++;
         scoreboard.innerHTML = `Score: ` + score;
     }
-    
     else{
         return;
     }
 }
 
-
-
 function minusPoint() {
+  sfxWrong.load();
+  sfxWrong.play();
   score--;
   scoreboard.innerHTML = `Score: ` + score;
 }
 
-
-
-
-
-
-
 function indicatorEquation () {
-    
-    
     if (blinkingState == true){
         equationBox.style.background = "rgba(0,225,0,0.2)";
         blinkingState = false;
@@ -564,11 +542,7 @@ function indicatorEquation () {
         equationBox.style.background = "";
         blinkingState = true;
     }
-    
 }
-
-
-
 
 function updateArray() {
   targetArray[0] = getRandomInt();
