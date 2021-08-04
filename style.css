@@ -65,7 +65,7 @@ a:hover {
     "flick flick"
     "resetgame highscore";
     grid-auto-columns: 50%;
-    border: 1px solid;
+    /* border: 1px solid; */
 }
 
 #title{
@@ -152,7 +152,9 @@ a:hover {
     justify-content: center;
     align-items: center;
     font-size: 25px;
-    background-color: #231f20;
+
+    background-color: #231f20; 
+
 }
 
 #highScore:hover {
@@ -209,6 +211,7 @@ a:hover {
 .highScoreHistory-hidden {
     display: none;
 }
+
 
 #box1{
     grid-area: box1;
@@ -271,7 +274,7 @@ a:hover {
     box-shadow : 0 0 30px white;
     font-family: 'Ubuntu', sans-serif;
     grid-area: equa;
-    border: 3px solid #A956A2;
+    /* border: 3px solid #A956A2; */
 }
 
 .comboMeter-display {
@@ -369,3 +372,8 @@ a:hover {
         transform: rotate(-359deg);
     }
 }
+
+
+
+
+
