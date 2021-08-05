@@ -369,9 +369,31 @@ a:hover {
 #canvas {
     position:absolute;
     z-index: -3;
+    height: 100%;
+    width: 100%;
     
 }
 
+#Tyler {
+    position:absolute;
+    z-index: -1;
+    right:151px;
+    bottom:-226px;
+}
+
+#Xiao {
+    position:absolute;
+    z-index: -1;
+    right:82px;
+    bottom:-226px;
+}
+
+#Tri {
+    position:absolute;
+    z-index: -1;
+    right:14px;
+    bottom:-226px;
+}
 @keyframes fadeInSide{
     to {
         opacity: 1;
