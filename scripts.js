@@ -8,7 +8,6 @@ const box2 = document.querySelector("#box2");
 const box1 = document.querySelector("#box1");
 const equationBox = document.querySelector("#equation");
 const targets = document.getElementsByClassName("target");
-const targetClass = document.querySelector(`.target`);
 const timer = document.querySelector(`.timer`);
 const scoreboard = document.querySelector(`.score`);
 const resetButton = document.querySelector(`.resetButton`);
@@ -148,7 +147,7 @@ resetButton.addEventListener(`click`, function() {
 function playGame(){
   equationBox.removeEventListener(`mouseover`, playGame);
   equationBox.addEventListener("mouseout", alertRed);
-  gameTime = 30; //debugging
+  gameTime = 11; //debugging
   constantGameTime = gameTime;
   gameState = "playgame";
   assignColors();
@@ -174,7 +173,7 @@ function countdown(){
           musicStarBlitz.play();
           starBlitzState = true;
           blitzEffects();
-          scoreboard.innerHTML = score + " x " + scoreMultiplier;
+          scoreboard.innerHTML = "Score: " + score + " x " + scoreMultiplier;
         }
     }
     else{
@@ -182,6 +181,8 @@ function countdown(){
         clearInterval(interval);
         if (gameTime === 0) {
           sfxGameEnd.play();
+          starBlitzState = false;
+          blitzEffects();
           score = score * scoreMultiplier;
           flickboard.className = "flickboard-hidden";
           highScoreHistory.className = "highScoreHistory-hidden";
@@ -202,8 +203,6 @@ function countdown(){
           }
         }
         setHighScore();
-        preGame();
-        blitzEffects();
     }
   }
 }
@@ -217,7 +216,6 @@ function reset(){
   numCorrect = 0;
   numWrong = 0;
   document.getElementById('comboMeter').innerHTML = "";  
-
 }
 
 //High score vvvv
@@ -477,27 +475,15 @@ if (solved == true) {
     equationBox.style.background = "rgba(0,225,0,0.2)";
     randomNumber = getRandomBoxNumber();
     randomBoxNumber="box"+(randomNumber+1);
-    // difficulty();
-    // console.log (randomNumber);
-    // console.log (randomBoxNumber);
-    // console.log (targetArray);
     
     eval(randomBoxNumber).textContent = equation;
     targetArray[randomNumber] = equation;
 
     roundCheck++;
     comboChain();
-    // console.log (combo);
-    // console.log (randomNumber);
-    // console.log (randomBoxNumber);
-    // console.log (targetArray);
-    // console.log (round);
-    // console.log (roundCheck);
-    // console.log (score);
   }
   else {
     equationBox.style.background = "rgba(225,0,0,0.5)";
-    // difficulty();
     indicatorT = setInterval(indicatorTargets,500);
   }
 });
@@ -569,7 +555,7 @@ function addPoint() {
         comboReset();
         scoreMultiplier = scoreMultiplier + 1;
         round++;
-        scoreboard.innerHTML = score + " x " + scoreMultiplier;
+        scoreboard.innerHTML = "Score: " + score + " x " + scoreMultiplier;
       }
     }
     else{
@@ -587,7 +573,7 @@ function minusPoint() {
   else {
     sfxWrong.load();
     sfxWrong.play();
-    scoreboard.innerHTML = score + " x " + scoreMultiplier;
+    scoreboard.innerHTML = "Score: " + score + " x " + scoreMultiplier;
   }
     
   
@@ -622,10 +608,6 @@ function updateArray() {
   box6.textContent = targetArray[5]; 
   box7.textContent = targetArray[6]; 
   box8.textContent = targetArray[7];       
-}
-
-function difficulty() {
-    
 }
 
 function Star(x,y,r,color){
@@ -708,17 +690,16 @@ function blitzEffects(){
     scoreboard.className = `score blitz`;
     resetButton.className = `resetButton blitz`;
     highScoreBox.className = `highScore blitz`;
-    targetClass.className = `target blitz`;
     for (let target of targets) {
       target.style.animation = 'rotationBackwards 60s infinite linear, animatedTarget 3s linear infinite alternate';
     }
+    
   }
   else{
     timer.className = `timer`;
     scoreboard.className = `score`;
     resetButton.className = `resetButton`;
     highScoreBox.className = `highScore`;
-    targets.className = `target blitz`;
     return;
   }
 }

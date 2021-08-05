@@ -266,7 +266,7 @@ a:hover {
     align-items: center;
     border: 3px solid #A956A2;
     /* animation: rotationBackwards 60s infinite linear; */
-    text-shadow: 0 0 4px black, 0 0 4px black, 0 0 4px black;
+    text-shadow: 0 0 6px black, 0 0 6px black, 0 0 6px black;
     width: 200px;
     height: 200px;
     clip-path: polygon(50% 0%,65% 29%,98% 35%,73% 59%,79% 91%,50% 75%,21% 91%,27% 59%,2% 35%,35% 29%);
@@ -282,7 +282,7 @@ a:hover {
     text-align: center;
     align-items: center;
     color:white;
-    text-shadow: 0 0 4px black, 0 0 4px black, 0 0 4px black;
+    text-shadow: 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black;
     /* animation: rotationBackwards 60s infinite linear; */
     box-shadow : 0 0 30px white;
     font-family: 'Ubuntu', sans-serif;
@@ -469,20 +469,6 @@ footer{
     background-color: #231f20;
 }
 
-.target.blitz{
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 3px solid #A956A2;
-    text-shadow: 0 0 4px black, 0 0 4px black, 0 0 4px black;
-    width: 200px;
-    height: 200px;
-    clip-path: polygon(50% 0%,65% 29%,98% 35%,73% 59%,79% 91%,50% 75%,21% 91%,27% 59%,2% 35%,35% 29%);
-    background-color: #a956a262;
-    animation: animatedTarget 3s linear infinite alternate;
-}
-
 .rainbow-text {
     animation: animatedText 3s linear infinite alternate;
 }
@@ -492,7 +478,7 @@ footer{
 }
 
 @keyframes animatedText{
-    0% {color: #ff8b00}
+    0% {color: #fbff00}
     10% {color: #e8ff00}
     20% {color: #5dff00}
     30% {color: #00ff2e}
@@ -506,7 +492,7 @@ footer{
 }
 
 @keyframes animatedBorder{
-    0% {border-color: #ff8b00}
+    0% {border-color: #fbff00}
     10% {border-color: #e8ff00}
     20% {border-color: #5dff00}
     30% {border-color: #00ff2e}
@@ -520,7 +506,7 @@ footer{
 }
 
 @keyframes animatedTarget{
-    0% {background-color: #ff8b00}
+    0% {background-color: #fbff00}
     10% {background-color: #e8ff00}
     20% {background-color: #5dff00}
     30% {background-color: #00ff2e}
