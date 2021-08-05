@@ -113,6 +113,17 @@ a:hover {
     background-color: #231f20cc;
 }
 
+.intro-page {
+    grid-area: summary;
+    margin: 40px auto;
+    width:100%;
+    height:800px;
+    font-size: 25px;
+    background-color: #231f20cc;
+    border: 1px solid white;
+    text-align: center;
+}
+
 #highScore-history {
     grid-area: scorehistory;
     margin: 40px auto;
@@ -197,6 +208,10 @@ a:hover {
 }
 
 .summary-hidden {
+    display: none;
+}
+
+.intro-page-hidden {
     display: none;
 }
 
@@ -372,8 +387,4 @@ a:hover {
         transform: rotate(-359deg);
     }
 }
-
-
-
-
-
+ 
