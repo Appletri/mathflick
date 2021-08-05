@@ -56,7 +56,7 @@ a:hover {
     width: 800px;
     background-image: url(./images/New_Earth.png);
     background-size: 25%;
-    background-position: 300px 441px;
+    background-position: 300px 455px;
     background-repeat: no-repeat;
     grid-template: 
     "title title"
@@ -81,8 +81,8 @@ a:hover {
 
 #score{
     grid-area: score;
-    margin: 0 3% 0 auto;
-    width: 75%;
+    margin: 0 0 3% auto;
+    width: 90%;
     height: 50px;
     /* border: 3px solid rgb(216, 216, 216); */
     border: 3px solid rgb(130, 228, 228);
@@ -94,8 +94,8 @@ a:hover {
 
 #timer{
     grid-area: timer;
-    margin: 0 auto 0 3%;
-    width: 75%;
+    margin: 0 auto 3% 0;
+    width: 90%;
     height: 50px;
     /* border: 3px solid rgb(216, 216, 216); */
     border: 3px solid rgb(130, 228, 228);
@@ -136,8 +136,8 @@ a:hover {
 
 #resetButton{
     grid-area: resetgame;
-    margin: 0 auto 3% 3%;
-    width:50%;
+    margin: 3% auto 0 0;
+    width:70%;
     height:50px;
     /* border: 3px solid rgb(216, 216, 216); */
     border: 3px solid rgb(100, 200, 200);
@@ -155,8 +155,8 @@ a:hover {
 
 #highScore{
     grid-area: highscore;
-    margin: 0 3% 3% auto;
-    width:50%;
+    margin: 3% 0 0 auto;
+    width:70%;
     height:50px;
     /* border: 3px solid rgb(216, 216, 216); */
     border: 3px solid rgb(100, 200, 200);
@@ -415,12 +415,80 @@ footer{
     }
 }
 
+.timer.blitz{
+    grid-area: timer;
+    margin: 0 auto 3% 0;
+    width: 90%;
+    height: 50px;
+    border: 3px solid rgb(130, 228, 228);
+    animation: animatedBorder 3s linear infinite alternate;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+}
+
+.score.blitz{
+    grid-area: score;
+    margin: 0 0 3% auto;
+    width: 90%;
+    height: 50px;
+    border: 3px solid rgb(130, 228, 228);
+    animation: animatedBorder 3s linear infinite alternate;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+}
+
+.highScore.blitz{
+    grid-area: highscore;
+    margin: 3% 0 0 auto;
+    width:70%;
+    height:50px;
+    border: 3px solid rgb(100, 200, 200);
+    animation: animatedBorder 3s linear infinite alternate;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    background-color: #231f20; 
+}
+
+.resetButton.blitz{
+    grid-area: resetgame;
+    margin: 3% auto 0 0;
+    width:70%;
+    height:50px;
+    border: 3px solid rgb(100, 200, 200);
+    animation: animatedBorder 3s linear infinite alternate;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    background-color: #231f20;
+}
+
+.target.blitz{
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #A956A2;
+    text-shadow: 0 0 4px black, 0 0 4px black, 0 0 4px black;
+    width: 200px;
+    height: 200px;
+    clip-path: polygon(50% 0%,65% 29%,98% 35%,73% 59%,79% 91%,50% 75%,21% 91%,27% 59%,2% 35%,35% 29%);
+    background-color: #a956a262;
+    animation: animatedTarget 3s linear infinite alternate;
+}
+
 .rainbow-text {
-    animation: animatedText 4s linear infinite alternate;
+    animation: animatedText 3s linear infinite alternate;
 }
 
 .rainbow-border {
-    animation: animatedBorder 4s linear infinite alternate;
+    animation: animatedBorder 3s linear infinite alternate;
 }
 
 @keyframes animatedText{
@@ -449,4 +517,18 @@ footer{
     80% {border-color: #e800ff}
     90% {border-color: #ff008b}
     100% {border-color: #ff0000}
+}
+
+@keyframes animatedTarget{
+    0% {background-color: #ff8b00}
+    10% {background-color: #e8ff00}
+    20% {background-color: #5dff00}
+    30% {background-color: #00ff2e}
+    40% {background-color: #00ffb9}
+    50% {background-color: #00b9ff}
+    60% {background-color: #2d54ff}
+    70% {background-color: #7525ff}
+    80% {background-color: #e800ff}
+    90% {background-color: #ff008b}
+    100% {background-color: #ff0000}
 }

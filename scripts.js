@@ -8,10 +8,11 @@ const box2 = document.querySelector("#box2");
 const box1 = document.querySelector("#box1");
 const equationBox = document.querySelector("#equation");
 const targets = document.getElementsByClassName("target");
-const timer = document.querySelector(`#timer`);
-const scoreboard = document.querySelector(`#score`);
-const resetButton = document.querySelector(`#resetButton`);
-const highScoreBox = document.querySelector(`#highScore`);
+const targetClass = document.querySelector(`.target`);
+const timer = document.querySelector(`.timer`);
+const scoreboard = document.querySelector(`.score`);
+const resetButton = document.querySelector(`.resetButton`);
+const highScoreBox = document.querySelector(`.highScore`);
 const flickboard = document.querySelector("#flickboard");
 const scoreSummary = document.querySelector("#score-summary");
 const highScoreHistory = document.querySelector("#highScore-history"); 
@@ -172,6 +173,7 @@ function countdown(){
           sfxStarBlitz.play();
           musicStarBlitz.play();
           starBlitzState = true;
+          blitzEffects();
           scoreboard.innerHTML = score + " x " + scoreMultiplier;
         }
     }
@@ -201,6 +203,7 @@ function countdown(){
         }
         setHighScore();
         preGame();
+        blitzEffects();
     }
   }
 }
@@ -230,7 +233,7 @@ function setHighScore(){
       scoreSummary.innerHTML = `You have the new high score!<br> Score: ${score} <br> Accuracy: ${Math.round(numCorrect / (numCorrect + numWrong) * 100)}% <br> Speed: ${Math.round(constantGameTime / (numCorrect + numWrong) * 10) / 10} seconds/question`;
     }
   }
-  highScoreBox.innerHTML = "High Score: " + highScore; 
+  highScoreBox.innerHTML = "Best: " + highScore; 
 }
 
 // Show high score history when highScoreBox is clicked at the end of game
@@ -700,5 +703,22 @@ function animate(){
 animate();
 
 function blitzEffects(){
-
+  if(starBlitzState){
+    timer.className = `timer blitz`;
+    scoreboard.className = `score blitz`;
+    resetButton.className = `resetButton blitz`;
+    highScoreBox.className = `highScore blitz`;
+    targetClass.className = `target blitz`;
+    for (let target of targets) {
+      target.style.animation = 'rotationBackwards 60s infinite linear, animatedTarget 3s linear infinite alternate';
+    }
+  }
+  else{
+    timer.className = `timer`;
+    scoreboard.className = `score`;
+    resetButton.className = `resetButton`;
+    highScoreBox.className = `highScore`;
+    targets.className = `target blitz`;
+    return;
+  }
 }
