@@ -50,10 +50,14 @@ let sfxWrong = new Audio(`./audio/sfx_sounds_error9.wav`);
 let sfxNewGame = new Audio(`./audio/sfx_sounds_button4.wav`);
 let sfxGameEnd = new Audio(`./audio/sfx_menu_select4.wav`);
 
+//load intro page on load. This should resolve the sound on browser. after loading the page.
+window.addEventListener(`load`, aboutUs); 
+
 function aboutUs() {
   flickboard.className = "flickboard-hidden";
   scoreSummary.className = "summary-hidden";
   comboMeter.className = "comboMeter-hidden";
+  highScoreHistory.className = "highScoreHistory-hidden";
   introPage.className = "intro-page";
   resetButton.textContent = "New Game";
   equationBox.style.animation = 'none';
@@ -62,10 +66,10 @@ function aboutUs() {
   flickboard.style.animation = 'none';
   flickboard.offsetHeight; /* trigger reflow */
   flickboard.style.animation = null;
+  setHighScore();
+  scoreboard.innerHTML = `Score: ` + score;
+  timer.innerHTML = `Time: ` + gameTime;
 }
-
-//load intro page on load. This should resolve the sound on browser. after loading the page.
-window.addEventListener(`load`, aboutUs); 
 
 //Present `hover to start` screen
 function preGame(){
@@ -657,3 +661,7 @@ function animate(){
 }
 
 animate();
+
+function blitzEffects(){
+
+}
