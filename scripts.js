@@ -53,6 +53,9 @@ let sfxRight = new Audio(`./audio/sfx_coin_double1.wav`);
 let sfxWrong = new Audio(`./audio/sfx_sounds_error9.wav`);
 let sfxNewGame = new Audio(`./audio/sfx_sounds_button4.wav`);
 let sfxGameEnd = new Audio(`./audio/sfx_menu_select4.wav`);
+let sfxBlitzRight = new Audio(`./audio/sfx_sounds_powerup18.wav`);
+let sfxStarBlitz = new Audio(`./audio/sfx_sounds_powerup2.wav`);
+let musicStarBlitz = new Audio(`./audio/15sec-2020-06-18_-_8_Bit_Retro_Funk_-_www.FesliyanStudios.com_David_Renda.mp3`);
 
 //load intro page on load. This should resolve the sound on browser. after loading the page.
 window.addEventListener(`load`, aboutUs); 
@@ -145,7 +148,7 @@ resetButton.addEventListener(`click`, function() {
 function playGame(){
   equationBox.removeEventListener(`mouseover`, playGame);
   equationBox.addEventListener("mouseout", alertRed);
-  gameTime = 11; //debugging
+  gameTime = 30; //debugging
   constantGameTime = gameTime;
   gameState = "playgame";
   assignColors();
@@ -165,9 +168,12 @@ function countdown(){
         timer.innerHTML = `Time: ` + gameTime;
         //star blitz mode engaged
         if ( gameTime == 10 && starBlitzState == false){
+          sfxStarBlitz.load();
+          musicStarBlitz.load();
+          sfxStarBlitz.play();
+          musicStarBlitz.play();
           starBlitzState = true;
           blitzEffects();
-          console.log (starBlitzState);
           scoreboard.innerHTML = score + " x " + scoreMultiplier;
         }
     }
@@ -558,11 +564,10 @@ function addPoint() {
         scoreboard.innerHTML = `Score: ` + score;
       }
       else {
-        sfxRight.load();
-        sfxRight.play();
+        sfxBlitzRight.load();
+        sfxBlitzRight.play();
         comboReset();
         scoreMultiplier = scoreMultiplier + 1;
-        console.log (scoreMultiplier);
         round++;
         scoreboard.innerHTML = score + " x " + scoreMultiplier;
       }
@@ -573,11 +578,20 @@ function addPoint() {
 }
 
 function minusPoint() {
-  sfxWrong.load();
-  sfxWrong.play();
-  score--;
-  scoreboard.innerHTML = `Score: ` + score;
-}
+  if (starBlitzState == false){
+    sfxWrong.load();
+    sfxWrong.play();
+    score--;
+    scoreboard.innerHTML = `Score: ` + score;
+  }
+  else {
+    sfxWrong.load();
+    sfxWrong.play();
+    scoreboard.innerHTML = score + " x " + scoreMultiplier;
+  }
+    
+  
+  }
 
 function indicatorEquation () {
     if (blinkingState == true){

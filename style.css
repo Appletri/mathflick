@@ -355,10 +355,10 @@ a:hover {
     transform: rotateY(180deg);
     border-radius:20px;
 } 
-
-#team-links {
-    text-align:right;
-    right: 20px;
+footer{
+    position:fixed;
+    bottom:0;
+    right:20px;
 }
 
 
@@ -373,22 +373,22 @@ a:hover {
 #Tyler {
     position:absolute;
     z-index: -1;
-    right:151px;
-    bottom:-226px;
+    right:144px;
+    bottom:4px;
 }
 
 #Xiao {
     position:absolute;
     z-index: -1;
-    right:82px;
-    bottom:-226px;
+    right:74px;
+    bottom:4px;
 }
 
 #Tri {
     position:absolute;
     z-index: -1;
-    right:14px;
-    bottom:-226px;
+    right:6px;
+    bottom:4px;
 }
 @keyframes fadeInSide{
     to {
