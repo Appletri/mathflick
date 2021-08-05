@@ -45,10 +45,10 @@ let indicatorTargets;
 let blinkingState = true;
 
 //sound variables
-let sfxRight = new Audio(`sfx_coin_double1.wav`);
-let sfxWrong = new Audio(`sfx_sounds_error9.wav`);
-let sfxNewGame = new Audio(`sfx_sounds_button4.wav`);
-let sfxGameEnd = new Audio(`sfx_menu_select4.wav`);
+let sfxRight = new Audio(`./audio/sfx_coin_double1.wav`);
+let sfxWrong = new Audio(`./audio/sfx_sounds_error9.wav`);
+let sfxNewGame = new Audio(`./audio/sfx_sounds_button4.wav`);
+let sfxGameEnd = new Audio(`./audio/sfx_menu_select4.wav`);
 
 function aboutUs() {
   flickboard.className = "flickboard-hidden";
