@@ -121,7 +121,7 @@ a:hover {
     height:716px;
     font-size: 25px;
     background-color: #231f20cc;
-    border: 1px solid white;
+    border: 1px solid rgb(130, 228, 228);;
     text-align: center;
 }
 
@@ -226,7 +226,6 @@ a:hover {
     display: none;
 }
 
-
 #box1{
     grid-area: box1;
     margin: -20px 0 20px 0;
@@ -295,7 +294,7 @@ a:hover {
     position:absolute;
     width:800px;
     text-align:center;
-    margin: 400px auto auto auto;
+    margin: 380px auto auto auto;
     opacity:0.3;
     font-size: 10px;
     z-index: 1;
@@ -414,4 +413,40 @@ a:hover {
     to {
         transform: rotate(-359deg);
     }
+}
+
+.rainbow-text {
+    animation: animatedText 4s linear infinite alternate;
+}
+
+.rainbow-border {
+    animation: animatedBorder 4s linear infinite alternate;
+}
+
+@keyframes animatedText{
+    0% {color: #ff8b00}
+    10% {color: #e8ff00}
+    20% {color: #5dff00}
+    30% {color: #00ff2e}
+    40% {color: #00ffb9}
+    50% {color: #00b9ff}
+    60% {color: #2d54ff}
+    70% {color: #7525ff}
+    80% {color: #e800ff}
+    90% {color: #ff008b}
+    100% {color: #ff0000}
+}
+
+@keyframes animatedBorder{
+    0% {border-color: #ff8b00}
+    10% {border-color: #e8ff00}
+    20% {border-color: #5dff00}
+    30% {border-color: #00ff2e}
+    40% {border-color: #00ffb9}
+    50% {border-color: #00b9ff}
+    60% {border-color: #2d54ff}
+    70% {border-color: #7525ff}
+    80% {border-color: #e800ff}
+    90% {border-color: #ff008b}
+    100% {border-color: #ff0000}
 }
