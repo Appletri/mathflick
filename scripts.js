@@ -30,8 +30,10 @@ let combo = 0;
 let a;
 let b;
 let score = 0;
+let scoreMultiplier = 1;
 let numCorrect = 0;
 let numWrong = 0;
+let starBlitzState = true;
 
 let interval; //time interval
 let gameTime = 0;
@@ -43,6 +45,7 @@ let indicatorEq;
 let indicatorT;
 let indicatorTargets;
 let blinkingState = true;
+
 
 //sound variables
 let sfxRight = new Audio(`./audio/sfx_coin_double1.wav`);
@@ -71,6 +74,8 @@ window.addEventListener(`load`, aboutUs);
 function preGame(){
     introPage.className = "intro-page-hidden";
     solved = true;
+    starBlitzState = false;
+    console.log (starBlitzState);
     gameState = "pregame";
     setHighScore();
     reset();
@@ -153,12 +158,19 @@ function countdown(){
     if(gameTime > 0 && gameState == "playgame"){
         gameTime--;
         timer.innerHTML = `Time: ` + gameTime;
+        //star blitz mode engaged
+        if ( gameTime == 10 && starBlitzState == false){
+          starBlitzState = true;
+          console.log (starBlitzState);
+          scoreboard.innerHTML = score + " x " + scoreMultiplier;
+        }
     }
     else{
         timer.innerHTML = `Time: ` + 0;
         clearInterval(interval);
         if (gameTime === 0) {
           sfxGameEnd.play();
+          score = score * scoreMultiplier;
           flickboard.className = "flickboard-hidden";
           highScoreHistory.className = "highScoreHistory-hidden";
           comboMeter.className = "comboMeter-hidden";
@@ -531,11 +543,22 @@ function comboReset() {
 
 function addPoint() {
     if (round == roundCheck){
+      if (starBlitzState == false){
         sfxRight.load();
         sfxRight.play();
         score = score + combo;
         round++;
         scoreboard.innerHTML = `Score: ` + score;
+      }
+      else {
+        sfxRight.load();
+        sfxRight.play();
+        comboReset();
+        scoreMultiplier = scoreMultiplier + 1;
+        console.log (scoreMultiplier);
+        round++;
+        scoreboard.innerHTML = score + " x " + scoreMultiplier;
+      }
     }
     else{
         return;
