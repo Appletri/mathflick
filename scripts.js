@@ -575,11 +575,20 @@ function addPoint() {
 }
 
 function minusPoint() {
-  sfxWrong.load();
-  sfxWrong.play();
-  score--;
-  scoreboard.innerHTML = `Score: ` + score;
-}
+  if (starBlitzState == false){
+    sfxWrong.load();
+    sfxWrong.play();
+    score--;
+    scoreboard.innerHTML = `Score: ` + score;
+  }
+  else {
+    sfxWrong.load();
+    sfxWrong.play();
+    scoreboard.innerHTML = score + " x " + scoreMultiplier;
+  }
+    
+  
+  }
 
 function indicatorEquation () {
     if (blinkingState == true){
