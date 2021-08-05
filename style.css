@@ -58,7 +58,6 @@ a:hover {
     background-size: 25%;
     background-position: 300px 441px;
     background-repeat: no-repeat;
-
     grid-template: 
     "title title"
     "timer score"
@@ -119,7 +118,7 @@ a:hover {
     grid-area: summary;
     margin: 40px auto;
     width:100%;
-    height:800px;
+    height:716px;
     font-size: 25px;
     background-color: #231f20cc;
     border: 1px solid white;
@@ -165,9 +164,7 @@ a:hover {
     justify-content: center;
     align-items: center;
     font-size: 25px;
-
     background-color: #231f20; 
-
 }
 
 #highScore:hover {
