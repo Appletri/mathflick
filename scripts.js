@@ -15,6 +15,7 @@ const highScoreBox = document.querySelector(`#highScore`);
 const flickboard = document.querySelector("#flickboard");
 const scoreSummary = document.querySelector("#score-summary");
 const highScoreHistory = document.querySelector("#highScore-history"); 
+const introPage = document.querySelector(`.intro-page`);
 const comboMeter = document.querySelector("#comboMeter");
 const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
 
@@ -44,15 +45,31 @@ let indicatorTargets;
 let blinkingState = true;
 
 //sound variables
-let sfxRight = new Audio(`sfx_coin_double1.wav`);
-let sfxWrong = new Audio(`sfx_sounds_error9.wav`);
-let sfxNewGame = new Audio(`sfx_sounds_button4.wav`);
-let sfxGameEnd = new Audio(`sfx_menu_select4.wav`);
+let sfxRight = new Audio(`./audio/sfx_coin_double1.wav`);
+let sfxWrong = new Audio(`./audio/sfx_sounds_error9.wav`);
+let sfxNewGame = new Audio(`./audio/sfx_sounds_button4.wav`);
+let sfxGameEnd = new Audio(`./audio/sfx_menu_select4.wav`);
 
-preGame(); 
+function aboutUs() {
+  flickboard.className = "flickboard-hidden";
+  scoreSummary.className = "summary-hidden";
+  comboMeter.className = "comboMeter-hidden";
+  introPage.className = "intro-page";
+  resetButton.textContent = "New Game";
+  equationBox.style.animation = 'none';
+  equationBox.offsetHeight; /* trigger reflow */
+  equationBox.style.animation = null; 
+  flickboard.style.animation = 'none';
+  flickboard.offsetHeight; /* trigger reflow */
+  flickboard.style.animation = null;
+}
+
+//load intro page on load. This should resolve the sound on browser. after loading the page.
+window.addEventListener(`load`, aboutUs); 
 
 //Present `hover to start` screen
 function preGame(){
+    introPage.className = "intro-page-hidden";
     solved = true;
     gameState = "pregame";
     setHighScore();
@@ -118,7 +135,7 @@ resetButton.addEventListener(`click`, function() {
 function playGame(){
   equationBox.removeEventListener(`mouseover`, playGame);
   equationBox.addEventListener("mouseout", alertRed);
-  gameTime = 60; //debugging
+  gameTime = 30; //debugging
   constantGameTime = gameTime;
   gameState = "playgame";
   assignColors();
