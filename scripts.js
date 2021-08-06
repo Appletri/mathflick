@@ -28,6 +28,7 @@ let combo = 0;
 let a;
 let b;
 let wrongEqArr = [];
+let wrongEqArrAns = [];
 
 let score = 0;
 let scoreMultiplier = 1;
@@ -209,7 +210,7 @@ function countdown(){
 
             let wrongEqHeaderRow = document.createElement("tr");
             let wrongEqHeader = document.createElement("th");
-            wrongEqHeader.innerHTML = `Equations to review`;
+            wrongEqHeader.innerHTML = `Equations to review (click for answer)`;
             wrongEqHeaderRow.appendChild(wrongEqHeader);
             wrongEqSummary.appendChild(wrongEqHeaderRow);
 
@@ -219,6 +220,12 @@ function countdown(){
 
               let wrongEq = document.createElement("td");
               wrongEq.innerHTML = `${equation}`;
+              wrongEq.onclick = function() {
+                wrongEq.innerHTML = `${equation} = ${wrongEqArrAns[wrongEqArr.indexOf(equation)]}`
+              }
+              wrongEq.onmouseover = function() {
+                wrongEq.style.cursor = "pointer";
+              }
               row.appendChild(wrongEq);
 
               wrongEqSummary.appendChild(row);
@@ -253,10 +260,11 @@ function reset(){
   numWrong = 0;
   document.getElementById('comboMeter').innerHTML = "";  
 
-  if (wrongEqArr.length !== 0) {
+  if (wrongEqSummary) {
     wrongEqSummary.remove();
   }
   wrongEqArr.splice(0, wrongEqArr.length);
+  wrongEqArrAns.splice(0, wrongEqArrAns.length);
 }
 
 //High score vvvv
@@ -330,6 +338,7 @@ function box1Colors(){
     minusPoint();
     numWrong++;
     wrongEqArr.push(`${a} + ${b}`);
+    wrongEqArrAns.push(a + b);
     comboReset();
     return solved = false; 
   }
@@ -350,6 +359,7 @@ function box2Colors(){
     minusPoint();
     numWrong++;
     wrongEqArr.push(`${a} + ${b}`);
+    wrongEqArrAns.push(a + b);
     comboReset();
     return solved = false; 
   }
@@ -369,6 +379,7 @@ function box3Colors(){
     minusPoint();
     numWrong++;
     wrongEqArr.push(`${a} + ${b}`);
+    wrongEqArrAns.push(a + b);
     comboReset();
     return solved = false; 
   }
@@ -388,6 +399,7 @@ function box4Colors(){
     minusPoint();
     numWrong++;
     wrongEqArr.push(`${a} + ${b}`);
+    wrongEqArrAns.push(a + b);
     comboReset();
     return solved = false; 
   }
@@ -407,6 +419,7 @@ function box5Colors(){
     minusPoint();
     numWrong++;
     wrongEqArr.push(`${a} + ${b}`);
+    wrongEqArrAns.push(a + b);
     comboReset();
     return solved = false; 
   }
@@ -426,6 +439,7 @@ function box6Colors(){
     minusPoint();
     numWrong++;
     wrongEqArr.push(`${a} + ${b}`);
+    wrongEqArrAns.push(a + b);
     comboReset();
     return solved = false; 
   }
@@ -445,6 +459,7 @@ function box7Colors(){
     minusPoint();
     numWrong++;
     wrongEqArr.push(`${a} + ${b}`);
+    wrongEqArrAns.push(a + b);
     comboReset();
     return solved = false; 
   }
@@ -464,6 +479,7 @@ function box8Colors(){
     minusPoint();
     numWrong++;
     wrongEqArr.push( `${a} + ${b}`);
+    wrongEqArrAns.push(a + b);
     comboReset();
     return solved = false; 
   }
