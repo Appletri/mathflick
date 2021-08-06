@@ -159,7 +159,7 @@ resetButton.addEventListener(`click`, function() {
 function playGame(){
   equationBox.removeEventListener(`mouseover`, playGame);
   equationBox.addEventListener("mouseout", alertRed);
-  gameTime = 20; //debugging
+  gameTime = 30; //debugging
   constantGameTime = gameTime;
   gameState = "playgame";
   assignColors();
