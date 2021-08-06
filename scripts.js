@@ -17,6 +17,7 @@ const scoreSummary = document.querySelector("#score-summary");
 const highScoreHistory = document.querySelector("#highScore-history"); 
 const introPage = document.querySelector(`.intro-page`);
 const comboMeter = document.querySelector("#comboMeter");
+const mathFlickLogo =  document.querySelector("#MFIMG");
 const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
 
 let gameState = "";
@@ -83,6 +84,7 @@ function aboutUs() {
 
 //Present `hover to start` screen
 function preGame(){
+    mathFlickLogo.style.opacity = 1;
     introPage.className = "intro-page-hidden";
     solved = true;
     starBlitzState = false;
@@ -252,6 +254,7 @@ function reset(){
   numCorrect = 0;
   numWrong = 0;
   document.getElementById('comboMeter').innerHTML = "";  
+  
 
   if (wrongEqArr.length !== 0) {
     wrongEqSummary.remove();
@@ -766,7 +769,7 @@ function blitzEffects(){
  
   let sbi = 0;
   let sbtxt = "STAR BLITZ"
-  let sbspeed = 30;
+  let sbspeed = 50;
  
 function starBlitz() {
   
@@ -776,8 +779,9 @@ function starBlitz() {
     setTimeout(starBlitz, sbspeed);
   }
   else {
-    setTimeout(resetText, 3000);
-
+    mathFlickLogo.style.opacity = 0;
+    setTimeout(resetText, 10000);
+    
   }
 
 }
