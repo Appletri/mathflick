@@ -21,17 +21,38 @@
         <div id="title">
             <img id="MFIMG" alt="MathFlick" src="./images/MathFlick.png">
         </div>
+
         <div id="score" class = "score">Score</div>
         <div id="timer" class = "timer">Timer</div>
-        <div id="score-summary"></div>
         <div id="starblitz"></div>
+        <div id="score-summary">
+            <h3 class="score-header">Game Over!</h3>
+            <table id="summary-table">
+                <tr>
+                  <th colspan="2">Your Game Summary</th>
+                </tr>
+                <tr>
+                    <td>Score</td>
+                    <td class="score-value"></td>
+                </tr>
+                <tr>
+                    <td>Accuracy</td>
+                    <td class="accuracy-value"></td>
+                </tr>
+                <tr>
+                    <td>Speed</td>
+                    <td class="speed-value"></td>
+                </tr>
+              </table>
+        </div>
+
         <div class="intro-page">
             <h2><u>Instructions</u></h2>
             <p>You are our top space cadet.</p>
             <p>Collect star energy by solving the equation and finding the correct star.</p>
             <p>Return your mouse back to home to get a new equation.</p>
             <p>Collect the most star energy within the time limit and defend your high score.</p>
-            <p>Goodluck!</p>
+            <p>Good luck!</p>
 
             <br><br>
             <h2><strong><u>Click New Game to play!</u></strong></h2>
@@ -84,8 +105,6 @@
             </a>
             
         </div>
-        
-        
         
     </footer>
     <script src="scripts.js"></script>
