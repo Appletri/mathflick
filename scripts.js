@@ -18,6 +18,7 @@ const highScoreHistory = document.querySelector("#highScore-history");
 const introPage = document.querySelector(`.intro-page`);
 const comboMeter = document.querySelector("#comboMeter");
 const mathFlickLogo =  document.querySelector("#MFIMG");
+const starBlitzText = document.querySelector("#starblitz");
 const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
 
 let gameState = "";
@@ -85,6 +86,9 @@ function aboutUs() {
 
 //Present `hover to start` screen
 function preGame(){
+    starBlitzText.style.opacity = 0;
+    musicStarBlitz.pause();
+    musicStarBlitz.currentTime = 0;
     mathFlickLogo.style.opacity = 1;
     introPage.className = "intro-page-hidden";
     solved = true;
@@ -155,7 +159,7 @@ resetButton.addEventListener(`click`, function() {
 function playGame(){
   equationBox.removeEventListener(`mouseover`, playGame);
   equationBox.addEventListener("mouseout", alertRed);
-  gameTime = 30; //debugging
+  gameTime = 20; //debugging
   constantGameTime = gameTime;
   gameState = "playgame";
   assignColors();
@@ -179,7 +183,9 @@ function countdown(){
           musicStarBlitz.load();
           sfxStarBlitz.play();
           musicStarBlitz.play();
+          starBlitzText.style.opacity = 1;
           starBlitzState = true;
+          sbi = 0;
           starBlitz();
           blitzEffects();
           scoreboard.innerHTML = "Score: " + score + " x " + scoreMultiplier;
@@ -852,13 +858,14 @@ function blitzEffects(){
  //Star Blitz text 
  
   let sbi = 0;
-  let sbtxt = "STAR BLITZ"
+  let sbtxt = "STAR BLITZ";
   let sbspeed = 50;
  
 function starBlitz() {
   mathFlickLogo.style.opacity = 0;
+
   if (sbi < sbtxt.length) {
-    document.getElementById("starblitz").innerHTML += sbtxt.charAt(sbi);
+    starBlitzText.innerHTML += sbtxt.charAt(sbi);
     sbi++;
     setTimeout(starBlitz, sbspeed);
   }
@@ -871,6 +878,7 @@ function starBlitz() {
 }
 
 function resetText (){
-  document.getElementById("starblitz").innerHTML ="";
+  starBlitzText.innerHTML ="";
+  mathFlickLogo.style.opacity = 1;
 }
 
