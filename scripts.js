@@ -141,12 +141,14 @@ resetButton.addEventListener(`click`, function() {
     target.style.animation = null;
     target.style.animation = 'rotationBackwards 60s infinite linear';
   }
-  preGame();
   flickboard.className = "flickboard-display";
   comboMeter.className = "comboMeter-display";
   scoreSummary.className = "summary-hidden";
   highScoreHistory.className = "highScoreHistory-hidden";
   resetButton.textContent = "Reset Game";
+  starBlitzState = false;
+  blitzEffects();
+  preGame();
 });
 
 //play the game, start countdown vvvv
@@ -329,12 +331,18 @@ function assignColors(){
 function box1Colors(){
   if (equation == targetArray[0]) {  
     box1.style.background = "green";
+    box1.innerText = ``;
+    if (starBlitzState){
+      box1.style.animation = `rotationBackwards 60s infinite linear, animatedTarget 3s linear infinite alternate, pulsate .5s ease-out`;
+    }
+    else{
+      box1.style.animation = `rotationBackwards 60s infinite linear, pulsate .5s ease-out`;
+    }
     addPoint();
     numCorrect++;
     equationBox.style.background = "rgba(0,225,0,0.2)";
     indicatorEq = setInterval(indicatorEquation, 500);
     return solved = true;
-    
   }
   else {
     box1.style.background = "red";
@@ -350,6 +358,13 @@ function box1Colors(){
 function box2Colors(){
   if (equation == targetArray[1]) {  
     box2.style.background = "green";
+    box2.innerText = ``;
+    if (starBlitzState){
+      box2.style.animation = `rotationBackwards 60s infinite linear, animatedTarget 3s linear infinite alternate, pulsate .5s ease-out`;
+    }
+    else{
+      box2.style.animation = `rotationBackwards 60s infinite linear, pulsate .5s ease-out`;
+    }
     addPoint();
     numCorrect++;
     equationBox.style.background = "rgba(0,225,0,0.2)";
@@ -371,6 +386,13 @@ function box2Colors(){
 function box3Colors(){
   if (equation == targetArray[2]) {  
     box3.style.background = "green";
+    box3.innerText = ``;
+    if (starBlitzState){
+      box3.style.animation = `rotationBackwards 60s infinite linear, animatedTarget 3s linear infinite alternate, pulsate .5s ease-out`;
+    }
+    else{
+      box3.style.animation = `rotationBackwards 60s infinite linear, pulsate .5s ease-out`;
+    }
     addPoint();
     numCorrect++;
     equationBox.style.background = "rgba(0,225,0,0.2)";
@@ -391,6 +413,13 @@ function box3Colors(){
 function box4Colors(){
   if (equation == targetArray[3]) {  
     box4.style.background = "green";
+    box4.innerText = ``;
+    if (starBlitzState){
+      box4.style.animation = `rotationBackwards 60s infinite linear, animatedTarget 3s linear infinite alternate, pulsate .5s ease-out`;
+    }
+    else{
+      box4.style.animation = `rotationBackwards 60s infinite linear, pulsate .5s ease-out`;
+    }
     addPoint();
     numCorrect++;
     equationBox.style.background = "rgba(0,225,0,0.2)";
@@ -411,6 +440,13 @@ function box4Colors(){
 function box5Colors(){
   if (equation == targetArray[4]) {  
     box5.style.background = "green";
+    box5.innerText = ``;
+    if (starBlitzState){
+      box5.style.animation = `rotationBackwards 60s infinite linear, animatedTarget 3s linear infinite alternate, pulsate .5s ease-out`;
+    }
+    else{
+      box5.style.animation = `rotationBackwards 60s infinite linear, pulsate .5s ease-out`;
+    }
     addPoint();
     numCorrect++;
     equationBox.style.background = "rgba(0,225,0,0.2)";
@@ -431,6 +467,13 @@ function box5Colors(){
 function box6Colors(){
   if (equation == targetArray[5]) {  
     box6.style.background = "green";
+    box6.innerText = ``;
+    if (starBlitzState){
+      box6.style.animation = `rotationBackwards 60s infinite linear, animatedTarget 3s linear infinite alternate, pulsate .5s ease-out`;
+    }
+    else{
+      box6.style.animation = `rotationBackwards 60s infinite linear, pulsate .5s ease-out`;
+    }
     addPoint();
     numCorrect++;
     equationBox.style.background = "rgba(0,225,0,0.2)";
@@ -451,6 +494,13 @@ function box6Colors(){
 function box7Colors(){
   if (equation == targetArray[6]) {  
     box7.style.background = "green";
+    box7.innerText = ``;
+    if (starBlitzState){
+      box7.style.animation = `rotationBackwards 60s infinite linear, animatedTarget 3s linear infinite alternate, pulsate .5s ease-out`;
+    }
+    else{
+      box7.style.animation = `rotationBackwards 60s infinite linear, pulsate .5s ease-out`;
+    }
     addPoint();
     numCorrect++;
     equationBox.style.background = "rgba(0,225,0,0.2)";
@@ -471,6 +521,13 @@ function box7Colors(){
 function box8Colors(){
   if (equation == targetArray[7]) {  
     box8.style.background = "green";
+    box8.innerText = ``;
+    if (starBlitzState){
+      box8.style.animation = `rotationBackwards 60s infinite linear, animatedTarget 3s linear infinite alternate, pulsate .5s ease-out`;
+    }
+    else{
+      box8.style.animation = `rotationBackwards 60s infinite linear, pulsate .5s ease-out`;
+    }
     addPoint();
     numCorrect++;
     equationBox.style.background = "rgba(0,225,0,0.2)";
@@ -544,6 +601,16 @@ function box8Mouseout(){
 //equation event listener. It will generate a new equation and array of numbers.
 //It will then add the correct answer in the array.
 equationBox.addEventListener("mouseover", function() {
+  if(starBlitzState){
+    for (let target of targets) {
+      target.style.animation = 'rotationBackwards 60s infinite linear, animatedTarget 3s linear infinite alternate';
+    }
+  }
+  else{
+    for (let target of targets) {
+      target.style.animation = 'rotationBackwards 60s infinite linear';
+    }
+  }
 
 let randomNumber= 1;
 let randomBoxNumber = "";
@@ -778,6 +845,7 @@ function blitzEffects(){
     scoreboard.className = `score`;
     resetButton.className = `resetButton`;
     highScoreBox.className = `highScore`;
+    comboMeter.className = "comboMeter-display";
     return;
   }
 }
