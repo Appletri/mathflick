@@ -17,6 +17,7 @@ const scoreSummary = document.querySelector("#score-summary");
 const highScoreHistory = document.querySelector("#highScore-history"); 
 const introPage = document.querySelector(`.intro-page`);
 const comboMeter = document.querySelector("#comboMeter");
+const mathFlickLogo =  document.querySelector("#MFIMG");
 const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
 
 let gameState = "";
@@ -28,6 +29,7 @@ let combo = 0;
 let a;
 let b;
 let wrongEqArr = [];
+let wrongEqArrAns = [];
 
 let score = 0;
 let scoreMultiplier = 1;
@@ -83,6 +85,7 @@ function aboutUs() {
 
 //Present `hover to start` screen
 function preGame(){
+    mathFlickLogo.style.opacity = 1;
     introPage.className = "intro-page-hidden";
     solved = true;
     starBlitzState = false;
@@ -211,7 +214,7 @@ function countdown(){
 
             let wrongEqHeaderRow = document.createElement("tr");
             let wrongEqHeader = document.createElement("th");
-            wrongEqHeader.innerHTML = `Equations to review`;
+            wrongEqHeader.innerHTML = `Equations to review (click for answer)`;
             wrongEqHeaderRow.appendChild(wrongEqHeader);
             wrongEqSummary.appendChild(wrongEqHeaderRow);
 
@@ -221,6 +224,12 @@ function countdown(){
 
               let wrongEq = document.createElement("td");
               wrongEq.innerHTML = `${equation}`;
+              wrongEq.onclick = function() {
+                wrongEq.innerHTML = `${equation} = ${wrongEqArrAns[wrongEqArr.indexOf(equation)]}`
+              }
+              wrongEq.onmouseover = function() {
+                wrongEq.style.cursor = "pointer";
+              }
               row.appendChild(wrongEq);
 
               wrongEqSummary.appendChild(row);
@@ -254,11 +263,13 @@ function reset(){
   numCorrect = 0;
   numWrong = 0;
   document.getElementById('comboMeter').innerHTML = "";  
+  
 
-  if (wrongEqArr.length !== 0) {
+  if (wrongEqSummary) {
     wrongEqSummary.remove();
   }
   wrongEqArr.splice(0, wrongEqArr.length);
+  wrongEqArrAns.splice(0, wrongEqArrAns.length);
 }
 
 //High score vvvv
@@ -338,6 +349,7 @@ function box1Colors(){
     minusPoint();
     numWrong++;
     wrongEqArr.push(`${a} + ${b}`);
+    wrongEqArrAns.push(a + b);
     comboReset();
     return solved = false; 
   }
@@ -365,6 +377,7 @@ function box2Colors(){
     minusPoint();
     numWrong++;
     wrongEqArr.push(`${a} + ${b}`);
+    wrongEqArrAns.push(a + b);
     comboReset();
     return solved = false; 
   }
@@ -391,6 +404,7 @@ function box3Colors(){
     minusPoint();
     numWrong++;
     wrongEqArr.push(`${a} + ${b}`);
+    wrongEqArrAns.push(a + b);
     comboReset();
     return solved = false; 
   }
@@ -417,6 +431,7 @@ function box4Colors(){
     minusPoint();
     numWrong++;
     wrongEqArr.push(`${a} + ${b}`);
+    wrongEqArrAns.push(a + b);
     comboReset();
     return solved = false; 
   }
@@ -443,6 +458,7 @@ function box5Colors(){
     minusPoint();
     numWrong++;
     wrongEqArr.push(`${a} + ${b}`);
+    wrongEqArrAns.push(a + b);
     comboReset();
     return solved = false; 
   }
@@ -469,6 +485,7 @@ function box6Colors(){
     minusPoint();
     numWrong++;
     wrongEqArr.push(`${a} + ${b}`);
+    wrongEqArrAns.push(a + b);
     comboReset();
     return solved = false; 
   }
@@ -495,6 +512,7 @@ function box7Colors(){
     minusPoint();
     numWrong++;
     wrongEqArr.push(`${a} + ${b}`);
+    wrongEqArrAns.push(a + b);
     comboReset();
     return solved = false; 
   }
@@ -521,6 +539,7 @@ function box8Colors(){
     minusPoint();
     numWrong++;
     wrongEqArr.push( `${a} + ${b}`);
+    wrongEqArrAns.push(a + b);
     comboReset();
     return solved = false; 
   }
@@ -778,7 +797,7 @@ function randomColor(){
         return "#"+arrColors[Math.floor((Math.random()*3))];
 }
         
-var arrStars = [];
+let arrStars = [];
 for(i = 0; i < 100; i++){
     let randX = Math.floor((Math.random()*C_WIDTH)+1);
     let randY = Math.floor((Math.random()*C_HEIGHT)+1);
@@ -834,18 +853,19 @@ function blitzEffects(){
  
   let sbi = 0;
   let sbtxt = "STAR BLITZ"
-  let sbspeed = 30;
+  let sbspeed = 50;
  
 function starBlitz() {
-  
+  mathFlickLogo.style.opacity = 0;
   if (sbi < sbtxt.length) {
     document.getElementById("starblitz").innerHTML += sbtxt.charAt(sbi);
     sbi++;
     setTimeout(starBlitz, sbspeed);
   }
   else {
-    setTimeout(resetText, 3000);
-
+    
+    setTimeout(resetText, 10000);
+    
   }
 
 }
@@ -853,3 +873,4 @@ function starBlitz() {
 function resetText (){
   document.getElementById("starblitz").innerHTML ="";
 }
+

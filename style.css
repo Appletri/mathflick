@@ -77,7 +77,9 @@ a:hover {
 
 #MFIMG{
     width:250px;
+    opacity: 1;
 }
+
 
 #score{
     grid-area: score;
@@ -556,12 +558,33 @@ text-decoration: none;
     100% {background-color: #ff0000}
 }
 
+@keyframes animatedStarBlitz {
+    0% {color: #fbff00; transform: scale(1);}
+    10% {color: #e8ff00; transform: scale(1.25);}
+    20% {color: #5dff00; transform: scale(1.4);}
+    30% {color: #00ff2e; transform: scale(1.25);}
+    40% {color: #00ffb9; transform: scale(1);}
+    50% {color: #00b9ff; transform: scale(1.25);}
+    60% {color: #2d54ff; transform: scale(1.4);}
+    70% {color: #7525ff; transform: scale(1.25);}
+    80% {color: #e800ff; transform: scale(1);}
+    90% {color: #ff008b; transform: scale(1.25);}
+    100% {color: #ff0000; transform: scale(1.4);}
+}
 #starblitz {
+    transform: scale(1);
     position:absolute;
+    left: 50%;
+    margin-left: -210px;
     z-index: -2;
     font-size:5rem;
-    animation: animatedText 3s linear infinite alternate;
+    animation: animatedStarBlitz 3s linear infinite alternate;
+    -webkit-text-stroke: 4px white;
+    text-shadow: 
+    0px 0px 20px #ff8800,
+    0px 0px 10px #e7eb0f;
 }
+
 
 @keyframes pulsate {
     0% {
@@ -576,3 +599,4 @@ text-decoration: none;
       opacity: 0.0;
     }
   }
+
