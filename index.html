@@ -57,6 +57,7 @@
             <br><br>
             <h2><strong><u>Click New Game to play!</u></strong></h2>
         </div>
+        
         <div id="highScore-history" class="highScoreHistory-hidden"></div>
         <div id="resetButton" class = "resetButton">Reset Game</div>
         <div id="highScore" class = "highScore">High Score</div>
@@ -88,8 +89,12 @@
             </div>
         </div>
     </div>
-
     <footer>
+        <img id="vol-img" src="images/outline_volume_up_white_24dp.png">
+        <input id="vol-control" type="range" min="0" max="100" step="1" oninput="SetVolume(this.value)" onchange="SetVolume(this.value)"></input>
+    </footer>
+    <footer>
+        
         <div id="team-links">
             <a href="https://github.com/TYLPHE" target="blank">
                 <img src="./images/GitHub-Mark-Light-64px.png">

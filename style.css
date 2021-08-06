@@ -395,6 +395,14 @@ footer{
     right:20px;
 }
 
+#vol-img {
+    position:relative;
+    bottom: 70px;
+}
+#vol-control {
+    position:relative;
+    bottom: 82px;
+}
 #team-links a{
 text-decoration: none;
 }
@@ -589,14 +597,26 @@ text-decoration: none;
 @keyframes pulsate {
     0% {
       transform: scale(0.1, 0.1);
+      background-color:green;
       opacity: 0.0;
     }
     50% {
       opacity: 1.0;
+      background-color:green;
     }
     100% {
       transform: scale(1.3, 1.3);
       opacity: 0.0;
+      background-color:green;
     }
   }
 
+  @keyframes incorrect {
+    0% {
+      background-color:red;
+    }
+
+    100% {
+      background-color:red;
+    }
+  }
