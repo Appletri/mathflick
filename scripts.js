@@ -19,8 +19,6 @@ const introPage = document.querySelector(`.intro-page`);
 const comboMeter = document.querySelector("#comboMeter");
 const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
 
-let highScore = localStorage.getItem('HS');
-let highScoreArray = [];
 let gameState = "";
 let equation = 1;
 let solved = true;
@@ -29,10 +27,16 @@ let roundCheck = 0;
 let combo = 0;
 let a;
 let b;
+let wrongEqArr = [];
+
 let score = 0;
 let scoreMultiplier = 1;
 let numCorrect = 0;
 let numWrong = 0;
+
+let highScore = localStorage.getItem('HS');
+let highScoreArray = [];
+let wrongEqSummary;
 let starBlitzState = true;
 
 let interval; //time interval
@@ -188,7 +192,38 @@ function countdown(){
           highScoreHistory.className = "highScoreHistory-hidden";
           comboMeter.className = "comboMeter-hidden";
           scoreSummary.className = "summary-display";
-          scoreSummary.innerHTML = `Game Over! <br>Score: ${score} <br>Accuracy: ${Math.round(numCorrect / (numCorrect + numWrong) * 100)}% <br>Speed: ${Math.round(constantGameTime / (numCorrect + numWrong) * 10) / 10} seconds/question`;
+
+          //End-of-game summary
+          document.querySelector(".score-value").innerHTML = `${score}`;
+          document.querySelector(".speed-value").innerHTML = `${Math.round(constantGameTime / (numCorrect + numWrong) * 10) / 10} seconds/question`;
+          document.querySelector(".accuracy-value").innerHTML = `${Math.round(numCorrect / (numCorrect + numWrong) * 100)}%`;
+          
+          //Displaying wrong equations for review
+          // generate unique array of wrong equations
+          let uniqueWrongArr = wrongEqArr.filter((value, index, self) => self.indexOf(value) === index);
+
+          //Create another table to hold wrong equations
+          wrongEqSummary = document.createElement("table");
+          wrongEqSummary.setAttribute("id", "wrong-equations");
+
+          let wrongEqHeaderRow = document.createElement("tr");
+          let wrongEqHeader = document.createElement("th");
+          wrongEqHeader.innerHTML = `Equations to review`;
+          wrongEqHeaderRow.appendChild(wrongEqHeader);
+          wrongEqSummary.appendChild(wrongEqHeaderRow);
+
+          for (let equation of uniqueWrongArr) {
+            let row = document.createElement("tr");
+            row.setAttribute("class", "new-row");
+
+            let wrongEq = document.createElement("td");
+            wrongEq.innerHTML = `${equation}`;
+            row.appendChild(wrongEq);
+
+            wrongEqSummary.appendChild(row);
+          }
+          scoreSummary.appendChild(wrongEqSummary);
+
           resetButton.textContent = "New Game";
           equationBox.style.animation = 'none';
           equationBox.offsetHeight; /* trigger reflow */
@@ -216,6 +251,11 @@ function reset(){
   numCorrect = 0;
   numWrong = 0;
   document.getElementById('comboMeter').innerHTML = "";  
+
+  if (wrongEqArr.length !== 0) {
+    wrongEqSummary.remove();
+  }
+  wrongEqArr.splice(0, wrongEqArr.length);
 }
 
 //High score vvvv
@@ -223,12 +263,21 @@ function setHighScore(){
   if (score > highScore) {
     localStorage.setItem(`HS`, score);
     highScore = score;
+    const now = new Date();
+    const offsetMs = now.getTimezoneOffset() * 60 * 1000;
+    const dateLocal = new Date(now.getTime() - offsetMs);
+    const str = dateLocal.toISOString().slice(0, 19).replace(/-/g, "/").replace("T", " ");
     highScoreArray.push({
       "Score": highScore, 
-      "Time": new Date()
+      "Time": str
     });
     if (gameTime === 0) {
-      scoreSummary.innerHTML = `You have the new high score!<br> Score: ${score} <br> Accuracy: ${Math.round(numCorrect / (numCorrect + numWrong) * 100)}% <br> Speed: ${Math.round(constantGameTime / (numCorrect + numWrong) * 10) / 10} seconds/question`;
+
+      // //End-of-game summary
+      document.querySelector(".score-header").innerHTML = `You have the new high score!`;
+      document.querySelector(".score-value").innerHTML = `${score}`;
+      document.querySelector(".speed-value").innerHTML = `${Math.round(constantGameTime / (numCorrect + numWrong) * 10) / 10} seconds/question`;
+      document.querySelector(".accuracy-value").innerHTML = `${Math.round(numCorrect / (numCorrect + numWrong) * 100)}%`;
     }
   }
   highScoreBox.innerHTML = "Best: " + highScore; 
@@ -240,6 +289,8 @@ highScoreBox.addEventListener("click", function() {
   flickboard.className = "flickboard-hidden";
   scoreSummary.className = "summary-hidden";
   comboMeter.className = "comboMeter-hidden";
+  introPage.className = "intro-page-hidden";
+
   if (highScoreArray.length > 0) {
     let scoreHistory = "";
     for (let i = 0; i < highScoreArray.length; i++) {
@@ -277,6 +328,7 @@ function box1Colors(){
     box1.style.background = "red";
     minusPoint();
     numWrong++;
+    wrongEqArr.push(`${a} + ${b}`);
     comboReset();
     return solved = false; 
   }
@@ -296,6 +348,7 @@ function box2Colors(){
     box2.style.background = "red";
     minusPoint();
     numWrong++;
+    wrongEqArr.push(`${a} + ${b}`);
     comboReset();
     return solved = false; 
   }
@@ -314,6 +367,7 @@ function box3Colors(){
     box3.style.background = "red";
     minusPoint();
     numWrong++;
+    wrongEqArr.push(`${a} + ${b}`);
     comboReset();
     return solved = false; 
   }
@@ -332,6 +386,7 @@ function box4Colors(){
     box4.style.background = "red";
     minusPoint();
     numWrong++;
+    wrongEqArr.push(`${a} + ${b}`);
     comboReset();
     return solved = false; 
   }
@@ -350,6 +405,7 @@ function box5Colors(){
     box5.style.background = "red";
     minusPoint();
     numWrong++;
+    wrongEqArr.push(`${a} + ${b}`);
     comboReset();
     return solved = false; 
   }
@@ -368,6 +424,7 @@ function box6Colors(){
     box6.style.background = "red";
     minusPoint();
     numWrong++;
+    wrongEqArr.push(`${a} + ${b}`);
     comboReset();
     return solved = false; 
   }
@@ -386,6 +443,7 @@ function box7Colors(){
     box7.style.background = "red";
     minusPoint();
     numWrong++;
+    wrongEqArr.push(`${a} + ${b}`);
     comboReset();
     return solved = false; 
   }
@@ -404,6 +462,7 @@ function box8Colors(){
     box8.style.background = "red";
     minusPoint();
     numWrong++;
+    wrongEqArr.push( `${a} + ${b}`);
     comboReset();
     return solved = false; 
   }
