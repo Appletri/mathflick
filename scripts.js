@@ -17,6 +17,7 @@ const scoreSummary = document.querySelector("#score-summary");
 const highScoreHistory = document.querySelector("#highScore-history"); 
 const introPage = document.querySelector(`.intro-page`);
 const comboMeter = document.querySelector("#comboMeter");
+const mathFlickLogo =  document.querySelector("#MFIMG");
 const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
 
 let gameState = "";
@@ -84,6 +85,7 @@ function aboutUs() {
 
 //Present `hover to start` screen
 function preGame(){
+    mathFlickLogo.style.opacity = 1;
     introPage.className = "intro-page-hidden";
     solved = true;
     starBlitzState = false;
@@ -151,7 +153,7 @@ resetButton.addEventListener(`click`, function() {
 function playGame(){
   equationBox.removeEventListener(`mouseover`, playGame);
   equationBox.addEventListener("mouseout", alertRed);
-  gameTime = 15; //debugging
+  gameTime = 30; //debugging
   constantGameTime = gameTime;
   gameState = "playgame";
   assignColors();
@@ -259,6 +261,7 @@ function reset(){
   numCorrect = 0;
   numWrong = 0;
   document.getElementById('comboMeter').innerHTML = "";  
+  
 
   if (wrongEqSummary) {
     wrongEqSummary.remove();
@@ -727,7 +730,7 @@ function randomColor(){
         return "#"+arrColors[Math.floor((Math.random()*3))];
 }
         
-var arrStars = [];
+let arrStars = [];
 for(i = 0; i < 100; i++){
     let randX = Math.floor((Math.random()*C_WIDTH)+1);
     let randY = Math.floor((Math.random()*C_HEIGHT)+1);
@@ -782,18 +785,19 @@ function blitzEffects(){
  
   let sbi = 0;
   let sbtxt = "STAR BLITZ"
-  let sbspeed = 30;
+  let sbspeed = 50;
  
 function starBlitz() {
-  
+  mathFlickLogo.style.opacity = 0;
   if (sbi < sbtxt.length) {
     document.getElementById("starblitz").innerHTML += sbtxt.charAt(sbi);
     sbi++;
     setTimeout(starBlitz, sbspeed);
   }
   else {
-    setTimeout(resetText, 3000);
-
+    
+    setTimeout(resetText, 10000);
+    
   }
 
 }
@@ -801,3 +805,4 @@ function starBlitz() {
 function resetText (){
   document.getElementById("starblitz").innerHTML ="";
 }
+
