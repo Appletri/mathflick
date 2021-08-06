@@ -83,7 +83,6 @@ function preGame(){
     introPage.className = "intro-page-hidden";
     solved = true;
     starBlitzState = false;
-    console.log (starBlitzState);
     gameState = "pregame";
     setHighScore();
     reset();
@@ -148,7 +147,7 @@ resetButton.addEventListener(`click`, function() {
 function playGame(){
   equationBox.removeEventListener(`mouseover`, playGame);
   equationBox.addEventListener("mouseout", alertRed);
-  gameTime = 30; //debugging
+  gameTime = 15; //debugging
   constantGameTime = gameTime;
   gameState = "playgame";
   assignColors();
@@ -173,6 +172,7 @@ function countdown(){
           sfxStarBlitz.play();
           musicStarBlitz.play();
           starBlitzState = true;
+          starBlitz();
           blitzEffects();
           scoreboard.innerHTML = score + " x " + scoreMultiplier;
         }
@@ -694,7 +694,7 @@ function animate(){
     //context.fillStyle = 'rgba(255, 255, 255, .1)';
     //context.fillRect(0,0,C_WIDTH,C_HEIGHT);
     context.clearRect(0,0,C_WIDTH,C_HEIGHT);
-    for(var i = 0; i < arrStars.length; i++){
+    for(let i = 0; i < arrStars.length; i++){
       arrStars[i].render();
     }
     requestAnimationFrame(animate);
@@ -721,4 +721,27 @@ function blitzEffects(){
     targets.className = `target blitz`;
     return;
   }
+}
+ //Star Blitz text 
+ 
+  let sbi = 0;
+  let sbtxt = "STAR BLITZ"
+  let sbspeed = 30;
+ 
+function starBlitz() {
+  
+  if (sbi < sbtxt.length) {
+    document.getElementById("starblitz").innerHTML += sbtxt.charAt(sbi);
+    sbi++;
+    setTimeout(starBlitz, sbspeed);
+  }
+  else {
+    setTimeout(resetText, 3000);
+
+  }
+
+}
+
+function resetText (){
+  document.getElementById("starblitz").innerHTML ="";
 }

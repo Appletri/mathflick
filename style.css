@@ -56,7 +56,7 @@ a:hover {
     width: 800px;
     background-image: url(./images/New_Earth.png);
     background-size: 25%;
-    background-position: 300px 455px;
+    background-position: 300px 453.5px;
     background-repeat: no-repeat;
     grid-template: 
     "title title"
@@ -361,6 +361,11 @@ footer{
     right:20px;
 }
 
+#team-links a{
+text-decoration: none;
+}
+
+
 
 #canvas {
     position:absolute;
@@ -531,4 +536,11 @@ footer{
     80% {background-color: #e800ff}
     90% {background-color: #ff008b}
     100% {background-color: #ff0000}
+}
+
+#starblitz {
+    position:absolute;
+    z-index: -2;
+    font-size:5rem;
+    animation: animatedText 3s linear infinite alternate;
 }
