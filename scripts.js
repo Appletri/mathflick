@@ -63,6 +63,15 @@ let sfxBlitzRight = new Audio(`./audio/sfx_sounds_powerup18.wav`);
 let sfxStarBlitz = new Audio(`./audio/sfx_sounds_powerup2.wav`);
 let musicStarBlitz = new Audio(`./audio/15sec-2020-06-18_-_8_Bit_Retro_Funk_-_www.FesliyanStudios.com_David_Renda.mp3`);
 
+let historyVolume = localStorage.getItem('volume');
+sfxRight.volume = historyVolume;
+sfxWrong.volume = historyVolume;
+sfxGameEnd.volume = historyVolume;
+sfxNewGame.volume = historyVolume;
+sfxStarBlitz.volume = historyVolume;
+sfxBlitzRight.volume = historyVolume;
+musicStarBlitz.volume = historyVolume; 
+
 //load intro page on load. This should resolve the sound on browser. after loading the page.
 window.addEventListener(`load`, aboutUs); 
 
@@ -408,7 +417,6 @@ function box3Colors(){
   else {
     box3.style.background = "red";
     minusPoint();
-    numWrong++;
     wrongEqArr.push(`${a} + ${b}`);
     wrongEqArrAns.push(a + b);
     comboReset();
@@ -882,3 +890,22 @@ function resetText (){
   mathFlickLogo.style.opacity = 1;
 }
 
+
+function SetVolume(val)
+    {   
+        
+
+        sfxRight.volume = val / 100;
+        sfxWrong.volume = val / 100;
+        sfxGameEnd.volume = val / 100;
+        sfxNewGame.volume = val / 100;
+        sfxStarBlitz.volume = val / 100;
+        sfxBlitzRight.volume = val / 100;
+        musicStarBlitz.volume = val / 100; 
+
+        
+        
+        historyVolume = localStorage.setItem('volume',val/100);
+        
+    }
+    
