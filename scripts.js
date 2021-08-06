@@ -151,7 +151,7 @@ resetButton.addEventListener(`click`, function() {
 function playGame(){
   equationBox.removeEventListener(`mouseover`, playGame);
   equationBox.addEventListener("mouseout", alertRed);
-  gameTime = 11; //debugging
+  gameTime = 30; //debugging
   constantGameTime = gameTime;
   gameState = "playgame";
   assignColors();
@@ -634,9 +634,7 @@ function minusPoint() {
     sfxWrong.play();
     scoreboard.innerHTML = "Score: " + score + " x " + scoreMultiplier;
   }
-    
-  
-  }
+}
 
 function indicatorEquation () {
     if (blinkingState == true){
@@ -749,6 +747,7 @@ function blitzEffects(){
     scoreboard.className = `score blitz`;
     resetButton.className = `resetButton blitz`;
     highScoreBox.className = `highScore blitz`;
+    comboMeter.className = "comboMeter-hidden";
     for (let target of targets) {
       target.style.animation = 'rotationBackwards 60s infinite linear, animatedTarget 3s linear infinite alternate';
     }
