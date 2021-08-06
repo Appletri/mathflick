@@ -152,7 +152,7 @@ resetButton.addEventListener(`click`, function() {
 function playGame(){
   equationBox.removeEventListener(`mouseover`, playGame);
   equationBox.addEventListener("mouseout", alertRed);
-  gameTime = 15; //debugging
+  gameTime = 30; //debugging
   constantGameTime = gameTime;
   gameState = "playgame";
   assignColors();
@@ -714,7 +714,7 @@ function randomColor(){
         return "#"+arrColors[Math.floor((Math.random()*3))];
 }
         
-var arrStars = [];
+let arrStars = [];
 for(i = 0; i < 100; i++){
     let randX = Math.floor((Math.random()*C_WIDTH)+1);
     let randY = Math.floor((Math.random()*C_HEIGHT)+1);
@@ -772,14 +772,14 @@ function blitzEffects(){
   let sbspeed = 50;
  
 function starBlitz() {
-  
+  mathFlickLogo.style.opacity = 0;
   if (sbi < sbtxt.length) {
     document.getElementById("starblitz").innerHTML += sbtxt.charAt(sbi);
     sbi++;
     setTimeout(starBlitz, sbspeed);
   }
   else {
-    mathFlickLogo.style.opacity = 0;
+    
     setTimeout(resetText, 10000);
     
   }
@@ -789,3 +789,4 @@ function starBlitz() {
 function resetText (){
   document.getElementById("starblitz").innerHTML ="";
 }
+
