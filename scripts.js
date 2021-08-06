@@ -203,27 +203,28 @@ function countdown(){
           let uniqueWrongArr = wrongEqArr.filter((value, index, self) => self.indexOf(value) === index);
 
           //Create another table to hold wrong equations
-          wrongEqSummary = document.createElement("table");
-          wrongEqSummary.setAttribute("id", "wrong-equations");
+          if (uniqueWrongArr.length !== 0) {
+            wrongEqSummary = document.createElement("table");
+            wrongEqSummary.setAttribute("id", "wrong-equations");
 
-          let wrongEqHeaderRow = document.createElement("tr");
-          let wrongEqHeader = document.createElement("th");
-          wrongEqHeader.innerHTML = `Equations to review`;
-          wrongEqHeaderRow.appendChild(wrongEqHeader);
-          wrongEqSummary.appendChild(wrongEqHeaderRow);
+            let wrongEqHeaderRow = document.createElement("tr");
+            let wrongEqHeader = document.createElement("th");
+            wrongEqHeader.innerHTML = `Equations to review`;
+            wrongEqHeaderRow.appendChild(wrongEqHeader);
+            wrongEqSummary.appendChild(wrongEqHeaderRow);
 
-          for (let equation of uniqueWrongArr) {
-            let row = document.createElement("tr");
-            row.setAttribute("class", "new-row");
+            for (let equation of uniqueWrongArr) {
+              let row = document.createElement("tr");
+              row.setAttribute("class", "new-row");
 
-            let wrongEq = document.createElement("td");
-            wrongEq.innerHTML = `${equation}`;
-            row.appendChild(wrongEq);
+              let wrongEq = document.createElement("td");
+              wrongEq.innerHTML = `${equation}`;
+              row.appendChild(wrongEq);
 
-            wrongEqSummary.appendChild(row);
-          }
-          scoreSummary.appendChild(wrongEqSummary);
-
+              wrongEqSummary.appendChild(row);
+            }
+            scoreSummary.appendChild(wrongEqSummary);
+        }
           resetButton.textContent = "New Game";
           equationBox.style.animation = 'none';
           equationBox.offsetHeight; /* trigger reflow */
