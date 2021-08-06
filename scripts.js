@@ -8,10 +8,10 @@ const box2 = document.querySelector("#box2");
 const box1 = document.querySelector("#box1");
 const equationBox = document.querySelector("#equation");
 const targets = document.getElementsByClassName("target");
-const timer = document.querySelector(`#timer`);
-const scoreboard = document.querySelector(`#score`);
-const resetButton = document.querySelector(`#resetButton`);
-const highScoreBox = document.querySelector(`#highScore`);
+const timer = document.querySelector(`.timer`);
+const scoreboard = document.querySelector(`.score`);
+const resetButton = document.querySelector(`.resetButton`);
+const highScoreBox = document.querySelector(`.highScore`);
 const flickboard = document.querySelector("#flickboard");
 const scoreSummary = document.querySelector("#score-summary");
 const highScoreHistory = document.querySelector("#highScore-history"); 
@@ -30,11 +30,14 @@ let b;
 let wrongEqArr = [];
 
 let score = 0;
+let scoreMultiplier = 1;
 let numCorrect = 0;
 let numWrong = 0;
+
 let highScore = localStorage.getItem('HS');
 let highScoreArray = [];
 let wrongEqSummary;
+let starBlitzState = true;
 
 let interval; //time interval
 let gameTime = 0;
@@ -47,16 +50,24 @@ let indicatorT;
 let indicatorTargets;
 let blinkingState = true;
 
+
 //sound variables
 let sfxRight = new Audio(`./audio/sfx_coin_double1.wav`);
 let sfxWrong = new Audio(`./audio/sfx_sounds_error9.wav`);
 let sfxNewGame = new Audio(`./audio/sfx_sounds_button4.wav`);
 let sfxGameEnd = new Audio(`./audio/sfx_menu_select4.wav`);
+let sfxBlitzRight = new Audio(`./audio/sfx_sounds_powerup18.wav`);
+let sfxStarBlitz = new Audio(`./audio/sfx_sounds_powerup2.wav`);
+let musicStarBlitz = new Audio(`./audio/15sec-2020-06-18_-_8_Bit_Retro_Funk_-_www.FesliyanStudios.com_David_Renda.mp3`);
+
+//load intro page on load. This should resolve the sound on browser. after loading the page.
+window.addEventListener(`load`, aboutUs); 
 
 function aboutUs() {
   flickboard.className = "flickboard-hidden";
   scoreSummary.className = "summary-hidden";
   comboMeter.className = "comboMeter-hidden";
+  highScoreHistory.className = "highScoreHistory-hidden";
   introPage.className = "intro-page";
   resetButton.textContent = "New Game";
   equationBox.style.animation = 'none';
@@ -65,15 +76,17 @@ function aboutUs() {
   flickboard.style.animation = 'none';
   flickboard.offsetHeight; /* trigger reflow */
   flickboard.style.animation = null;
+  setHighScore();
+  scoreboard.innerHTML = `Score: ` + score;
+  timer.innerHTML = `Time: ` + gameTime;
 }
-
-//load intro page on load. This should resolve the sound on browser. after loading the page.
-window.addEventListener(`load`, aboutUs); 
 
 //Present `hover to start` screen
 function preGame(){
     introPage.className = "intro-page-hidden";
     solved = true;
+    starBlitzState = false;
+    console.log (starBlitzState);
     gameState = "pregame";
     setHighScore();
     reset();
@@ -138,7 +151,7 @@ resetButton.addEventListener(`click`, function() {
 function playGame(){
   equationBox.removeEventListener(`mouseover`, playGame);
   equationBox.addEventListener("mouseout", alertRed);
-  gameTime = 30; //debugging
+  gameTime = 11; //debugging
   constantGameTime = gameTime;
   gameState = "playgame";
   assignColors();
@@ -156,12 +169,25 @@ function countdown(){
     if(gameTime > 0 && gameState == "playgame"){
         gameTime--;
         timer.innerHTML = `Time: ` + gameTime;
+        //star blitz mode engaged
+        if ( gameTime == 10 && starBlitzState == false){
+          sfxStarBlitz.load();
+          musicStarBlitz.load();
+          sfxStarBlitz.play();
+          musicStarBlitz.play();
+          starBlitzState = true;
+          blitzEffects();
+          scoreboard.innerHTML = "Score: " + score + " x " + scoreMultiplier;
+        }
     }
     else{
         timer.innerHTML = `Time: ` + 0;
         clearInterval(interval);
         if (gameTime === 0) {
           sfxGameEnd.play();
+          starBlitzState = false;
+          blitzEffects();
+          score = score * scoreMultiplier;
           flickboard.className = "flickboard-hidden";
           highScoreHistory.className = "highScoreHistory-hidden";
           comboMeter.className = "comboMeter-hidden";
@@ -225,6 +251,7 @@ function reset(){
   numCorrect = 0;
   numWrong = 0;
   document.getElementById('comboMeter').innerHTML = "";  
+
   if (wrongEqArr.length !== 0) {
     wrongEqSummary.remove();
   }
@@ -253,7 +280,7 @@ function setHighScore(){
       document.querySelector(".accuracy-value").innerHTML = `${Math.round(numCorrect / (numCorrect + numWrong) * 100)}%`;
     }
   }
-  highScoreBox.innerHTML = "High Score: " + highScore; 
+  highScoreBox.innerHTML = "Best: " + highScore; 
 }
 
 // Show high score history when highScoreBox is clicked at the end of game
@@ -507,27 +534,15 @@ if (solved == true) {
     equationBox.style.background = "rgba(0,225,0,0.2)";
     randomNumber = getRandomBoxNumber();
     randomBoxNumber="box"+(randomNumber+1);
-    // difficulty();
-    // console.log (randomNumber);
-    // console.log (randomBoxNumber);
-    // console.log (targetArray);
     
     eval(randomBoxNumber).textContent = equation;
     targetArray[randomNumber] = equation;
 
     roundCheck++;
     comboChain();
-    // console.log (combo);
-    // console.log (randomNumber);
-    // console.log (randomBoxNumber);
-    // console.log (targetArray);
-    // console.log (round);
-    // console.log (roundCheck);
-    // console.log (score);
   }
   else {
     equationBox.style.background = "rgba(225,0,0,0.5)";
-    // difficulty();
     indicatorT = setInterval(indicatorTargets,500);
   }
 });
@@ -586,11 +601,21 @@ function comboReset() {
 
 function addPoint() {
     if (round == roundCheck){
+      if (starBlitzState == false){
         sfxRight.load();
         sfxRight.play();
         score = score + combo;
         round++;
         scoreboard.innerHTML = `Score: ` + score;
+      }
+      else {
+        sfxBlitzRight.load();
+        sfxBlitzRight.play();
+        comboReset();
+        scoreMultiplier = scoreMultiplier + 1;
+        round++;
+        scoreboard.innerHTML = "Score: " + score + " x " + scoreMultiplier;
+      }
     }
     else{
         return;
@@ -598,11 +623,20 @@ function addPoint() {
 }
 
 function minusPoint() {
-  sfxWrong.load();
-  sfxWrong.play();
-  score--;
-  scoreboard.innerHTML = `Score: ` + score;
-}
+  if (starBlitzState == false){
+    sfxWrong.load();
+    sfxWrong.play();
+    score--;
+    scoreboard.innerHTML = `Score: ` + score;
+  }
+  else {
+    sfxWrong.load();
+    sfxWrong.play();
+    scoreboard.innerHTML = "Score: " + score + " x " + scoreMultiplier;
+  }
+    
+  
+  }
 
 function indicatorEquation () {
     if (blinkingState == true){
@@ -633,10 +667,6 @@ function updateArray() {
   box6.textContent = targetArray[5]; 
   box7.textContent = targetArray[6]; 
   box8.textContent = targetArray[7];       
-}
-
-function difficulty() {
-    
 }
 
 function Star(x,y,r,color){
@@ -712,3 +742,23 @@ function animate(){
 }
 
 animate();
+
+function blitzEffects(){
+  if(starBlitzState){
+    timer.className = `timer blitz`;
+    scoreboard.className = `score blitz`;
+    resetButton.className = `resetButton blitz`;
+    highScoreBox.className = `highScore blitz`;
+    for (let target of targets) {
+      target.style.animation = 'rotationBackwards 60s infinite linear, animatedTarget 3s linear infinite alternate';
+    }
+    
+  }
+  else{
+    timer.className = `timer`;
+    scoreboard.className = `score`;
+    resetButton.className = `resetButton`;
+    highScoreBox.className = `highScore`;
+    return;
+  }
+}

@@ -48,20 +48,21 @@
               </table>
         </div>
         <div class="intro-page">
-            <h2>About Math Flick</h2>
-            <p>Math Flick is a fun game that aims to improve your hand-eye coordination, reflexes, and basic arithmetic. </p>
-            <br>
-            <h2>About Us</h2>
-            <p>Welcome! We are three aspiring web developers. We are learning <a href="https://www.theodinproject.com">The Odin Project</a> this year and after creating our first <a href="https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/rock-paper-scissors">Rock Paper Scissors assignment</a>, we wanted to submit a game with the knowledge we gained!</p>
-            <p>This is our submission for the very first <a href="https://itch.io/jam/top-jam-1" target="_blank">Odin Project jam</a>!</p>
+            <h2><u>Instructions</u></h2>
+            <p>You are our top space cadet.</p>
+            <p>Collect star energy by solving the equation and finding the correct star.</p>
+            <p>Return your mouse back to home to get a new equation.</p>
+            <p>Collect the most star energy within the time limit and defend your high score.</p>
+            <p>Good luck!</p>
+
             <br><br>
-            <h2><strong>Click New Game to play!</strong></h2>
+            <h2><strong><u>Click New Game to play!</u></strong></h2>
         </div>
         <div id="highScore-history" class="highScoreHistory-hidden"></div>
-        <div id="resetButton">Reset Game</div>
-        <div id="highScore">High Score</div>
-        <div id="comboMeter" class="comboMeter-display"></div>
-        <div id="flickboard" class="flickboard-display">
+        <div id="resetButton" class = "resetButton">Reset Game</div>
+        <div id="highScore" class = "highScore">High Score</div>
+        <div id="comboMeter" class="comboMeter-hidden"></div>
+        <div id="flickboard" class="flickboard-hidden">
             <div id="box8" class="target">box8</div>
             <div id="box1" class="target">box1</div>
             <div id="box2" class="target">box2</div>
@@ -79,6 +80,7 @@
             <div class="flip-card-front">
                 <h2>About Math Flick</h2>
                 <p>Math Flick is a fun game that aims to improve your hand-eye coordination, reflexes, and basic arithmetic. </p>
+                <p>Music: 8 Bit Retro Funk by David Renda </p>
             </div>   
             <div class="flip-card-back">
                 <h2>About Us</h2>
@@ -92,15 +94,19 @@
         <div id="team-links">
             <a href="https://github.com/TYLPHE" target="blank">
                 <img src="./images/GitHub-Mark-Light-64px.png">
+                <p id="Tyler">T</p>
             </a>
             <a href="https://github.com/xiaozhong21" target="blank">
                 <img src="./images/GitHub-Mark-Light-64px.png">
+                <p id="Xiao">X</p>
             </a>
             <a href="https://github.com/Appletri" target="blank">
                 <img src="./images/GitHub-Mark-Light-64px.png">
+                <p id="Tri">T</p>
             </a>
             
         </div>
+        
     </footer>
     <script src="scripts.js"></script>
 </body>
