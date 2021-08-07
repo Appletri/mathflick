@@ -91,7 +91,7 @@ function aboutUs() {
   comboMeter.className = "comboMeter-hidden";
   highScoreHistory.className = "highScoreHistory-hidden";
   introPage.className = "intro-page";
-  resetButton.textContent = "New Game";
+  resetButton.textContent = "";
   equationBox.style.animation = 'none';
   equationBox.offsetHeight; /* trigger reflow */
   equationBox.style.animation = null; 
@@ -131,6 +131,7 @@ function preGame(){
     box6.removeEventListener(`mouseover`, box6Colors);
     box7.removeEventListener(`mouseover`, box7Colors);
     box8.removeEventListener(`mouseover`, box8Colors);
+
     equationBox.style.animation = 'rotationBackwards 60s infinite linear';
     flickboard.style.animation = 'rotation 60s infinite linear';
     for (let target of targets) {
@@ -148,7 +149,9 @@ function preGame(){
     timer.innerHTML = `Time: ` + gameTime;
 }
 
-resetButton.addEventListener(`click`, function() {
+
+
+function resetButt(){
   sfxNewGame.play();
   equationBox.style.animation = 'none';
   equationBox.offsetHeight; /* trigger reflow */
@@ -172,7 +175,7 @@ resetButton.addEventListener(`click`, function() {
   starBlitzState = false;
   blitzEffects();
   preGame();
-});
+}
 
 //play the game, start countdown vvvv
 function playGame(){
@@ -919,4 +922,53 @@ function SetVolume(val)
         historyVolume = localStorage.setItem('volume',val/100);
         
     }
+
+const indicatorRight = document.querySelector("#indicator-right");
+const indicatorLeft = document.querySelector("#indicator-left");
+const start = document.querySelector("#start");
+const end = document.querySelector("#end");
+let tutorialStage1 = true;
+let tutorialStage2 = false;
+let tutorialComplete = false;
+
+
+function tutorial() {
+    if (tutorialStage1 == true){
+      indicatorRight.style.opacity = "1";
+      start.innerHTML = "2 + 2";
+      tutorialStage1 = false;
+      
+      end.addEventListener(`mouseover`,tutorialP2);
+    }
+    else if (tutorialStage2 == true){
+      start.innerHTML = `<img src="images/outline_done_white_24dp.png">`;
+      start.style.lineHeight="180px";
+      start.style.backgroundColor = "green";
+      end.innerHTML = `<img src="images/outline_done_white_24dp.png">`;
+      end.style.lineHeight="180px";
+      end.style.backgroundColor = "green";
+      indicatorLeft.style.opacity = "0"
+      tutorialComplete = true;
+      resetButton.addEventListener(`click`, resetButt);
+      resetButton.textContent = "New Game";
+      document.getElementById("tutuorial-last").innerHTML = "Click New Game to play!"
+    }
+
     
+    
+    
+}
+
+function tutorialP2() {
+    if (tutorialComplete == false){
+      indicatorRight.style.opacity = "0";
+      indicatorLeft.style.opacity = "1";
+      tutorialStage2 = true;
+    }
+    else {
+      return;
+    }
+  
+}
+
+start.addEventListener(`mouseover`,tutorial);
