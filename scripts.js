@@ -86,6 +86,7 @@ musicStarBlitz.volume = historyVolume ;
 window.addEventListener(`load`, aboutUs); 
 
 function aboutUs() {
+  highScoreBox.disabled = true;
   flickboard.className = "flickboard-hidden";
   scoreSummary.className = "summary-hidden";
   comboMeter.className = "comboMeter-hidden";
@@ -105,6 +106,7 @@ function aboutUs() {
 
 //Present `hover to start` screen
 function preGame(){
+    highScoreBox.disabled = false;
     starBlitzText.style.opacity = 0;
     musicStarBlitz.pause();
     musicStarBlitz.currentTime = 0;

@@ -188,6 +188,8 @@ a:hover {
 }
 
 #highScore{
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
     grid-area: highscore;
     margin: 3% 0 0 auto;
     width:70%;
