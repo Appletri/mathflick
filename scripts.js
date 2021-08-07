@@ -951,7 +951,7 @@ function tutorial() {
       tutorialComplete = true;
       resetButton.addEventListener(`click`, resetButt);
       resetButton.textContent = "New Game";
-      document.getElementById("tutuorial-last").innerHTML = "Click New Game to play!"
+      document.getElementById("tutorial-last").innerHTML = "Click New Game to play!"
     }
 
     
