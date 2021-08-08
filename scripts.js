@@ -287,6 +287,7 @@ function countdown(){
 //reset variables vvvv
 function reset(){
   score = 0;
+  scoreMultiplier = 1;
   round = 1;
   roundCheck = 0;
   combo = 0;
